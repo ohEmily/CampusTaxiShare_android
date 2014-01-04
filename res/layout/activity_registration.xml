@@ -1,0 +1,80 @@
+<ScrollView
+    	xmlns:android="http://schemas.android.com/apk/res/android"
+    	xmlns:tools="http://schemas.android.com/tools"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:fillViewport="true"
+ >
+ 
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="60dp"
+	    android:paddingRight="60dp"
+	    android:orientation="vertical"
+	    android:weightSum="1.0"
+	    tools:context=".HomeActivity" >
+	
+	    <TextView
+	        android:text="@string/confirmation_email_notice"
+	        style="@style/CustomFontA"
+	     />
+	    
+	    <ImageView
+	        android:id="@+id/imageView1"
+	        android:layout_marginTop="30dp"
+	        android:layout_gravity="center"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:contentDescription="@string/logo_description"
+	        android:src="@drawable/icon" 
+	        />
+	
+	    <EditText
+	        android:id="@+id/nameEditTextRegistration"
+	        android:layout_width="match_parent"
+	        android:layout_marginTop="40dp"
+	        android:layout_height="wrap_content"
+	        android:inputType="textPersonName"
+	        android:hint="@string/first_name"
+	        >
+	
+	        <requestFocus />
+	    </EditText>
+	    
+	    <EditText
+	        android:id="@+id/emailEditTextRegistration"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+   	        android:inputType="textEmailAddress" 
+	        android:hint="@string/input_email"
+	        >
+	        <requestFocus />
+	    </EditText>
+
+	    <EditText
+	        android:id="@+id/passEditTextRegistration"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:inputType="textPassword" 
+	        android:hint="@string/password_hint"
+	    />
+	    
+	    <Button 
+	        android:id="@+id/button_send"
+	        android:layout_gravity="center"
+	        android:layout_marginTop="30dp"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="@string/button_signup"
+	    	android:onClick="submitRegistrationFields"
+	    />
+	    
+	    <TextView android:id="@+id/link_to_login"
+            style="@style/CustomFontA"
+            android:text="@string/go_to_login"
+            android:onClick="switchToLogin"
+        />
+	    
+	</LinearLayout>
+</ScrollView>

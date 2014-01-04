@@ -1,0 +1,67 @@
+<ScrollView
+    	xmlns:android="http://schemas.android.com/apk/res/android"
+    	xmlns:tools="http://schemas.android.com/tools"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:fillViewport="true"
+ >
+ 
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="60dp"
+	    android:paddingRight="60dp"
+	    android:orientation="vertical"
+	    android:weightSum="1.0"
+	    tools:context=".HomeActivity" >
+	
+	    <TextView
+	        android:text="@string/welcome_message"
+	        style="@style/CustomFontA"
+	     />
+	    
+	    <ImageView
+	        android:id="@+id/imageView1"
+	        android:layout_marginTop="30dp"
+	        android:layout_gravity="center"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:contentDescription="@string/logo_description"
+	        android:src="@drawable/icon" 
+	        />
+	    
+	    <EditText
+	        android:id="@+id/emailEditTextLogin"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+   	        android:inputType="textEmailAddress" 
+	        android:hint="@string/input_email"
+	        >
+	        <requestFocus />
+	    </EditText>
+
+	    <EditText
+	        android:id="@+id/passEditTextLogin"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:inputType="textPassword" 
+	        android:hint="your password"
+	    />
+	    
+	    <Button 
+	        android:id="@+id/button_send"
+	        android:layout_gravity="center"
+	        android:layout_marginTop="30dp"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="@string/button_login"
+	    	android:onClick="submitLoginFields"
+	    />
+	    
+	    <TextView android:id="@+id/link_to_registration"
+            style="@style/CustomFontA"
+            android:text="@string/go_to_registration"
+        />
+	    
+	</LinearLayout>
+</ScrollView>

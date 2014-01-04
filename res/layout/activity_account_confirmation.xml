@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="60dp"
+    android:layout_marginRight="60dp"
+    android:layout_marginTop="20dp"
+    tools:context=".AccountConfirmationActivity" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" 
+        android:text="@string/confirm_submission"
+    >
+    </TextView>
+</LinearLayout>
