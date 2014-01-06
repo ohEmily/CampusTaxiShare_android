@@ -1,0 +1,93 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+ 
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="60dp"
+	    android:paddingRight="60dp"
+	    android:orientation="vertical"
+	    android:weightSum="1.0"
+	    tools:context=".HomeActivity" 
+	>
+
+	<!-- Select destination -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prompt_destination"
+    />
+    
+    <Button 
+        android:id="@+id/myDestinationPickerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/button_destination"
+        android:onClick="showDestinationPickerDialog"
+    />
+    
+    <!-- Select dates -->
+	<TextView
+	    android:id="@+id/promptForDate"
+    	android:layout_width="fill_parent" 
+   		android:layout_height="wrap_content"
+    	android:text="@string/prompt_date"    
+    />
+	
+	<Button 
+        android:id="@+id/myDatePickerButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/button_date"
+        android:onClick="showDatePickerDialog"
+    />
+	
+	<TextView
+	    android:id="@+id/showMyDate"
+    	android:layout_width="fill_parent" 
+   		android:layout_height="wrap_content"   
+    />
+    
+	<!-- Select times -->
+    <TextView 
+    	android:layout_width="wrap_content"  
+    	android:layout_height="wrap_content"
+    	android:text="@string/prompt_times"  
+    />
+    
+    <LinearLayout
+        android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    >
+	    <Button
+	        android:id="@+id/myEarlierTimePickerButton"
+	        android:layout_weight="0.5"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/button_earliest_time"
+	        android:onClick="showTimePickerDialog"
+	    />
+	    
+	    <Button
+	        android:id="@+id/myLaterTimePickerButton"
+	        android:layout_weight="0.5"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/button_latest_time"
+	        android:onClick="showTimePickerDialog"
+	    />
+    </LinearLayout>
+    <TextView
+	    android:id="@+id/showMyTime"
+    	android:layout_width="fill_parent" 
+   		android:layout_height="wrap_content"   
+    />
+    
+	</LinearLayout>
+</ScrollView>

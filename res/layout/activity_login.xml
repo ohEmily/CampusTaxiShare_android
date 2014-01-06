@@ -20,6 +20,7 @@
 	        style="@style/CustomFontA"
 	     />
 	    
+	    <!-- First name field -->
 	    <ImageView
 	        android:id="@+id/imageView1"
 	        android:layout_marginTop="30dp"
@@ -30,6 +31,7 @@
 	        android:src="@drawable/icon" 
 	        />
 	    
+	    <!-- Input email address field -->
 	    <EditText
 	        android:id="@+id/emailEditTextLogin"
 	        android:layout_width="match_parent"
@@ -40,13 +42,22 @@
 	        <requestFocus />
 	    </EditText>
 
+	    <!--  Password field -->
 	    <EditText
 	        android:id="@+id/passEditTextLogin"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:inputType="textPassword" 
-	        android:hint="your password"
+	        android:hint="@string/password_field"
 	    />
+	    
+	    <!--  Error message -->
+        <TextView android:id="@+id/login_error"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#af2525"
+            android:textStyle="bold"
+        />
 	    
 	    <Button 
 	        android:id="@+id/button_send"

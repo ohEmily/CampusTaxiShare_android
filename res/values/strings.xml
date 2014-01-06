@@ -8,32 +8,51 @@
     <string name="logo_description">The RallyPoint Logo\: a red flag on a round base</string>
 
     <!-- Login screen -->
-    <string name="welcome_message">Find somebody to split a cab with to get somewhere.</string>
-	<string name="go_to_registration">First time user? Register here</string>
-	<string name="button_login">log me in!</string>
+    <string name="welcome_message">Find or create a group to split a cab with to get to 
+        	a popular destination.</string>
+    <string name="go_to_registration">First time user? Register here</string>
+    <string name="button_login">log me in!</string>
+    <string name="password_field">your password</string>
 
     <!-- Registration screen -->
-    <string name="confirmation_email_notice">Sign up and we\'ll send you a confirmation email. Then you\'re set.</string>
+    <string name="confirmation_email_notice">Sign up and we\'ll send you a 
+        confirmation email. Then you\'re set.</string>
     <string name="input_email">.edu email address</string>
     <string name="first_name">your first name</string>
     <string name="button_signup">sign me up!</string>
     <string name="password_hint">pick a password</string>
-	<string name="go_to_login">Already have an account? Login here</string>
-    
+    <string name="go_to_login">Already have an account? Login here</string>
+
     <string-array name="registered_colleges">
         <item>"columbia"</item>
+        <item>"barnard"</item>
+        <item>"nyu"</item>
+        <item>"penn"</item>
     </string-array>
 
-    <!-- Go screen (Main) -->
-    <string name="select_destination">Where are you headed?</string>
-    <string name="select_date_time">Date and time?</string>
-    <string name="select_rally_point">Where would you like to meet?</string>
-    <string name="title_activity_home">Sign Up</string>
+    <!-- Dashboard -->
+    <string name="title_activity_home">Sign up</string>
+    <string name="prompt_user">What would you like to do?</string>
+    <string name="button_new_trip">Create a new taxi-share group</string>
+    <string name="button_logout">Logout</string>
 
+    <!-- When/Where Activity -->
+    <string name="explanation_when_where">Please select carefully how many people
+        you have room for. If you have a <b>lot</b> of luggage, consider allowing
+        one person fewer.</string>
+    <string name="prompt_destination">Where are you headed?</string>
+    <string name="button_destination">Select destination</string>
+    <string name="prompt_date">What day are you heading out?</string>
+    <string name="button_date">Select date</string>
+    <string name="prompt_times">Departure times:</string>
+    <string name="button_earliest_time">Earliest</string>
+    <string name="button_latest_time">Latest</string>
+    
     <!-- Confirm email screen -->
     <string name="confirm_submission">Great! We\'ve sent an email to: </string>
     <string name="title_activity_account_confirmation">Confirmed!</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_when_where">WhenWhereActivity</string>
 
 </resources>

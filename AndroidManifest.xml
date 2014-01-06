@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,31 +15,33 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
         <activity
             android:name="edu.columbia.enp2111.rallypoint.LoginActivity"
             android:label="@string/title_activity_login" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        
         <activity
             android:name="edu.columbia.enp2111.rallypoint.RegistrationActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/ActivityTheme" >
         </activity>
-        
         <activity
-            android:name="edu.columbia.enp2111.rallypoint.MainActivity"
+            android:name="edu.columbia.enp2111.rallypoint.DashboardActivity"
             android:label="@string/app_name" >
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>            
         </activity>
-        
         <activity
             android:name="edu.columbia.enp2111.rallypoint.AccountConfirmationActivity"
             android:label="@string/title_activity_account_confirmation" >
+        </activity>
+        
+        <activity
+            android:name="edu.columbia.enp2111.rallypoint.WhenWhereActivity"
+            android:label="@string/title_activity_when_where" >
         </activity>
         
     </application>

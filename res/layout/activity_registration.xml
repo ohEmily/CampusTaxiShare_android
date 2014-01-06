@@ -60,6 +60,14 @@
 	        android:hint="@string/password_hint"
 	    />
 	    
+	    <!--  Error message -->
+        <TextView android:id="@+id/registration_error"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#af2525"
+            android:textStyle="bold"
+        />
+	    
 	    <Button 
 	        android:id="@+id/button_send"
 	        android:layout_gravity="center"
