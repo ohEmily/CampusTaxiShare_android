@@ -28,13 +28,13 @@ import org.json.JSONObject;
 public class RegistrationActivity extends Activity {
 	private String email;
 	private String firstName;
-	private String network;
 	private String password;
+	private String network;
 	
     // JSON Response node names
     private static String KEY_SUCCESS = "success";
-    private static String KEY_ERROR = "error";
-    private static String KEY_ERROR_MSG = "error_msg";
+//    private static String KEY_ERROR = "error";
+//    private static String KEY_ERROR_MSG = "error_msg";
     private static String KEY_UID = "uid";
     private static String KEY_NAME = "name";
     private static String KEY_EMAIL = "email";
@@ -49,15 +49,6 @@ public class RegistrationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registration);
 		Log.v("Testing", "opened registration activity");
-		
-		
-		// from http://stackoverflow.com/questions/13136539/caused-by-android-os-networkonmainthreadexception
-		// TODO
-		// http://stackoverflow.com/questions/6343166/android-os-networkonmainthreadexception
-		if (android.os.Build.VERSION.SDK_INT > 9) {
-		    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-		    StrictMode.setThreadPolicy(policy);
-		}
 		
 		final TextView toLogin = (TextView) this.findViewById(R.id.link_to_login);
 		toLogin.setOnClickListener(new OnClickListener()
@@ -97,9 +88,12 @@ public class RegistrationActivity extends Activity {
 	
 	private boolean setFirstName(String name)
 	{
-//		int length = name.length();
-//		if (!(length >= 2) || !(length <= 20));
-//				// TODO error
+		int length = name.length();
+		if (!(length >= 2) || !(length <= 20))
+		{
+			registerErrorMsg.setText("Names must be 2-20 characters long.");
+			return false;
+		}
 		this.firstName = name;
 		return true;
 	}
@@ -136,8 +130,13 @@ public class RegistrationActivity extends Activity {
 	
 	private boolean setPassword(String pass)
 	{
-		this.password = pass; // TODO error checking
-		return true;
+		if (pass.length() >= 5 && pass.length() <= 25)
+		{
+			this.password = pass; // TODO error checking
+			return true;
+		}
+		registerErrorMsg.setText("Your password must be between 5 and 25 characters long.");
+		return false;
 	}
 	
 	@Override
@@ -148,6 +147,10 @@ public class RegistrationActivity extends Activity {
 		return true;
 	}
 
+	
+//	from http://stackoverflow.com/questions/13136539/caused-by-android-os-networkonmainthreadexception
+//	http://stackoverflow.com/questions/6343166/android-os-networkonmainthreadexception
+//	http://pastebin.com/TbdAwS5g
 	private class MyAsyncTask extends AsyncTask<String, Void, JSONObject> {
 	       
         protected JSONObject doInBackground(String ... params) {
@@ -186,7 +189,7 @@ public class RegistrationActivity extends Activity {
                 }
                 else
                 {
-                    registerErrorMsg.setText("Error occured in registration. Does your account already exist?");
+                    registerErrorMsg.setText("Error occured in registration. (Account already exists?)");
                 }
             }
         }
