@@ -81,18 +81,19 @@ public final class R {
         /**  General 
          */
         public static final int app_name=0x7f060000;
-        public static final int button_date=0x7f06001a;
-        public static final int button_destination=0x7f060018;
-        public static final int button_earliest_time=0x7f06001c;
-        public static final int button_latest_time=0x7f06001d;
+        public static final int button_date=0x7f06001d;
+        public static final int button_destination=0x7f06001b;
+        public static final int button_earliest_time=0x7f06001f;
+        public static final int button_latest_time=0x7f060020;
         public static final int button_login=0x7f060006;
-        public static final int button_logout=0x7f060015;
-        public static final int button_new_trip=0x7f060014;
+        public static final int button_logout=0x7f060018;
+        public static final int button_new_trip=0x7f060017;
         public static final int button_signup=0x7f06000b;
         public static final int campus_name=0x7f060002;
+        public static final int college_placeholder=0x7f060014;
         /**  Confirm email screen 
          */
-        public static final int confirm_submission=0x7f06001e;
+        public static final int confirm_submission=0x7f060021;
         /**  Registration screen 
          */
         public static final int confirmation_email_notice=0x7f060008;
@@ -102,25 +103,27 @@ public final class R {
         public static final int error_message_registration=0x7f060011;
         /**  When/Where Activity 
          */
-        public static final int explanation_when_where=0x7f060016;
+        public static final int explanation_when_where=0x7f060019;
         public static final int first_name=0x7f06000a;
         public static final int go_to_login=0x7f06000d;
         public static final int go_to_registration=0x7f060005;
-        public static final int hello_world=0x7f060021;
+        public static final int greet_user=0x7f060013;
+        public static final int hello_world=0x7f060024;
         public static final int input_email=0x7f060009;
         public static final int logo_description=0x7f060003;
+        public static final int meeting_location_notice=0x7f060015;
+        public static final int meeting_location_placeholder=0x7f060016;
         public static final int password_field=0x7f060007;
         public static final int password_hint=0x7f06000c;
-        public static final int prompt_date=0x7f060019;
-        public static final int prompt_destination=0x7f060017;
-        public static final int prompt_times=0x7f06001b;
-        public static final int prompt_user=0x7f060013;
-        public static final int title_activity_account_confirmation=0x7f06001f;
+        public static final int prompt_date=0x7f06001c;
+        public static final int prompt_destination=0x7f06001a;
+        public static final int prompt_times=0x7f06001e;
+        public static final int title_activity_account_confirmation=0x7f060022;
         /**  Dashboard 
          */
         public static final int title_activity_home=0x7f060012;
-        public static final int title_activity_login=0x7f060020;
-        public static final int title_activity_when_where=0x7f060022;
+        public static final int title_activity_login=0x7f060023;
+        public static final int title_activity_when_where=0x7f060025;
         /**  Login screen 
          */
         public static final int welcome_message=0x7f060004;
@@ -141,10 +144,11 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
-        public static final int Button=0x7f080005;
+        public static final int Button=0x7f080006;
+        public static final int LargeYellowFont=0x7f080005;
         public static final int MyAppTheme=0x7f080002;
         public static final int WhiteFont=0x7f080003;
         public static final int YellowFont=0x7f080004;
-        public static final int button_text=0x7f080006;
+        public static final int button_text=0x7f080007;
     }
 }

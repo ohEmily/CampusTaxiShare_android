@@ -28,14 +28,36 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_message"
+        style="@style/WhiteFont"
+        android:text="@string/greet_user"
+     />
+    
+    <!-- Name of university/college -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/LargeYellowFont"
+        android:layout_gravity="center"
+        android:text="@string/college_placeholder"
      />
     
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-    	android:text="@string/prompt_user"
-    />
+        android:layout_marginTop="20dp"
+        style="@style/WhiteFont"
+        android:text="@string/meeting_location_notice"
+     />
+    
+    <!-- Meeting point associated with that university -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        style="@style/YellowFont"
+        android:text="@string/meeting_location_placeholder"
+        android:layout_marginBottom="20dp"
+     />
 
    <Button
        android:id="@+id/tripSpecificationButton"
@@ -59,7 +81,6 @@
 	   	<TextView
 			android:id="@+id/link_to_logout"
 		    android:layout_gravity="center"
-		    android:layout_marginTop="30dp"
 		    style="@style/YellowFont"
 		    android:text="@string/button_logout"
 		    android:clickable="true"

@@ -35,6 +35,10 @@
         <item name="android:textColor">@color/myYellow</item>
     </style>
     
+    <style name="LargeYellowFont" parent="YellowFont">
+        <item name="android:textSize">25sp</item>
+    </style>
+    
     <style name="Button">
         <item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">wrap_content</item>
@@ -46,7 +50,7 @@
     <style name="button_text" >
 	    <item name="android:layout_width" >fill_parent</item>
 	    <item name="android:layout_height" >wrap_content</item>
-	    <item name="android:textColor" >#ffffff</item>
+	    <item name="android:textColor" >@color/myWhite</item>
 	    <item name="android:gravity" >center</item>
 	    <item name="android:layout_margin" >3dp</item>
 	    <item name="android:shadowColor" >#000000</item>

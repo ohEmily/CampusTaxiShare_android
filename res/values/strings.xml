@@ -35,7 +35,10 @@
 
     <!-- Dashboard -->
     <string name="title_activity_home">Sign up</string>
-    <string name="prompt_user">What would you like to do?</string>
+    <string name="greet_user">Welcome! Your network is:</string>
+    <string name="college_placeholder">Columbia University</string>
+    <string name="meeting_location_notice">Your meeting place is:</string>
+    <string name="meeting_location_placeholder">116th Street and Broadway\n(Main Gates)</string>
     <string name="button_new_trip">Create a new taxi-share group</string>
     <string name="button_logout">Logout</string>
 
