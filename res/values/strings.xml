@@ -10,7 +10,7 @@
     <!-- Login screen -->
     <string name="welcome_message">Find or start  a cab share group 
         going between your school and a popular destination.</string>
-    <string name="go_to_registration">First time user? Register here</string>
+    <string name="go_to_registration">First time user? Register here!</string>
     <string name="button_login">log me in!</string>
     <string name="password_field">your password</string>
 
@@ -21,13 +21,16 @@
     <string name="first_name">your first name</string>
     <string name="button_signup">sign me up!</string>
     <string name="password_hint">pick a password</string>
-    <string name="go_to_login">Already have an account? Login here</string>
-
+    <string name="go_to_login">Already a user? Login here!</string>
+	<string name="error_message_name_length">Names must be 2–20 characters long.</string>
+    <string name="error_message_invalid_edu_email">Invalid .edu email address.</string>
+	<string name="error_message_registered_schools">You must use a registered school\'s edu address.</string>
+    <string name="error_message_registration">Error occurred in registration. (Account already exists?)</string>
+	
     <string-array name="registered_colleges">
         <item>"columbia"</item>
         <item>"barnard"</item>
         <item>"nyu"</item>
-        <item>"penn"</item>
     </string-array>
 
     <!-- Dashboard -->

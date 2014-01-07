@@ -14,12 +14,13 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int background=0x7f040001;
-        public static final int errorColor=0x7f040005;
-        public static final int myBlue=0x7f040004;
+        public static final int background=0x7f040002;
+        public static final int errorColor=0x7f040006;
+        public static final int myBlue=0x7f040005;
+        public static final int myDarkPink=0x7f040001;
         public static final int myPink=0x7f040000;
-        public static final int myWhite=0x7f040002;
-        public static final int myYellow=0x7f040003;
+        public static final int myWhite=0x7f040003;
+        public static final int myYellow=0x7f040004;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -29,40 +30,44 @@ public final class R {
     }
     public static final class drawable {
         public static final int app_name_banner=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int icon=0x7f020002;
+        public static final int custom_button=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int icon=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0016;
-        public static final int button_send=0x7f0a0007;
-        public static final int emailEditTextLogin=0x7f0a0004;
-        public static final int emailEditTextRegistration=0x7f0a000b;
-        public static final int imageView1=0x7f0a0009;
-        public static final int imageViewBanner=0x7f0a0002;
-        public static final int imageViewLogo=0x7f0a0003;
-        public static final int link_to_login=0x7f0a000e;
-        public static final int link_to_registration=0x7f0a0008;
-        public static final int login_error=0x7f0a0006;
-        public static final int logout_button=0x7f0a0001;
-        public static final int myDatePickerButton=0x7f0a0011;
-        public static final int myDestinationPickerButton=0x7f0a000f;
-        public static final int myEarlierTimePickerButton=0x7f0a0013;
-        public static final int myLaterTimePickerButton=0x7f0a0014;
-        public static final int nameEditTextRegistration=0x7f0a000a;
-        public static final int passEditTextLogin=0x7f0a0005;
-        public static final int passEditTextRegistration=0x7f0a000c;
-        public static final int promptForDate=0x7f0a0010;
-        public static final int registration_error=0x7f0a000d;
-        public static final int showMyDate=0x7f0a0012;
-        public static final int showMyTime=0x7f0a0015;
-        public static final int tripSpecificationButton=0x7f0a0000;
+        public static final int action_settings=0x7f0a001a;
+        public static final int bigLogo=0x7f0a000c;
+        public static final int button_send=0x7f0a000a;
+        public static final int button_send_registration=0x7f0a0011;
+        public static final int confirmation_error=0x7f0a0001;
+        public static final int emailEditTextLogin=0x7f0a0007;
+        public static final int emailEditTextRegistration=0x7f0a000e;
+        public static final int footer=0x7f0a0003;
+        public static final int imageViewBanner=0x7f0a0005;
+        public static final int imageViewLogo=0x7f0a0006;
+        public static final int link_to_login=0x7f0a0012;
+        public static final int link_to_logout=0x7f0a0004;
+        public static final int link_to_registration=0x7f0a000b;
+        public static final int login_error=0x7f0a0009;
+        public static final int myDatePickerButton=0x7f0a0015;
+        public static final int myDestinationPickerButton=0x7f0a0013;
+        public static final int myEarlierTimePickerButton=0x7f0a0017;
+        public static final int myLaterTimePickerButton=0x7f0a0018;
+        public static final int nameEditTextRegistration=0x7f0a000d;
+        public static final int passEditTextLogin=0x7f0a0008;
+        public static final int passEditTextRegistration=0x7f0a000f;
+        public static final int promptForDate=0x7f0a0014;
+        public static final int registration_error=0x7f0a0010;
+        public static final int showMyDate=0x7f0a0016;
+        public static final int showMyTime=0x7f0a0019;
+        public static final int tripSpecificationButton=0x7f0a0002;
+        public static final int upperPortionDashboard=0x7f0a0000;
     }
     public static final class layout {
-        public static final int activity_account_confirmation=0x7f030000;
-        public static final int activity_dashboard=0x7f030001;
-        public static final int activity_login=0x7f030002;
-        public static final int activity_registration=0x7f030003;
-        public static final int activity_when_where=0x7f030004;
+        public static final int activity_dashboard=0x7f030000;
+        public static final int activity_login=0x7f030001;
+        public static final int activity_registration=0x7f030002;
+        public static final int activity_when_where=0x7f030003;
     }
     public static final class menu {
         public static final int account_confirmation=0x7f090000;
@@ -76,42 +81,46 @@ public final class R {
         /**  General 
          */
         public static final int app_name=0x7f060000;
-        public static final int button_date=0x7f060016;
-        public static final int button_destination=0x7f060014;
-        public static final int button_earliest_time=0x7f060018;
-        public static final int button_latest_time=0x7f060019;
+        public static final int button_date=0x7f06001a;
+        public static final int button_destination=0x7f060018;
+        public static final int button_earliest_time=0x7f06001c;
+        public static final int button_latest_time=0x7f06001d;
         public static final int button_login=0x7f060006;
-        public static final int button_logout=0x7f060011;
-        public static final int button_new_trip=0x7f060010;
+        public static final int button_logout=0x7f060015;
+        public static final int button_new_trip=0x7f060014;
         public static final int button_signup=0x7f06000b;
         public static final int campus_name=0x7f060002;
         /**  Confirm email screen 
          */
-        public static final int confirm_submission=0x7f06001a;
+        public static final int confirm_submission=0x7f06001e;
         /**  Registration screen 
          */
         public static final int confirmation_email_notice=0x7f060008;
+        public static final int error_message_invalid_edu_email=0x7f06000f;
+        public static final int error_message_name_length=0x7f06000e;
+        public static final int error_message_registered_schools=0x7f060010;
+        public static final int error_message_registration=0x7f060011;
         /**  When/Where Activity 
          */
-        public static final int explanation_when_where=0x7f060012;
+        public static final int explanation_when_where=0x7f060016;
         public static final int first_name=0x7f06000a;
         public static final int go_to_login=0x7f06000d;
         public static final int go_to_registration=0x7f060005;
-        public static final int hello_world=0x7f06001d;
+        public static final int hello_world=0x7f060021;
         public static final int input_email=0x7f060009;
         public static final int logo_description=0x7f060003;
         public static final int password_field=0x7f060007;
         public static final int password_hint=0x7f06000c;
-        public static final int prompt_date=0x7f060015;
-        public static final int prompt_destination=0x7f060013;
-        public static final int prompt_times=0x7f060017;
-        public static final int prompt_user=0x7f06000f;
-        public static final int title_activity_account_confirmation=0x7f06001b;
+        public static final int prompt_date=0x7f060019;
+        public static final int prompt_destination=0x7f060017;
+        public static final int prompt_times=0x7f06001b;
+        public static final int prompt_user=0x7f060013;
+        public static final int title_activity_account_confirmation=0x7f06001f;
         /**  Dashboard 
          */
-        public static final int title_activity_home=0x7f06000e;
-        public static final int title_activity_login=0x7f06001c;
-        public static final int title_activity_when_where=0x7f06001e;
+        public static final int title_activity_home=0x7f060012;
+        public static final int title_activity_login=0x7f060020;
+        public static final int title_activity_when_where=0x7f060022;
         /**  Login screen 
          */
         public static final int welcome_message=0x7f060004;
@@ -132,8 +141,10 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
+        public static final int Button=0x7f080005;
         public static final int MyAppTheme=0x7f080002;
         public static final int WhiteFont=0x7f080003;
         public static final int YellowFont=0x7f080004;
+        public static final int button_text=0x7f080006;
     }
 }

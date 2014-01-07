@@ -65,7 +65,6 @@ public class RegistrationActivity extends Activity {
 	// http://developer.android.com/training/basics/firstapp/starting-activity.html
 	public void submitRegistrationFields(View view)
 	{
-		Log.v("Testing", "clicked button to submit registration fields");
 		final EditText emailField = (EditText) findViewById(R.id.emailEditTextRegistration);
 		final EditText firstNameField = (EditText) findViewById(R.id.nameEditTextRegistration);
 		final EditText passField = (EditText) findViewById(R.id.passEditTextRegistration);
@@ -91,7 +90,7 @@ public class RegistrationActivity extends Activity {
 		int length = name.length();
 		if (!(length >= 2) || !(length <= 20))
 		{
-			registerErrorMsg.setText("Names must be 2-20 characters long.");
+			registerErrorMsg.setText(R.string.error_message_name_length);
 			return false;
 		}
 		this.firstName = name;
@@ -109,7 +108,7 @@ public class RegistrationActivity extends Activity {
 		// check if actually an email address
 		if (!emailAddress.contains("@") || !emailAddress.contains(".edu"))
 		{
-			registerErrorMsg.setText("Invalid .edu email address.");
+			registerErrorMsg.setText(R.string.error_message_invalid_edu_email);
 			return false;
 		}
 		// check if its an email from one of the registered schools
@@ -124,7 +123,7 @@ public class RegistrationActivity extends Activity {
 		    	return true;
 		    }
 		}
-		registerErrorMsg.setText("You must use a registered school's edu address.");
+		registerErrorMsg.setText(R.string.error_message_registered_schools);
 		return false;
 	}
 	
@@ -147,13 +146,13 @@ public class RegistrationActivity extends Activity {
 		return true;
 	}
 
-	
 //	from http://stackoverflow.com/questions/13136539/caused-by-android-os-networkonmainthreadexception
 //	http://stackoverflow.com/questions/6343166/android-os-networkonmainthreadexception
 //	http://pastebin.com/TbdAwS5g
 	private class MyAsyncTask extends AsyncTask<String, Void, JSONObject> {
 	       
-        protected JSONObject doInBackground(String ... params) {
+        protected JSONObject doInBackground(String ... params)
+        {
                 UserFunctions userFunction = new UserFunctions();
                 if (params.length != 3)
                         return null;
@@ -163,40 +162,40 @@ public class RegistrationActivity extends Activity {
        
         protected void onPostExecute(JSONObject json)
         {
-        // check for login response
-        try 
-        {
-            if (json != null && json.getString(KEY_SUCCESS) != null)
-            {
-                registerErrorMsg.setText("");
-                String res = json.getString(KEY_SUCCESS);
-                if(Integer.parseInt(res) == 1) // user successfully registered
-                {
-                    // Store user details in SQLite Database
-                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-                    JSONObject json_user = json.getJSONObject("user");
-                     
-                    // Clear all previous data in database
-                    UserFunctions userFunction = new UserFunctions();
-                    userFunction.logoutUser(getApplicationContext());
-                    db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                        
-                    // Launch Dashboard Screen
-                    Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
-                    // Close all views before launching Dashboard
-                    dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(dashboard);
-                    finish(); // Close Registration Activity
-                }
-                else
-                {
-                    registerErrorMsg.setText("Error occured in registration. (Account already exists?)");
-                }
-            }
+	        // check for login response
+	        try 
+	        {
+	            if (json != null && json.getString(KEY_SUCCESS) != null)
+	            {
+	                registerErrorMsg.setText("");
+	                String res = json.getString(KEY_SUCCESS);
+	                if(Integer.parseInt(res) == 1) // user successfully registered
+	                {
+	                    // Store user details in SQLite Database
+	                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+	                    JSONObject json_user = json.getJSONObject("user");
+	                     
+	                    // Clear all previous data in database
+	                    UserFunctions userFunction = new UserFunctions();
+	                    userFunction.logoutUser(getApplicationContext());
+	                    db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                        
+	                    // Launch Dashboard Screen
+	                    Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
+	                    // Close all views before launching Dashboard
+	                    dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	                    startActivity(dashboard);
+	                    finish(); // Close Registration Activity
+	                }
+	                else
+	                {
+	                    registerErrorMsg.setText(R.string.error_message_registration);
+	                }
+	            }
+	        }
+	        catch (JSONException e) 
+	        {
+	            e.printStackTrace();
+	        }
         }
-        catch (JSONException e) 
-        {
-            e.printStackTrace();
-        }
-        }
-}
+	}
 }

@@ -21,9 +21,9 @@
 	     />
 	    
 	    <ImageView
-	        android:id="@+id/imageView1"
-	        android:layout_marginTop="30dp"
+	        android:id="@+id/bigLogo"
 	        android:layout_gravity="center"
+	        android:adjustViewBounds="true"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:contentDescription="@string/logo_description"
@@ -33,7 +33,7 @@
 	    <EditText
 	        android:id="@+id/nameEditTextRegistration"
 	        android:layout_width="match_parent"
-	        android:layout_marginTop="40dp"
+	        android:layout_marginTop="10dp"
 	        android:layout_height="wrap_content"
 	        android:inputType="textPersonName"
 	        android:hint="@string/first_name"
@@ -64,22 +64,22 @@
         <TextView android:id="@+id/registration_error"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="#af2525"
+            android:textColor="@color/errorColor"
             android:textStyle="bold"
         />
 	    
 	    <Button 
-	        android:id="@+id/button_send"
+	        android:id="@+id/button_send_registration"
+	        style="@style/button_text"
+	        android:background="@drawable/custom_button"
 	        android:layout_gravity="center"
 	        android:layout_marginTop="30dp"
-	    	android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
 	    	android:text="@string/button_signup"
 	    	android:onClick="submitRegistrationFields"
 	    />
 	    
 	    <TextView android:id="@+id/link_to_login"
-            style="@style/WhiteFont"
+            style="@style/YellowFont"
             android:text="@string/go_to_login"
             android:onClick="switchToLogin"
         />

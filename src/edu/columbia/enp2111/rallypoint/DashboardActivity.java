@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * Dashboard. Connects to database.
@@ -17,7 +17,6 @@ import android.widget.Button;
 public class DashboardActivity extends Activity {
 
     private UserFunctions userFunctions;
-    private Button btnLogout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +32,9 @@ public class DashboardActivity extends Activity {
         {
         // user already logged in show databoard
             setContentView(R.layout.activity_dashboard);
-            btnLogout = (Button) findViewById(R.id.logout_button);
+            TextView linkLogout = (TextView) findViewById(R.id.link_to_logout);
              
-            btnLogout.setOnClickListener(new View.OnClickListener() {
+            linkLogout.setOnClickListener(new View.OnClickListener() {
                  
                 public void onClick(View view)
                 {
