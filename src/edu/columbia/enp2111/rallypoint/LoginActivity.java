@@ -1,5 +1,6 @@
 package edu.columbia.enp2111.rallypoint;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+
 
 // handling login event
 import org.json.JSONException;
@@ -33,6 +35,8 @@ public class LoginActivity extends Activity {
     private static String KEY_EMAIL = "email";
     private static String KEY_CREATED_AT = "created_at";
 	
+    TextView loginErrorMsg;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,53 +59,15 @@ public class LoginActivity extends Activity {
 		Log.v("Testing", "submitLoginFields method");
 		final EditText emailField = (EditText) findViewById(R.id.emailEditTextLogin);
 		final EditText passwordField = (EditText) findViewById(R.id.passEditTextLogin);
-		final TextView loginErrorMsg = (TextView) findViewById(R.id.login_error);
+		loginErrorMsg = (TextView) findViewById(R.id.login_error);
 		
 		email = emailField.getText().toString();
 		password = passwordField.getText().toString();
-        UserFunctions userFunction = new UserFunctions();
-        JSONObject json = userFunction.loginUser(email, password);
         
 		Log.v("Testing", "Login email: " + email);
 		Log.v("Testing", "Login Password: " + password);
 		
-        try // check for login response
-        {
-            if (json.getString(KEY_SUCCESS) != null) 
-            {
-                loginErrorMsg.setText("");
-                String res = json.getString(KEY_SUCCESS);
-                if(Integer.parseInt(res) == 1)
-                {
-                    // user successfully logged in
-                    // Store user details in SQLite Database
-                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-                    JSONObject json_user = json.getJSONObject("user");
-                     
-                    // Clear all previous data in database
-                    userFunction.logoutUser(getApplicationContext());
-                    db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), 
-                    		json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                       
-                     
-                    // Launch dashboard screen
-                    Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
-                     
-                    // Close all views before launching dashboard
-                    dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(dashboard);
-
-                    finish(); // Close login screen to return to dashboard
-                }
-                else // Error in login
-                {
-                    loginErrorMsg.setText("Incorrect email/password.");
-                }
-            }
-        }
-        catch (JSONException e)
-        {
-        	e.printStackTrace();
-        }
+		 new MyAsyncTask().execute(email, password);
     }
 	
 	@Override
@@ -109,5 +75,58 @@ public class LoginActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
+	}
+	
+	private class MyAsyncTask extends AsyncTask<String, Void, JSONObject>
+	{   
+	    protected JSONObject doInBackground(String ... params) {
+	            UserFunctions userFunction = new UserFunctions();
+	            if (params.length != 2)
+	                    return null;
+	            JSONObject json = userFunction.loginUser(params[0], params[1]);
+	            return json;
+	    }
+	   
+	    protected void onPostExecute(JSONObject json)
+	    {
+	    	try
+	    	{
+	    		if (json != null && json.getString(KEY_SUCCESS) != null)
+	    		{
+	    			loginErrorMsg.setText("");
+	    			String res = json.getString(KEY_SUCCESS);
+	    			if(Integer.parseInt(res) == 1)
+	    			{
+		                // user successfully logged in
+		                // Store user details in SQLite Database
+		                DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+		                JSONObject json_user = json.getJSONObject("user");
+	                 
+		                // Clear all previous data in database
+		                UserFunctions userFunction = new UserFunctions();
+		                userFunction.logoutUser(getApplicationContext());
+		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                        
+		                 
+		                // Launch Dashboard Screen
+		                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
+		                 
+		                // Close all views before launching Dashboard
+		                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		                startActivity(dashboard);
+		                 
+		                finish(); // Close login screen
+	    			}
+	    			else
+	    			{
+	    				// Error in login
+	    				loginErrorMsg.setText("Incorrect email/password.");
+	    			}
+	    		}
+	    	} 
+		    catch (JSONException e)
+		    {
+		        e.printStackTrace();
+		    }
+		}
 	}
 }

@@ -2,6 +2,7 @@ package edu.columbia.enp2111.rallypoint;
 
 import java.util.Locale;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.app.Activity;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
+
 
 //handling registration event
 import org.json.JSONException;
@@ -38,6 +40,9 @@ public class RegistrationActivity extends Activity {
     private static String KEY_EMAIL = "email";
     private static String KEY_CREATED_AT = "created_at";
 
+    // Activity page elements
+    TextView registerErrorMsg;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -73,66 +78,30 @@ public class RegistrationActivity extends Activity {
 		final EditText emailField = (EditText) findViewById(R.id.emailEditTextRegistration);
 		final EditText firstNameField = (EditText) findViewById(R.id.nameEditTextRegistration);
 		final EditText passField = (EditText) findViewById(R.id.passEditTextRegistration);
-		final TextView registerErrorMsg = (TextView) findViewById(R.id.registration_error);
+		registerErrorMsg = (TextView) findViewById(R.id.registration_error);
 		
-		setFirstName(firstNameField.getText().toString());
-		setEmailAndNetwork(emailField.getText().toString());
-		setPassword(passField.getText().toString());
+		String tempName = firstNameField.getText().toString();
+		String tempEmail = emailField.getText().toString();
+		String tempPass = passField.getText().toString();
 		
-        // testing
-        Log.v("Testing", "Email: " + email);
-//		Log.v("Testing", "Network: " + network);
-		Log.v("Testing", "Name: " + firstName);
-		Log.v("Testing", "Password: " + password);
-		
-		Log.v("Testing", "Creating UserFuctions and json objects.");
-		UserFunctions userFunction = new UserFunctions();
-        JSONObject json = userFunction.registerUser(this.firstName, this.email, this.password);
-		
-        // check for login response
-        try
-        {
-            if (json.getString(KEY_SUCCESS) != null)
-            {
-            	registerErrorMsg.setText("");
-            	String res = json.getString(KEY_SUCCESS);
-            	if (Integer.parseInt(res) == 1)
-            	{
-            	// user successfully registered
-	                // Store user details in SQLite Database
-	            	DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-	            	JSONObject json_user = json.getJSONObject("user");
-	                     
-	            	// Clear all previous data in database
-	            	userFunction.logoutUser(getApplicationContext());
-	                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), 
-	                		json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                       
-	                // Launch Dashboard Screen
-	                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
-	                // Close all views before launching Dashboard
-	                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	                startActivity(dashboard);
+		if (setFirstName(tempName) && setEmailAndNetwork(tempEmail) && setPassword(tempPass))
+		{
+	        // testing
+	        Log.v("Testing", "Email: " + email);
+//			Log.v("Testing", "Network: " + network);
+			Log.v("Testing", "Name: " + firstName);
+			Log.v("Testing", "Password: " + password);
+			new MyAsyncTask().execute(firstName, email, password);
+		}
+	}
 	
-	                finish(); // close registration screen
-                }
-            	else
-            	{
-            		registerErrorMsg.setText("Error occured in registration"); // error in registration
-            	}
-            }
-        } 
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-    }
-	
-	private void setFirstName(String name)
+	private boolean setFirstName(String name)
 	{
 //		int length = name.length();
 //		if (!(length >= 2) || !(length <= 20));
 //				// TODO error
 		this.firstName = name;
+		return true;
 	}
 
 	/**
@@ -140,29 +109,35 @@ public class RegistrationActivity extends Activity {
 	 * email address given.
 	 * @param inputEmail the email address
 	 */
-	private void setEmailAndNetwork(String inputEmail)
+	private boolean setEmailAndNetwork(String inputEmail)
 	{
 		String emailAddress = inputEmail.toLowerCase(Locale.getDefault());
-//		// check if actually an email address
-//		if (!emailAddress.contains("@") || !emailAddress.contains(".edu"));
-//			// TODO Error Handling ^ notice semicolon after if-statement
-//		// check if its an email from one of the registered schools
-//		String[] names = getResources().getStringArray(R.array.registered_colleges);
-//		for (String each : names) 
-//		{
-//			int i = emailAddress.indexOf(each);
-//		    if (i >= 0)
-//		    {
-//		    	network = each; // set the correct network
+		// check if actually an email address
+		if (!emailAddress.contains("@") || !emailAddress.contains(".edu"))
+		{
+			registerErrorMsg.setText("Invalid .edu email address.");
+			return false;
+		}
+		// check if its an email from one of the registered schools
+		String[] names = getResources().getStringArray(R.array.registered_colleges);
+		for (String each : names) 
+		{
+			int i = emailAddress.indexOf(each);
+		    if (i >= 0)
+		    {
+		    	network = each; // set the correct network
 		    	this.email = emailAddress;
-//		    }
-//		}
-//		// TODO Error Handling
+		    	return true;
+		    }
+		}
+		registerErrorMsg.setText("You must use a registered school's edu address.");
+		return false;
 	}
 	
-	private void setPassword(String pass)
+	private boolean setPassword(String pass)
 	{
 		this.password = pass; // TODO error checking
+		return true;
 	}
 	
 	@Override
@@ -173,4 +148,52 @@ public class RegistrationActivity extends Activity {
 		return true;
 	}
 
+	private class MyAsyncTask extends AsyncTask<String, Void, JSONObject> {
+	       
+        protected JSONObject doInBackground(String ... params) {
+                UserFunctions userFunction = new UserFunctions();
+                if (params.length != 3)
+                        return null;
+                JSONObject json = userFunction.registerUser(params[0], params[1], params[2]);
+                return json;
+        }
+       
+        protected void onPostExecute(JSONObject json)
+        {
+        // check for login response
+        try 
+        {
+            if (json != null && json.getString(KEY_SUCCESS) != null)
+            {
+                registerErrorMsg.setText("");
+                String res = json.getString(KEY_SUCCESS);
+                if(Integer.parseInt(res) == 1) // user successfully registered
+                {
+                    // Store user details in SQLite Database
+                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                    JSONObject json_user = json.getJSONObject("user");
+                     
+                    // Clear all previous data in database
+                    UserFunctions userFunction = new UserFunctions();
+                    userFunction.logoutUser(getApplicationContext());
+                    db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                        
+                    // Launch Dashboard Screen
+                    Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
+                    // Close all views before launching Dashboard
+                    dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(dashboard);
+                    finish(); // Close Registration Activity
+                }
+                else
+                {
+                    registerErrorMsg.setText("Error occured in registration. Does your account already exist?");
+                }
+            }
+        }
+        catch (JSONException e) 
+        {
+            e.printStackTrace();
+        }
+        }
+}
 }

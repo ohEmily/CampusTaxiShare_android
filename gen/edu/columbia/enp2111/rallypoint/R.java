@@ -14,45 +14,47 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int myBlue=0x7f040002;
-        public static final int myGray=0x7f040001;
-        public static final int myRed=0x7f040000;
+        public static final int background=0x7f040001;
+        public static final int errorColor=0x7f040005;
+        public static final int myBlue=0x7f040004;
+        public static final int myPink=0x7f040000;
+        public static final int myWhite=0x7f040002;
+        public static final int myYellow=0x7f040003;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
-
-         Customize dimensions originally defined in res/values/dimens.xml (such as
-         screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
-    
          */
         public static final int activity_horizontal_margin=0x7f050000;
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int icon=0x7f020001;
+        public static final int app_name_banner=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int icon=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0014;
-        public static final int button_send=0x7f0a0006;
-        public static final int emailEditTextLogin=0x7f0a0003;
-        public static final int emailEditTextRegistration=0x7f0a0009;
-        public static final int imageView1=0x7f0a0002;
-        public static final int link_to_login=0x7f0a000c;
-        public static final int link_to_registration=0x7f0a0007;
-        public static final int login_error=0x7f0a0005;
+        public static final int action_settings=0x7f0a0016;
+        public static final int button_send=0x7f0a0007;
+        public static final int emailEditTextLogin=0x7f0a0004;
+        public static final int emailEditTextRegistration=0x7f0a000b;
+        public static final int imageView1=0x7f0a0009;
+        public static final int imageViewBanner=0x7f0a0002;
+        public static final int imageViewLogo=0x7f0a0003;
+        public static final int link_to_login=0x7f0a000e;
+        public static final int link_to_registration=0x7f0a0008;
+        public static final int login_error=0x7f0a0006;
         public static final int logout_button=0x7f0a0001;
-        public static final int myDatePickerButton=0x7f0a000f;
-        public static final int myDestinationPickerButton=0x7f0a000d;
-        public static final int myEarlierTimePickerButton=0x7f0a0011;
-        public static final int myLaterTimePickerButton=0x7f0a0012;
-        public static final int nameEditTextRegistration=0x7f0a0008;
-        public static final int passEditTextLogin=0x7f0a0004;
-        public static final int passEditTextRegistration=0x7f0a000a;
-        public static final int promptForDate=0x7f0a000e;
-        public static final int registration_error=0x7f0a000b;
-        public static final int showMyDate=0x7f0a0010;
-        public static final int showMyTime=0x7f0a0013;
+        public static final int myDatePickerButton=0x7f0a0011;
+        public static final int myDestinationPickerButton=0x7f0a000f;
+        public static final int myEarlierTimePickerButton=0x7f0a0013;
+        public static final int myLaterTimePickerButton=0x7f0a0014;
+        public static final int nameEditTextRegistration=0x7f0a000a;
+        public static final int passEditTextLogin=0x7f0a0005;
+        public static final int passEditTextRegistration=0x7f0a000c;
+        public static final int promptForDate=0x7f0a0010;
+        public static final int registration_error=0x7f0a000d;
+        public static final int showMyDate=0x7f0a0012;
+        public static final int showMyTime=0x7f0a0015;
         public static final int tripSpecificationButton=0x7f0a0000;
     }
     public static final class layout {
@@ -115,7 +117,6 @@ public final class R {
         public static final int welcome_message=0x7f060004;
     }
     public static final class style {
-        public static final int ActivityTheme=0x7f080002;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -125,23 +126,14 @@ public final class R {
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         
-
-        Base application theme for API 11+. This theme completely replaces
-        AppBaseTheme from res/values/styles.xml on API 11+ devices.
-    
- API 11 theme customizations can go here. 
-
-        Base application theme for API 14+. This theme completely replaces
-        AppBaseTheme from BOTH res/values/styles.xml and
-        res/values-v11/styles.xml on API 14+ devices.
-    
- API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
-        public static final int CustomFontA=0x7f080003;
+        public static final int MyAppTheme=0x7f080002;
+        public static final int WhiteFont=0x7f080003;
+        public static final int YellowFont=0x7f080004;
     }
 }

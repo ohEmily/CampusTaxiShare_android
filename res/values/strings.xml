@@ -8,8 +8,8 @@
     <string name="logo_description">The RallyPoint Logo\: a red flag on a round base</string>
 
     <!-- Login screen -->
-    <string name="welcome_message">Find or create a group to split a cab with to get to 
-        	a popular destination.</string>
+    <string name="welcome_message">Find or start  a cab share group 
+        going between your school and a popular destination.</string>
     <string name="go_to_registration">First time user? Register here</string>
     <string name="button_login">log me in!</string>
     <string name="password_field">your password</string>

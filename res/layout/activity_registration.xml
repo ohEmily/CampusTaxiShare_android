@@ -17,7 +17,7 @@
 	
 	    <TextView
 	        android:text="@string/confirmation_email_notice"
-	        style="@style/CustomFontA"
+	        style="@style/WhiteFont"
 	     />
 	    
 	    <ImageView
@@ -79,7 +79,7 @@
 	    />
 	    
 	    <TextView android:id="@+id/link_to_login"
-            style="@style/CustomFontA"
+            style="@style/WhiteFont"
             android:text="@string/go_to_login"
             android:onClick="switchToLogin"
         />
