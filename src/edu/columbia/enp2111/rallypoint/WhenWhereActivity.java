@@ -3,12 +3,15 @@ package edu.columbia.enp2111.rallypoint;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
-public class WhenWhereActivity extends FragmentActivity {
+public class WhenWhereActivity extends FragmentActivity
+{
 	/* has to extend FragmentActivity:
 	 * stackoverflow.com/questions/13121432/the-method-is-getsupportfragmentmanager-is-unsuported */
 
@@ -18,13 +21,47 @@ public class WhenWhereActivity extends FragmentActivity {
 //	private int mMonth;
 //	private int mDay;
 
+	private UserFunctions userFunctions;
+	
 	AlertDialog levelDialog;
 	static final int DATE_DIALOG_ID = 0;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_when_where);
+		
+        /**
+         * When/Where Screen for the application
+         * */
+        // Check login status in database
+        userFunctions = new UserFunctions();
+        if (userFunctions.isUserLoggedIn(getApplicationContext()))
+        {
+        // user already logged in show databoard
+            setContentView(R.layout.activity_when_where);
+            TextView linkLogout = (TextView) findViewById(R.id.link_to_logout);
+             
+            linkLogout.setOnClickListener(new View.OnClickListener() {
+                 
+                public void onClick(View view)
+                {
+                    userFunctions.logoutUser(getApplicationContext());
+                    Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+                    login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(login);
+                    finish(); // Closing dashboard screen
+                }
+            });   
+        }
+        else
+        {
+            // user is not logged in show login screen
+            Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+            login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(login);
+            finish(); // Closing dashboard screen
+        }   
 	}
 	
 	/**
