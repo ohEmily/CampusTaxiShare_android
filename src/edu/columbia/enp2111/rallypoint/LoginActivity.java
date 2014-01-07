@@ -2,15 +2,15 @@ package edu.columbia.enp2111.rallypoint;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import android.app.ActionBar;
 
 // handling login event
 import org.json.JSONException;
@@ -22,9 +22,11 @@ import org.json.JSONObject;
  * @author Ravi Tamada, androidhive.info for the database connection stuff
  */
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends ActionBarActivity
+{
 	private String email;
 	private String password;
+	private ActionBar actionBar;
 	
 	// JSON Response node names
     private static String KEY_SUCCESS = "success";
@@ -41,6 +43,8 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		actionBar = getActionBar();
+		actionBar.show();
 		
 		final TextView toRegistration = (TextView) this.findViewById(R.id.link_to_registration);
 		toRegistration.setOnClickListener(new OnClickListener() 
@@ -74,7 +78,7 @@ public class LoginActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 	
 	private class MyAsyncTask extends AsyncTask<String, Void, JSONObject>
