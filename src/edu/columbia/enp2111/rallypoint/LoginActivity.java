@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.app.ActionBar;
 
+
+
 // handling login event
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,8 +32,8 @@ public class LoginActivity extends ActionBarActivity
 	
 	// JSON Response node names
     private static String KEY_SUCCESS = "success";
-    private static String KEY_ERROR = "error";
-    private static String KEY_ERROR_MSG = "error_msg";
+//    private static String KEY_ERROR = "error";
+//    private static String KEY_ERROR_MSG = "error_msg";
     private static String KEY_UID = "uid";
     private static String KEY_NAME = "name";
     private static String KEY_EMAIL = "email";
@@ -75,7 +77,8 @@ public class LoginActivity extends ActionBarActivity
     }
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login, menu);
 		return super.onCreateOptionsMenu(menu);
@@ -83,12 +86,13 @@ public class LoginActivity extends ActionBarActivity
 	
 	private class MyAsyncTask extends AsyncTask<String, Void, JSONObject>
 	{   
-	    protected JSONObject doInBackground(String ... params) {
-	            UserFunctions userFunction = new UserFunctions();
-	            if (params.length != 2)
-	                    return null;
-	            JSONObject json = userFunction.loginUser(params[0], params[1]);
-	            return json;
+	    protected JSONObject doInBackground(String ... params)
+	    {
+	    	UserFunctions userFunction = new UserFunctions();
+	    	if (params.length != 2)
+	    		return null;
+	        JSONObject json = userFunction.loginUser(params[0], params[1]);
+	        return json;
 	    }
 	   
 	    protected void onPostExecute(JSONObject json)
@@ -109,7 +113,8 @@ public class LoginActivity extends ActionBarActivity
 		                // Clear all previous data in database
 		                UserFunctions userFunction = new UserFunctions();
 		                userFunction.logoutUser(getApplicationContext());
-		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                        
+		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), 
+		                		json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                        
 		                 
 		                // Launch Dashboard Screen
 		                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
@@ -123,13 +128,14 @@ public class LoginActivity extends ActionBarActivity
 	    			else
 	    			{
 	    				// Error in login
-	    				loginErrorMsg.setText("Incorrect email/password.");
+	    				loginErrorMsg.setText(R.string.error_message_login);
 	    			}
 	    		}
 	    	} 
 		    catch (JSONException e)
 		    {
-		        e.printStackTrace();
+		        loginErrorMsg.setText("Server error. Please try again later.");
+		    	e.printStackTrace();
 		    }
 		}
 	}

@@ -5,6 +5,6 @@
     <color name="background">#3f3f3f</color>
     <color name="myWhite">#eaeaea</color>
     <color name="myYellow">#f6eb2d</color>
-    <color name="myBlue">#1e617a</color>
+    <color name="myBlack">#151515</color>
     <color name="errorColor">#af2525</color>
 </resources>

@@ -7,12 +7,17 @@
     <string name="campus_name">Columbia University</string>
     <string name="logo_description">The RallyPoint Logo\: a red flag on a round base</string>
 
+    <!-- Action Bar -->
+    <string name="settings_label">Settings</string>
+    <string name="action_search">Search</string>
+    
     <!-- Login screen -->
     <string name="welcome_message">Find or start  a cab share group 
         going between your school and a popular destination.</string>
     <string name="go_to_registration">First time user? Register here!</string>
     <string name="button_login">log me in!</string>
     <string name="password_field">your password</string>
+    <string name="error_message_login">Incorrect email/password.</string>
 
     <!-- Registration screen -->
     <string name="confirmation_email_notice">Sign up and we\'ll send you a 
@@ -26,7 +31,8 @@
     <string name="error_message_invalid_edu_email">Invalid .edu email address.</string>
 	<string name="error_message_registered_schools">You must use a registered school\'s edu address.</string>
     <string name="error_message_registration">Error occurred in registration. (Account already exists?)</string>
-	
+    <string name="error_message_password_length">Your password must be between 5 and 25 characters long.</string>
+    
     <string-array name="registered_colleges">
         <item>"columbia"</item>
         <item>"barnard"</item>

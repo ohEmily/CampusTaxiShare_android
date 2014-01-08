@@ -13,16 +13,21 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
-    
-    <style name="MyAppTheme" parent="AppTheme">
+    <style name="MyAppTheme" parent="AppBaseTheme">
         <item name="android:colorBackground">@color/background</item>
         <item name="android:background">@color/background</item>
         <item name="android:textColor">@color/myWhite</item>
-    </style> 
-
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+    
+    <!-- ActionBar styles -->
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:background">@drawable/actionbar_background</item>
+        <item name="actionMenuTextColor">@color/myWhite</item>
+    	<!--Support Library compatibility-->
+    	<item name="background">@color/myBlack</item>
+    </style>
+    
     <style name="WhiteFont" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>

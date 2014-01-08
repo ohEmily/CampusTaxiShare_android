@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
@@ -134,7 +133,7 @@ public class RegistrationActivity extends Activity {
 			this.password = pass; // TODO error checking
 			return true;
 		}
-		registerErrorMsg.setText("Your password must be between 5 and 25 characters long.");
+		registerErrorMsg.setText(R.string.error_message_password_length);
 		return false;
 	}
 	
@@ -142,7 +141,7 @@ public class RegistrationActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.home, menu);
+		getMenuInflater().inflate(R.menu.registration, menu);
 		return true;
 	}
 

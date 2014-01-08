@@ -11,7 +11,6 @@
 	    android:layout_height="wrap_content"
 	    android:orientation="vertical"
 	    tools:context=".LoginActivity"
-    	android:layout_margin="5dp"   
 	>
 	
 	    <ImageView
@@ -27,24 +26,15 @@
 	    <TextView
 	        android:text="@string/welcome_message"
 	        style="@style/WhiteFont"
-	        android:layout_marginLeft="10dp"
-	        android:layout_marginRight="10dp"
-	     />
-	   	
-	    <ImageView
-	        android:id="@+id/imageViewLogo"
-	        android:layout_marginTop="10dp"
-	        android:layout_gravity="center"
-	        android:layout_width="70dp"
-	        android:layout_height="70dp"
-	        android:contentDescription="@string/logo_description"
-	        android:src="@drawable/icon" 
+	        android:layout_marginTop="5dp"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginRight="5dp"
 	     />
 	    
 	    <!-- Input email address field -->
 	    <EditText
 	        android:id="@+id/emailEditTextLogin"
-	        android:layout_marginTop="25dp"
+	        android:layout_marginTop="5dp"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
    	        android:inputType="textEmailAddress" 
