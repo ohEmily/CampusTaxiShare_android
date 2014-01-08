@@ -70,8 +70,10 @@
 	    <Button 
 	        android:id="@+id/button_send_registration"
 	        style="@style/button_text"
-	        android:background="@drawable/custom_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
 	        android:layout_gravity="center"
+	        android:background="@drawable/custom_button"
 	        android:layout_marginTop="30dp"
 	    	android:text="@string/button_signup"
 	    	android:onClick="submitRegistrationFields"
@@ -79,7 +81,7 @@
 	    
 	    <TextView 
 	        android:id="@+id/link_to_login"
-            style="@style/YellowFont"
+            style="@style/FooterFont"
             android:text="@string/go_to_login"
             android:onClick="switchToLogin"
         />

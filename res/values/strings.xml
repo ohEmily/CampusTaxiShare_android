@@ -45,7 +45,7 @@
     <string name="college_placeholder">Columbia University</string>
     <string name="meeting_location_notice">Your meeting place is:</string>
     <string name="meeting_location_placeholder">116th Street and Broadway\n(Main Gates)</string>
-    <string name="button_new_trip">Create a new taxi-share group</string>
+    <string name="button_new_trip">Create new cab share</string>
     <string name="button_logout">Logout</string>
 
     <!-- When/Where Activity -->
@@ -56,9 +56,8 @@
     <string name="button_destination">Select destination</string>
     <string name="prompt_date">What day are you heading out?</string>
     <string name="button_date">Select date</string>
-    <string name="prompt_times">Departure times:</string>
-    <string name="button_earliest_time">Earliest</string>
-    <string name="button_latest_time">Latest</string>
+    <string name="prompt_times">Departure time from your meeting point:</string>
+    <string name="button_time">Select time</string>
     
     <!-- Confirm email screen -->
     <string name="confirm_submission">Great! We\'ve sent an email to: </string>

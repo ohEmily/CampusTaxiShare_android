@@ -62,8 +62,7 @@
    <Button
        android:id="@+id/tripSpecificationButton"
        style="@style/button_text"
-       android:layout_width="fill_parent"
-       android:layout_height="wrap_content"
+       android:drawableLeft="@drawable/ic_action_new_event"
        android:background="@drawable/custom_button"
        android:text="@string/button_new_trip" 
        android:onClick="createNewTrip"

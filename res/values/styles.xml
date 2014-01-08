@@ -29,7 +29,7 @@
     </style>
     
     <style name="WhiteFont" parent="@android:style/TextAppearance.Medium">
-        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/myWhite</item>
@@ -40,12 +40,16 @@
         <item name="android:textColor">@color/myYellow</item>
     </style>
     
+    <style name="FooterFont" parent="YellowFont">
+        <item name="android:layout_gravity">center</item>
+    </style> 
+    
     <style name="LargeYellowFont" parent="YellowFont">
         <item name="android:textSize">25sp</item>
     </style>
     
     <style name="Button">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:layout_gravity">center</item>
 		<item name="android:textColor">@color/myPink</item>
@@ -53,15 +57,15 @@
 	</style>
 	
     <style name="button_text" >
-	    <item name="android:layout_width" >fill_parent</item>
-	    <item name="android:layout_height" >wrap_content</item>
-	    <item name="android:textColor" >@color/myWhite</item>
-	    <item name="android:gravity" >center</item>
-	    <item name="android:layout_margin" >3dp</item>
-	    <item name="android:shadowColor" >#000000</item>
-	    <item name="android:shadowDx" >1</item>
-	    <item name="android:shadowDy" >1</item>
-	    <item name="android:shadowRadius" >2</item>
+	    <item name="android:layout_width">wrap_content</item>
+	    <item name="android:layout_height">wrap_content</item>
+	    <item name="android:textColor">@color/myWhite</item>
+	    <item name="android:layout_gravity">center</item>
+	    <item name="android:layout_margin">3dp</item>
+	    <item name="android:shadowColor">#000000</item>
+	    <item name="android:shadowDx">1</item>
+	    <item name="android:shadowDy">1</item>
+	    <item name="android:shadowRadius">2</item>
   	</style>
     
 </resources>
