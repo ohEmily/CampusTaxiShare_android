@@ -9,8 +9,6 @@
 	<LinearLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:paddingLeft="60dp"
-	    android:paddingRight="60dp"
 	    android:orientation="vertical"
 	    android:weightSum="1.0"
 	    tools:context=".HomeActivity" >
@@ -18,7 +16,7 @@
 	    <TextView
 	        android:text="@string/confirmation_email_notice"
 	        style="@style/WhiteFont"
-	        android:layout_marginBottom="10dp"
+	        android:layout_marginBottom="20dp"
 	     />
 	    
 	    <ImageView
@@ -34,7 +32,7 @@
 	    <EditText
 	        android:id="@+id/nameEditTextRegistration"
 	        android:layout_width="match_parent"
-	        android:layout_marginTop="10dp"
+	        android:layout_marginTop="20dp"
 	        android:layout_height="wrap_content"
 	        android:inputType="textPersonName"
 	        android:hint="@string/first_name"
