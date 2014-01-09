@@ -88,6 +88,7 @@ public class LoginActivity extends ActionBarActivity
 	{   
 	    protected JSONObject doInBackground(String ... params)
 	    {
+	    	Log.v("Testing", "0");
 	    	UserFunctions userFunction = new UserFunctions();
 	    	if (params.length != 2)
 	    		return null;
@@ -97,17 +98,21 @@ public class LoginActivity extends ActionBarActivity
 	   
 	    protected void onPostExecute(JSONObject json)
 	    {
+	    	Log.v("Testing", "a");
 	    	try
 	    	{
+	    		Log.v("Testing", "b");
 	    		if (json != null && json.getString(KEY_SUCCESS) != null)
 	    		{
+	    			Log.v("Testing", "c");
 	    			loginErrorMsg.setText("");
 	    			String res = json.getString(KEY_SUCCESS);
 	    			if(Integer.parseInt(res) == 1)
 	    			{
-		                // user successfully logged in
+	    				Log.v("Testing", "b");
+	    				// user successfully logged in
 		                // Store user details in SQLite Database
-		                DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+		                UserDatabaseHandler db = new UserDatabaseHandler(getApplicationContext());
 		                JSONObject json_user = json.getJSONObject("user");
 	                 
 		                // Clear all previous data in database

@@ -32,8 +32,8 @@ public class RegistrationActivity extends Activity {
 	
     // JSON Response node names
     private static String KEY_SUCCESS = "success";
-//    private static String KEY_ERROR = "error";
-//    private static String KEY_ERROR_MSG = "error_msg";
+    private static String KEY_ERROR = "error";
+    private static String KEY_ERROR_MSG = "error_msg";
     private static String KEY_UID = "uid";
     private static String KEY_NAME = "name";
     private static String KEY_EMAIL = "email";
@@ -161,17 +161,18 @@ public class RegistrationActivity extends Activity {
        
         protected void onPostExecute(JSONObject json)
         {
-	        // check for login response
 	        try 
 	        {
-	            if (json != null && json.getString(KEY_SUCCESS) != null)
+	            Log.v("Testing", "RegistrationActivity onPostExecute method");
+	        	if (json != null && json.getString(KEY_SUCCESS) != null)
 	            {
-	                registerErrorMsg.setText("");
+	                Log.v("Testing", "onPostExecute: json != null");
+	        		registerErrorMsg.setText("");
 	                String res = json.getString(KEY_SUCCESS);
 	                if(Integer.parseInt(res) == 1) // user successfully registered
 	                {
 	                    // Store user details in SQLite Database
-	                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+	                    UserDatabaseHandler db = new UserDatabaseHandler(getApplicationContext());
 	                    JSONObject json_user = json.getJSONObject("user");
 	                     
 	                    // Clear all previous data in database

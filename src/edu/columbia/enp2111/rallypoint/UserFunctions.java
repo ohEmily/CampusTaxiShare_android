@@ -20,8 +20,8 @@ public class UserFunctions {
      
     // Testing in localhost using wamp or xampp
     // use http://10.0.2.2/ to connect to your localhost ie http://localhost/
-    private static String loginURL = "http://10.0.2.2/android_login_api/";
-    private static String registerURL = "http://10.0.2.2/android_login_api/";
+    private static String loginURL = "http://10.0.2.2/taxi_login_api/";
+    private static String registerURL = "http://10.0.2.2/taxi_login_api/";
      
     private static String login_tag = "login";
     private static String register_tag = "register";
@@ -63,8 +63,6 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("name", name));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
-        
-        Log.v("Testing", "creating json object from userfunctions class.");
         // getting JSON Object
         JSONObject json = jsonParser.getJSONFromUrl(registerURL, params);
         return json; // return json
@@ -75,7 +73,7 @@ public class UserFunctions {
      * */
     public boolean isUserLoggedIn(Context context)
     {
-        DatabaseHandler db = new DatabaseHandler(context);
+        UserDatabaseHandler db = new UserDatabaseHandler(context);
         int count = db.getRowCount();
         if(count > 0) // user logged in
         {
@@ -89,7 +87,7 @@ public class UserFunctions {
      * */
     public boolean logoutUser(Context context)
     {
-        DatabaseHandler db = new DatabaseHandler(context);
+        UserDatabaseHandler db = new UserDatabaseHandler(context);
         db.resetTables();
         return true;
     }
