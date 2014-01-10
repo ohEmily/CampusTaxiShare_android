@@ -37,6 +37,7 @@ public class LoginActivity extends ActionBarActivity
     private static String KEY_UID = "uid";
     private static String KEY_NAME = "name";
     private static String KEY_EMAIL = "email";
+    private static String KEY_NETWORK = "network";
     private static String KEY_CREATED_AT = "created_at";
 	
     TextView loginErrorMsg;
@@ -88,7 +89,6 @@ public class LoginActivity extends ActionBarActivity
 	{   
 	    protected JSONObject doInBackground(String ... params)
 	    {
-	    	Log.v("Testing", "0");
 	    	UserFunctions userFunction = new UserFunctions();
 	    	if (params.length != 2)
 	    		return null;
@@ -98,7 +98,6 @@ public class LoginActivity extends ActionBarActivity
 	   
 	    protected void onPostExecute(JSONObject json)
 	    {
-	    	Log.v("Testing", "a");
 	    	try
 	    	{
 	    		Log.v("Testing", "b");
@@ -118,8 +117,8 @@ public class LoginActivity extends ActionBarActivity
 		                // Clear all previous data in database
 		                UserFunctions userFunction = new UserFunctions();
 		                userFunction.logoutUser(getApplicationContext());
-		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), 
-		                		json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                        
+		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_NETWORK),
+		                		json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT)); //TODO                        
 		                 
 		                // Launch Dashboard Screen
 		                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);

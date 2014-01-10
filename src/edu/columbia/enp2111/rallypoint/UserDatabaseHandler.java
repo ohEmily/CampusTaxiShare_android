@@ -29,9 +29,9 @@ public class UserDatabaseHandler extends SQLiteOpenHelper
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
+    private static final String KEY_NETWORK = "network"; // TODO 
     private static final String KEY_UID = "uid";
     private static final String KEY_CREATED_AT = "created_at";
-//  private static final String KEY_NETWORK = "network"; // TODO 
  
     public UserDatabaseHandler(Context context)
     {
@@ -46,8 +46,9 @@ public class UserDatabaseHandler extends SQLiteOpenHelper
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_NAME + " TEXT,"
                 + KEY_EMAIL + " TEXT UNIQUE,"
+                + KEY_NETWORK + " TEXT,"
                 + KEY_UID + " TEXT,"
-                + KEY_CREATED_AT + " TEXT" + ")";
+                + KEY_CREATED_AT + " TEXT" + ");"; // TODO
         db.execSQL(CREATE_LOGIN_TABLE);
     }
  
@@ -64,17 +65,16 @@ public class UserDatabaseHandler extends SQLiteOpenHelper
     /**
      * Storing user details in database
      * */
-    public void addUser(String name, String email, String uid, String created_at)
+    public void addUser(String name, String email, String network, String uid, String created_at)
     {
         SQLiteDatabase db = this.getWritableDatabase();
  
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name); // Name
         values.put(KEY_EMAIL, email); // Email
+        values.put(KEY_NETWORK, network); // TODO
         values.put(KEY_UID, uid); // Email
-        values.put(KEY_CREATED_AT, created_at); // Created At
-        // values.put(KEY_NETWORK, network); // TODO
- 
+        values.put(KEY_CREATED_AT, created_at); // Created at
         // Inserting Row
         db.insert(TABLE_LOGIN, null, values);
         db.close(); // Closing database connection
@@ -96,9 +96,9 @@ public class UserDatabaseHandler extends SQLiteOpenHelper
         {
             user.put("name", cursor.getString(1));
             user.put("email", cursor.getString(2));
-            user.put("uid", cursor.getString(3));
-            user.put("created_at", cursor.getString(4));
-//          user.put("network", cursor.getString(5)); // TODO
+            user.put("network", cursor.getString(3)); // TODO
+            user.put("uid", cursor.getString(4));
+            user.put("created_at", cursor.getString(5));
         }
         cursor.close();
         db.close();
@@ -127,8 +127,7 @@ public class UserDatabaseHandler extends SQLiteOpenHelper
     public void resetTables()
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        // Delete all rows
-        db.delete(TABLE_LOGIN, null, null);
+        db.delete(TABLE_LOGIN, null, null); // Delete all rows
         db.close();
     }
 }

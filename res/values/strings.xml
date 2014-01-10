@@ -43,22 +43,20 @@
     <string name="title_activity_home">Sign up</string>
     <string name="greet_user">Welcome! Your network is:</string>
     <string name="college_placeholder">Columbia University</string>
-    <string name="meeting_location_notice">Your meeting place is:</string>
-    <string name="meeting_location_placeholder">116th Street and Broadway\n(Main Gates)</string>
-    <string name="button_new_trip">Create new cab share</string>
+    <string name="prompt_activity">What would you like to do?</string>
+    <string name="button_browse_groups">Browse cab shares</string>
+    <string name="button_new_from_school_trip">Create new cab share from campus</string>
+    <string name="button_new_to_school_trip">Create new cab share to campus</string>
     <string name="button_logout">Logout</string>
 
     <!-- When/Where Activity -->
-    <string name="explanation_when_where">Please select carefully how many people
-        you have room for. If you have a <b>lot</b> of luggage, consider allowing
-        one person fewer.</string>
-    <string name="prompt_destination">Where are you headed?</string>
-    <string name="button_destination">Select destination</string>
-    <string name="prompt_date">What day are you heading out?</string>
-    <string name="button_date">Select date</string>
-    <string name="prompt_times">Departure time from your meeting point:</string>
+    <string name="meeting_point"><b>Meeting point</b>: Columbia University</string>
+    <string name="destination"><b>Taxi\'s destination</b>: </string>
     <string name="button_time">Select time</string>
-    
+    <string name="button_date">Select date</string>
+    <string name="button_destination">Select destination</string>
+    <string name="departure"><b>Taxi departure date</b>: </string>
+    <string name="time"><b>Exact taxi departure time</b>: </string>
     <!-- Confirm email screen -->
     <string name="confirm_submission">Great! We\'ve sent an email to: </string>
     <string name="title_activity_account_confirmation">Confirmed!</string>

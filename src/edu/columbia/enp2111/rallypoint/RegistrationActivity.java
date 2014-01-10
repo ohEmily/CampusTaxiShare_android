@@ -32,11 +32,12 @@ public class RegistrationActivity extends Activity {
 	
     // JSON Response node names
     private static String KEY_SUCCESS = "success";
-    private static String KEY_ERROR = "error";
-    private static String KEY_ERROR_MSG = "error_msg";
+//    private static String KEY_ERROR = "error";
+//    private static String KEY_ERROR_MSG = "error_msg";
     private static String KEY_UID = "uid";
     private static String KEY_NAME = "name";
     private static String KEY_EMAIL = "email";
+    private static String KEY_NETWORK = "network"; // TODO
     private static String KEY_CREATED_AT = "created_at";
 
     // Activity page elements
@@ -77,10 +78,10 @@ public class RegistrationActivity extends Activity {
 		{
 	        // testing
 	        Log.v("Testing", "Email: " + email);
-//			Log.v("Testing", "Network: " + network);
 			Log.v("Testing", "Name: " + firstName);
+			Log.v("Testing", "Network: " + network); // TODO
 			Log.v("Testing", "Password: " + password);
-			new MyAsyncTask().execute(firstName, email, password);
+			new MyAsyncTask().execute(firstName, email, network, password); // TODO
 		}
 	}
 	
@@ -130,7 +131,7 @@ public class RegistrationActivity extends Activity {
 	{
 		if (pass.length() >= 5 && pass.length() <= 25)
 		{
-			this.password = pass; // TODO error checking
+			this.password = pass;
 			return true;
 		}
 		registerErrorMsg.setText(R.string.error_message_password_length);
@@ -153,9 +154,9 @@ public class RegistrationActivity extends Activity {
         protected JSONObject doInBackground(String ... params)
         {
                 UserFunctions userFunction = new UserFunctions();
-                if (params.length != 3)
+                if (params.length != 4) // TODO
                         return null;
-                JSONObject json = userFunction.registerUser(params[0], params[1], params[2]);
+                JSONObject json = userFunction.registerUser(params[0], params[1], params[2], params[3]); // TODO
                 return json;
         }
        
@@ -174,11 +175,11 @@ public class RegistrationActivity extends Activity {
 	                    // Store user details in SQLite Database
 	                    UserDatabaseHandler db = new UserDatabaseHandler(getApplicationContext());
 	                    JSONObject json_user = json.getJSONObject("user");
-	                     
 	                    // Clear all previous data in database
 	                    UserFunctions userFunction = new UserFunctions();
 	                    userFunction.logoutUser(getApplicationContext());
-	                    db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                        
+	                    Log.v("Testing", "The current value for network in RegistrationActivity line 183 is " + json_user.getString(KEY_NETWORK));
+	                    db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_NETWORK), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT)); // TODO                   
 	                    // Launch Dashboard Screen
 	                    Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
 	                    // Close all views before launching Dashboard
@@ -191,6 +192,10 @@ public class RegistrationActivity extends Activity {
 	                    registerErrorMsg.setText(R.string.error_message_registration);
 	                }
 	            }
+	        	else
+	        	{
+	        		Log.v("Testing", "didn't enter if statement in registrationActivity onPostExecute");
+	        	}
 	        }
 	        catch (JSONException e) 
 	        {

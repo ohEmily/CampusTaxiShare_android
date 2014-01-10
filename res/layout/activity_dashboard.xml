@@ -42,32 +42,40 @@
      />
     
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         style="@style/WhiteFont"
-        android:text="@string/meeting_location_notice"
-     />
-    
-    <!-- Meeting point associated with that university -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        style="@style/YellowFont"
-        android:text="@string/meeting_location_placeholder"
-        android:layout_marginBottom="20dp"
+        android:text="@string/prompt_activity"
      />
 
-   <Button
-       android:id="@+id/tripSpecificationButton"
+	<Button
+       android:id="@+id/browseGroupsButton"
        style="@style/button_text"
+       android:layout_width="match_parent"
        android:drawableLeft="@drawable/ic_action_new_event"
        android:background="@drawable/custom_button"
-       android:text="@string/button_new_trip" 
-       android:onClick="createNewTrip"
+       android:text="@string/button_browse_groups" 
+       android:onClick="browseGroups"
+    />
+    
+   <Button
+       android:id="@+id/groupFromSchoolButton"
+       style="@style/button_text"
+       android:layout_width="match_parent"
+       android:drawableLeft="@drawable/ic_action_new_event"
+       android:background="@drawable/custom_button"
+       android:text="@string/button_new_from_school_trip"
+       android:onClick="createFromSchoolGroup"
     />
 
+    <Button
+       android:id="@+id/groupToSchoolButton"
+       style="@style/button_text"
+       android:layout_width="match_parent"
+       android:drawableLeft="@drawable/ic_action_new_event"
+       android:background="@drawable/custom_button"
+       android:text="@string/button_new_to_school_trip"
+    />
+    
 	</LinearLayout>
 	
 	<LinearLayout

@@ -34,7 +34,8 @@ public class JSONParser
  
     public JSONObject getJSONFromUrl(String url, List<NameValuePair> params)
     {
-        // Making HTTP request
+        Log.v("Testing", "JSONParser class, getJSONFromUrl method");
+    	// Making HTTP request
         try {
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);

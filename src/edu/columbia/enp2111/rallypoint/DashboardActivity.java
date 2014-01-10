@@ -14,23 +14,21 @@ import android.widget.TextView;
  * @author Ravi Tamada, androidhive.info for the database connection stuff
  */
 
-public class DashboardActivity extends Activity {
-
+public class DashboardActivity extends Activity
+{
     private UserFunctions userFunctions;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Log.v("Testing", "opened dashboard activity");
-
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);		
         /**
          * Dashboard Screen for the application
          * */
         // Check login status in database
         userFunctions = new UserFunctions();
-        if (userFunctions.isUserLoggedIn(getApplicationContext()))
+        if (userFunctions.isUserLoggedIn(getApplicationContext())) // user already logged in show databoard
         {
-        // user already logged in show databoard
             setContentView(R.layout.activity_dashboard);
             TextView linkLogout = (TextView) findViewById(R.id.link_to_logout);
              
@@ -56,15 +54,13 @@ public class DashboardActivity extends Activity {
         }       
     }
 	
-	/**
-	 * Called when the relevant button is pressed.
-	 */
-	public void createNewTrip(View v)
+	/** Called when the relevant button is pressed. */
+	public void createFromSchoolGroup(View v)
 	{
     	DashboardActivity.this.startActivity(new Intent(DashboardActivity.this, 
     			WhenWhereActivity.class));
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
