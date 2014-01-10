@@ -996,11 +996,12 @@ containing a value of this type.
         public static final int ic_action_new_event=0x7f02005e;
         public static final int ic_action_place=0x7f02005f;
         public static final int ic_action_save=0x7f020060;
-        public static final int ic_action_send_now=0x7f020061;
-        public static final int ic_action_time=0x7f020062;
-        public static final int ic_action_warning=0x7f020063;
-        public static final int ic_launcher=0x7f020064;
-        public static final int icon=0x7f020065;
+        public static final int ic_action_search=0x7f020061;
+        public static final int ic_action_send_now=0x7f020062;
+        public static final int ic_action_time=0x7f020063;
+        public static final int ic_action_warning=0x7f020064;
+        public static final int ic_launcher=0x7f020065;
+        public static final int icon=0x7f020066;
     }
     public static final class id {
         public static final int LabelMyDepartureDate=0x7f050057;
@@ -1204,17 +1205,16 @@ containing a value of this type.
         /**  General 
          */
         public static final int app_name=0x7f0a000d;
-        public static final int button_browse_groups=0x7f0a0027;
+        public static final int button_browse_groups=0x7f0a0026;
         public static final int button_date=0x7f0a002e;
         public static final int button_destination=0x7f0a002f;
         public static final int button_login=0x7f0a0015;
-        public static final int button_logout=0x7f0a002a;
-        public static final int button_new_from_school_trip=0x7f0a0028;
-        public static final int button_new_to_school_trip=0x7f0a0029;
+        public static final int button_logout=0x7f0a0029;
+        public static final int button_new_from_school_trip=0x7f0a0027;
+        public static final int button_new_to_school_trip=0x7f0a0028;
         public static final int button_signup=0x7f0a001b;
         public static final int button_time=0x7f0a002d;
         public static final int campus_name=0x7f0a000f;
-        public static final int college_placeholder=0x7f0a0025;
         /**  Confirm email screen 
          */
         public static final int confirm_submission=0x7f0a0032;
@@ -1236,15 +1236,16 @@ containing a value of this type.
         public static final int hello_world=0x7f0a0035;
         public static final int input_email=0x7f0a0019;
         public static final int logo_description=0x7f0a0010;
-        /**  When/Where Activity 
-         */
         public static final int meeting_point=0x7f0a002b;
         public static final int password_field=0x7f0a0016;
         public static final int password_hint=0x7f0a001c;
-        public static final int prompt_activity=0x7f0a0026;
+        public static final int prompt_activity=0x7f0a0025;
         /**  Action Bar 
          */
         public static final int settings_label=0x7f0a0011;
+        /**  When/Where Activity 
+         */
+        public static final int summary=0x7f0a002a;
         public static final int time=0x7f0a0031;
         public static final int title_activity_account_confirmation=0x7f0a0033;
         /**  Dashboard 

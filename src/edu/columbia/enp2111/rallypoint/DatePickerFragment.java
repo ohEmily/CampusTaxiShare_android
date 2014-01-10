@@ -51,7 +51,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 	{
 		Calendar selectedDate = Calendar.getInstance();
 		selectedDate.set(selectedYear, selectedMonth, selectedDay);
-		String date = (selectedDate.get(Calendar.MONTH) + 1) + "-" + selectedDate.get(Calendar.DAY_OF_MONTH) + "-" + selectedDate.get(Calendar.YEAR);
+		String date = (selectedDate.get(Calendar.MONTH) + 1) + "-" 
+				+ selectedDate.get(Calendar.DAY_OF_MONTH) + "-" + selectedDate.get(Calendar.YEAR);
 		departureDateView.setText(date);
 	}
 	

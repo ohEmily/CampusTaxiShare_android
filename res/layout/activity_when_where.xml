@@ -50,50 +50,55 @@
     <!-- Displaying all the choices -->
     <TextView
     	style="@style/LargeYellowFont"
-    	android:text="Summary: "  
+    	android:text="@string/summary"  
     />
 
     <TextView
         android:id="@+id/labelMyMeetingPoint"
-        style="@style/WhiteFont"
+        style="@style/YellowFont"
     	android:text="@string/meeting_point"
     />
 
     <TextView
         android:id="@+id/myMeetingPoint"
         style="@style/WhiteFont"
+        android:layout_gravity="center"
+        android:text="@string/campus_name"
     />
     
     <TextView
         android:id="@+id/labelMyDestination"
-        style="@style/WhiteFont"
+        style="@style/YellowFont"
     	android:text="@string/destination"
     />
 
     <TextView
         android:id="@+id/myDestination"
         style="@style/WhiteFont"
+        android:layout_gravity="center"
     />
     
     <TextView
         android:id="@+id/LabelMyDepartureDate"
-        style="@style/WhiteFont"
+        style="@style/YellowFont"
     	android:text="@string/departure"
     />  
     
     <TextView
         android:id="@+id/myDepartureDate"
+        android:layout_gravity="center"
         style="@style/WhiteFont"
     />  
 
     <TextView
         android:id="@+id/labelMyDepartureTime"
-        style="@style/WhiteFont"
+        style="@style/YellowFont"
     	android:text="@string/time"
     />  
     
     <TextView
         android:id="@+id/myDepartureTime"
+        android:layout_gravity="center"
         style="@style/WhiteFont"
     />  
     

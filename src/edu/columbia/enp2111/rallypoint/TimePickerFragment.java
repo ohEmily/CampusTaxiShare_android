@@ -47,10 +47,16 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 	{
 		this.hour = hourOfDay;
 		this.minute = minuteOfHour;
+		String hourString = Integer.toString(hourOfDay);
+		if (hourOfDay > 12)
+			hourString = Integer.toString(hourOfDay - 12);
+		String minuteString = Integer.toString(minuteOfHour);
+		if (minuteOfHour < 10)
+			minuteString = 0 + Integer.toString(minuteOfHour); 
 		String AMorPM = "AM";
 		if (hourOfDay >= 12)
 			AMorPM = "PM";
-		String time = (Integer.toString(hourOfDay) + ":" + Integer.toString(minuteOfHour) + " " + AMorPM);
+		String time = (hourString + ":" + minuteString + " " + AMorPM);
 		departureTimeView.setText(time);
 	}
 	
