@@ -14,10 +14,11 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/MyAppTheme" >
+        android:theme="@style/MyAppTheme" 
+        >
         <activity
             android:name="edu.columbia.enp2111.rallypoint.LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,7 +27,7 @@
         
         <activity
             android:name="edu.columbia.enp2111.rallypoint.RegistrationActivity"
-            android:label="@string/title_activity_home" 
+            android:label="@string/app_name" 
             android:parentActivityName="edu.columbia.enp2111.rallypoint.LoginActivity"
             >
             <!-- Parent activity meta-data to support API level 7+ -->
@@ -37,7 +38,7 @@
         
         <activity
             android:name="edu.columbia.enp2111.rallypoint.DashboardActivity"
-            android:label="@string/app_name" >         
+            android:label="@string/dashboard_activity_title" >         
         </activity>
        	
         <activity

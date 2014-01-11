@@ -118,7 +118,7 @@ public class LoginActivity extends ActionBarActivity
 		                UserFunctions userFunction = new UserFunctions();
 		                userFunction.logoutUser(getApplicationContext());
 		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_NETWORK),
-		                		json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT)); //TODO                        
+		                		json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                 
 		                 
 		                // Launch Dashboard Screen
 		                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);

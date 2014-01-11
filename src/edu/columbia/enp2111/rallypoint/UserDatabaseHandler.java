@@ -29,9 +29,9 @@ public class UserDatabaseHandler extends SQLiteOpenHelper
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_EMAIL = "email";
-    private static final String KEY_NETWORK = "network"; // TODO 
+    private static final String KEY_NETWORK = "network";
     private static final String KEY_UID = "uid";
-    private static final String KEY_CREATED_AT = "created_at";
+    private static final String KEY_CREATED_AT = "created_at";    
  
     public UserDatabaseHandler(Context context)
     {
@@ -48,7 +48,7 @@ public class UserDatabaseHandler extends SQLiteOpenHelper
                 + KEY_EMAIL + " TEXT UNIQUE,"
                 + KEY_NETWORK + " TEXT,"
                 + KEY_UID + " TEXT,"
-                + KEY_CREATED_AT + " TEXT" + ");"; // TODO
+                + KEY_CREATED_AT + " TEXT" + ");";
         db.execSQL(CREATE_LOGIN_TABLE);
     }
  
@@ -72,7 +72,7 @@ public class UserDatabaseHandler extends SQLiteOpenHelper
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, name); // Name
         values.put(KEY_EMAIL, email); // Email
-        values.put(KEY_NETWORK, network); // TODO
+        values.put(KEY_NETWORK, network); // Network
         values.put(KEY_UID, uid); // Email
         values.put(KEY_CREATED_AT, created_at); // Created at
         // Inserting Row
@@ -96,7 +96,7 @@ public class UserDatabaseHandler extends SQLiteOpenHelper
         {
             user.put("name", cursor.getString(1));
             user.put("email", cursor.getString(2));
-            user.put("network", cursor.getString(3)); // TODO
+            user.put("network", cursor.getString(3)); 
             user.put("uid", cursor.getString(4));
             user.put("created_at", cursor.getString(5));
         }

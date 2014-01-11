@@ -40,7 +40,7 @@
     </string-array>
 
     <!-- Dashboard -->
-    <string name="title_activity_home">Sign up</string>
+    <string name="dashboard_activity_title">Home</string>
     <string name="greet_user">Welcome! Your network is:</string>
     <string name="prompt_activity">What would you like to do?</string>
     <string name="button_browse_groups">Browse cab shares</string>
@@ -57,11 +57,6 @@
     <string name="button_destination">Select destination</string>
     <string name="departure"><b>Taxi departure date</b>: </string>
     <string name="time"><b>Exact taxi departure time</b>: </string>
-    <!-- Confirm email screen -->
-    <string name="confirm_submission">Great! We\'ve sent an email to: </string>
-    <string name="title_activity_account_confirmation">Confirmed!</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_when_where">WhenWhereActivity</string>
 
 </resources>

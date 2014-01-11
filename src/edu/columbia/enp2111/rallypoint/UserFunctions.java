@@ -55,14 +55,14 @@ public class UserFunctions {
      * @param email
      * @param password
      * */
-    public JSONObject registerUser(String name, String email, String network, String password) // TODO
+    public JSONObject registerUser(String name, String email, String network, String password)
     {
         // Building parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", register_tag));
         params.add(new BasicNameValuePair("name", name));
         params.add(new BasicNameValuePair("email", email));
-        params.add(new BasicNameValuePair("network", network)); // TODO
+        params.add(new BasicNameValuePair("network", network));
         params.add(new BasicNameValuePair("password", password));
         // getting JSON Object
         JSONObject json = jsonParser.getJSONFromUrl(registerURL, params);
