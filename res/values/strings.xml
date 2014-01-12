@@ -58,5 +58,6 @@
     <string name="departure"><b>Taxi departure date</b>: </string>
     <string name="time"><b>Exact taxi departure time</b>: </string>
     <string name="title_activity_when_where">WhenWhereActivity</string>
+    <string name="button_submit">Submit</string>
 
 </resources>

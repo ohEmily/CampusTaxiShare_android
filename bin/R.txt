@@ -400,6 +400,7 @@ int string button_logout 0x7f0a0029
 int string button_new_from_school_trip 0x7f0a0027
 int string button_new_to_school_trip 0x7f0a0028
 int string button_signup 0x7f0a001b
+int string button_submit 0x7f0a0033
 int string button_time 0x7f0a002d
 int string campus_name 0x7f0a000f
 int string confirmation_email_notice 0x7f0a0018

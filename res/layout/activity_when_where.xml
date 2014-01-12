@@ -102,6 +102,13 @@
         style="@style/WhiteFont"
     />  
     
+    <Button 
+        style="@style/button_text"
+        android:background="@drawable/custom_button" 
+        android:drawableLeft="@drawable/ic_action_send_now"
+        android:text="@string/button_submit"
+        android:onClick="onSubmit"
+    />
     
     </LinearLayout>
     <!-- Footer with logout button -->

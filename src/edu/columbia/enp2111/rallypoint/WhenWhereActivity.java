@@ -1,9 +1,13 @@
 package edu.columbia.enp2111.rallypoint;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -20,12 +24,11 @@ public class WhenWhereActivity extends FragmentActivity
 	private DialogFragment dateFragment;
 	private DialogFragment timeFragment;
 	
-	private int taxiYear;
-	private int taxiMonth;
-	private int taxiDay;
-	private int taxiHour;
-	private int taxiMinute;
+	private String taxiDate;
+	private String taxiTime;
 
+	private static String KEY_SUCCESS = "success";
+	
 	private UserFunctions userFunctions;
 	
 	AlertDialog levelDialog;
@@ -85,7 +88,6 @@ public class WhenWhereActivity extends FragmentActivity
 			public void onClick(DialogInterface dialog, int item)
 			{   
 				TextView meetingPoint = (TextView) findViewById(R.id.myDestination);
-//				String tempText = (String) meetingPoint.getText() + options[item];
 				meetingPoint.setText(options[item]);
 				levelDialog.dismiss();    
 			}
@@ -105,21 +107,20 @@ public class WhenWhereActivity extends FragmentActivity
 	
 	public void showDatePickerDialog(View v)
 	{
-	    TextView dateView = (TextView) findViewById(R.id.myDepartureDate);
+		TextView dateView = (TextView) findViewById(R.id.myDepartureDate);
 		dateFragment = new DatePickerFragment(dateView);
 	    dateFragment.show(getFragmentManager(), "datePicker");
 	}
 
 	public void onSubmit(View v)
 	{
-		this.taxiMonth = ((DatePickerFragment) dateFragment).getMonth();
-	    this.taxiYear = ((DatePickerFragment) dateFragment).getYear();
-		this.taxiDay = ((DatePickerFragment) dateFragment).getDay();
-		this.taxiHour = ((TimePickerFragment) timeFragment).getHour();
-		this.taxiMinute = ((TimePickerFragment) timeFragment).getMinute();
-		Log.v("Testing", "The time is " + taxiHour + ":" + taxiMinute);
-		Log.v("Testing", "The date is " + taxiDay + "-" + taxiMonth + "-" + taxiYear);
+		this.taxiDate = ((DatePickerFragment) dateFragment).getDate();
+		this.taxiTime = ((TimePickerFragment) timeFragment).getTime();
+		Log.v("Testing", "The time is " + taxiTime);
+		Log.v("Testing", "The date is " + taxiDate);
 		// Put all the values from the TextViews into the database
+		
+//		new MyAsyncTask().execute(taxiMonth, taxiYear, taxiDay, taxiHour, taxiMinute);
 	}
 	
 	@Override
@@ -127,5 +128,64 @@ public class WhenWhereActivity extends FragmentActivity
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.when_where, menu);
 		return true;
+	}
+	
+	private class MyAsyncTask extends AsyncTask<String, Void, JSONObject>
+	{   
+	    // pass date and time as strings
+		// http://stackoverflow.com/questions/12120433/php-mysql-insert-date-format
+		protected JSONObject doInBackground(String ... params)
+	    {
+	    	GroupFunctions groupFunction = new GroupFunctions();
+	    	if (params.length != 2)
+	    		return null;
+	        JSONObject json = groupFunction.createGroup(params[0], params[1]);
+	        return json;
+	    }
+	   
+	    protected void onPostExecute(JSONObject json)
+	    {
+	    	try
+	    	{
+	    		if (json != null && json.getString(KEY_SUCCESS) != null)
+	    		{
+	    			Log.v("Testing", "c");
+	    			String res = json.getString(KEY_SUCCESS);
+	    			if(Integer.parseInt(res) == 1)
+	    			{
+	    				// user successfully logged in
+		                // Store user details in SQLite Database
+		                UserDatabaseHandler db = new UserDatabaseHandler(getApplicationContext());
+		                JSONObject json_user = json.getJSONObject("user");
+	                 
+		                // Clear all previous data in database
+		                UserFunctions userFunction = new UserFunctions();
+		                userFunction.logoutUser(getApplicationContext());
+//		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_NETWORK),
+//		                		json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                 
+//		                 
+		                // Launch Dashboard Screen
+		                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
+		                 
+		                // Close all views before launching Dashboard
+		                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		                startActivity(dashboard);
+		                 
+		                finish(); // Close create screen
+	    			}
+	    			else
+	    			{
+	    				// Error in login
+	    				Log.v("Testing", "Error in connecting to DB in WhenWhere");
+//	    				loginErrorMsg.setText(R.string.error_message_login);
+	    			}
+	    		}
+	    	} 
+		    catch (JSONException e)
+		    {
+		        Log.v("Testing", "Server error. Please try again later.");
+		    	e.printStackTrace();
+		    }
+		}
 	}
 }

@@ -10,18 +10,18 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 /**
+ * Creates a dialog that allows the user to select a date, with the default 
+ * date being today.
  * From here: http://developer.android.com/guide/topics/ui/controls/pickers.html
  */
 
-//TODO restrict selectable dates to up to 60 days in advance?
+// TODO restrict selectable dates to up to 60 days in advance?
 
 @SuppressLint("ValidFragment")
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
 {
 	private TextView departureDateView;
-	private int day;
-	private int month;
-	private int year;
+	private String date;
 	
 	public DatePickerFragment() {}
 	
@@ -38,10 +38,10 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 		int todaysYear = c.get(Calendar.YEAR);
 		int todaysMonth = c.get(Calendar.MONTH);
 		int todaysDay = c.get(Calendar.DAY_OF_MONTH);
-		
+
 //		// Create a new instance of DatePickerDialog and return it
-		DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, todaysYear, todaysMonth, 
-				todaysDay);
+		DatePickerDialog dialog = new DatePickerDialog(getActivity(), 
+				this, todaysYear, todaysMonth, todaysDay);
 		dialog.setTitle(R.string.button_date);
 		return dialog;
 	}
@@ -49,25 +49,29 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 	public void onDateSet(DatePicker view, int selectedYear, int selectedMonth,
 			int selectedDay)
 	{
+		// format the date to MM-DD-YY
 		Calendar selectedDate = Calendar.getInstance();
 		selectedDate.set(selectedYear, selectedMonth, selectedDay);
-		String date = (selectedDate.get(Calendar.MONTH) + 1) + "-" 
-				+ selectedDate.get(Calendar.DAY_OF_MONTH) + "-" + selectedDate.get(Calendar.YEAR);
+		String month = makeTwoDigitLongString((selectedDate.get(Calendar.MONTH) + 1));
+		String dayOfMonth = makeTwoDigitLongString(selectedDate.get(Calendar.DAY_OF_MONTH));
+		date = month + "-" + dayOfMonth + "-" + selectedDate.get(Calendar.YEAR);
+		
+		// make the date visible to the user by setting the TextView contents
 		departureDateView.setText(date);
 	}
 	
-	public int getDay() 
+	/** Formats numbers to a String that is always two digits long by adding
+	 * a 0 if the number if less than 10. */
+	private String makeTwoDigitLongString(int dayOrMonth)
 	{
-		return day;		
+		if (dayOrMonth < 10)
+			return "0" + Integer.toString(dayOrMonth);
+		return Integer.toString(dayOrMonth);
 	}
 	
-	public int getMonth()
+	/** Return the date in MM-DD-YY format. */
+	public String getDate()
 	{
-		return month;
-	}
-	
-	public int getYear()
-	{
-		return year;
+		return date;
 	}
 }

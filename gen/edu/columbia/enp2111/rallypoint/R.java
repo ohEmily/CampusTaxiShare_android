@@ -1213,6 +1213,7 @@ containing a value of this type.
         public static final int button_new_from_school_trip=0x7f0a0027;
         public static final int button_new_to_school_trip=0x7f0a0028;
         public static final int button_signup=0x7f0a001b;
+        public static final int button_submit=0x7f0a0033;
         public static final int button_time=0x7f0a002d;
         public static final int campus_name=0x7f0a000f;
         /**  Registration screen 

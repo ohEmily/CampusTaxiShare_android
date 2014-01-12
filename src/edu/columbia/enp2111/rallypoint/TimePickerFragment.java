@@ -21,8 +21,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 	private static final int DEFAULT_HOUR = 12;
 	private static final int DEFAULT_MINUTE = 0;
 	
-	private int hour;
-	private int minute;
+	private String hour;
+	private String minute;
 	
 	// TODO: restrict time picker to 15 minute intervals
 //	private static final int TIME_PICKER_INTERVAL = 15;
@@ -43,30 +43,27 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 				DEFAULT_MINUTE,	DateFormat.is24HourFormat(getActivity()));
 	}
 
+	/** Sets the values for time on the relevant TextView. */
 	public void onTimeSet(TimePicker view, int hourOfDay, int minuteOfHour)
 	{
-		this.hour = hourOfDay;
-		this.minute = minuteOfHour;
-		String hourString = Integer.toString(hourOfDay);
+		hour = Integer.toString(hourOfDay);
+		// sets hourString to non-military time (e.g. 2 o clock instead of 14 o clock)
+		String hourString = hour;
+		String AMorPM = "AM";
 		if (hourOfDay > 12)
 			hourString = Integer.toString(hourOfDay - 12);
-		String minuteString = Integer.toString(minuteOfHour);
-		if (minuteOfHour < 10)
-			minuteString = 0 + Integer.toString(minuteOfHour); 
-		String AMorPM = "AM";
 		if (hourOfDay >= 12)
 			AMorPM = "PM";
-		String time = (hourString + ":" + minuteString + " " + AMorPM);
+		minute = Integer.toString(minuteOfHour);
+		if (minuteOfHour < 10)
+			minute = 0 + minute; 
+		String time = (hourString + ":" + minute + " " + AMorPM);
 		departureTimeView.setText(time);
 	}
 	
-	public int getHour()
+	/** Returns the time in HH:SS format. */
+	public String getTime()
 	{
-		return hour;
-	}
-	
-	public int getMinute()
-	{
-		return minute;
+		return hour + ":" + minute;
 	}
 }
