@@ -20,7 +20,6 @@ public class GroupFunctions
     /** Default constructor. */
     public GroupFunctions()
     {
-        Log.v("Testing", "Calling GroupFunctions constructor");
     	jsonParser = new JSONParser();
     }
      
@@ -29,14 +28,14 @@ public class GroupFunctions
      * @param email
      * @param password
      * */
-    public JSONObject createGroup(String date, String time, String destination)
+    public JSONObject createGroup(String datetime, String destination)
     {
         // Building parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", create_tag));
-        params.add(new BasicNameValuePair("date", date));
-        params.add(new BasicNameValuePair("time", time));
+        params.add(new BasicNameValuePair("datetime", datetime));
         params.add(new BasicNameValuePair("destination", destination));
+        params.add(new BasicNameValuePair("owner_uid", "52cf4405795782.50588600"));
         JSONObject json = jsonParser.getJSONFromUrl(URL, params);
         return json;
     }

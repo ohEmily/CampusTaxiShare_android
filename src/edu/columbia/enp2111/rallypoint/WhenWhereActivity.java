@@ -34,7 +34,7 @@ public class WhenWhereActivity extends FragmentActivity
 	
     private static final String KEY_DATE_TIME = "date_time";
     private static final String KEY_DESTINATION = "destination";
-    private static final String KEY_OWNER_UID = "owner_user";
+    private static final String KEY_OWNER_UID = "owner_uid";
 //    private static final String KEY_MEMBER1_UID = "member_1";
 //    private static final String KEY_MEMBER2_UID = "member_2";
 //    private static final String KEY_MEMBER3_UID = "member_3";
@@ -136,8 +136,9 @@ public class WhenWhereActivity extends FragmentActivity
 			Log.v("Testing", "The time is " + taxiTime);
 			Log.v("Testing", "The date is " + taxiDate);
 			Log.v("Testing", "The destination is " + destination);
+			String taxiDateTime = taxiDate + " " + taxiTime;
 			// Put all the values from the TextViews into the database
-			new MyAsyncTask().execute(taxiDate, taxiTime, destination);
+			new MyAsyncTask().execute(taxiDateTime, destination);
 		}
 	}
 	
@@ -154,9 +155,9 @@ public class WhenWhereActivity extends FragmentActivity
 		// http://stackoverflow.com/questions/12120433/php-mysql-insert-date-format
 		protected JSONObject doInBackground(String ... params)
 	    {
-			// parameters: String date, String time, String destination
+			// parameters: String datetime, String destination
 	    	GroupFunctions groupFunction = new GroupFunctions();
-	        JSONObject json = groupFunction.createGroup(params[0], params[1], params[2]);
+	        JSONObject json = groupFunction.createGroup(params[0], params[1]);
 	        return json;
 	    }
 	   
@@ -169,18 +170,18 @@ public class WhenWhereActivity extends FragmentActivity
 	    			String res = json.getString(KEY_SUCCESS);
 	    			if(Integer.parseInt(res) == 1)
 	    			{
-	    				// only allow creating new groups if logged in!!
-	    				UserDatabaseHandler db_user = new UserDatabaseHandler(getApplicationContext());
-		                if (db_user.getRowCount() > 0) // user is logged in
-		                {
+//	    				// only allow creating new groups if logged in!!
+//	    				UserDatabaseHandler db_user = new UserDatabaseHandler(getApplicationContext());
+//		                if (db_user.getRowCount() > 0) // user is logged in
+//		                {
 			                Log.v("Testing", "User is logged in.");
-		                	GroupDatabaseHandler db_group = new GroupDatabaseHandler(getApplicationContext());
+		                	DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 			                JSONObject json_group = json.getJSONObject("group"); // TODO
 			                
-			                db_group.addGroup(json_group.getString(KEY_DATE_TIME), json_group.getString(KEY_DESTINATION), 
+			                db.addGroup(json_group.getString(KEY_DATE_TIME), json_group.getString(KEY_DESTINATION), 
 			                		json_group.getString(KEY_OWNER_UID), json_group.getString(KEY_GROUP_CREATED_AT));
 			                
-		                }
+//		                }
 	                 
 		                // Launch Dashboard Screen
 		                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);

@@ -29,7 +29,6 @@ public class UserFunctions {
     // constructor
     public UserFunctions()
     {
-        Log.v("Testing", "Calling UserFunctions constructor");
     	jsonParser = new JSONParser();
     }
      
@@ -74,7 +73,7 @@ public class UserFunctions {
      * */
     public boolean isUserLoggedIn(Context context)
     {
-        UserDatabaseHandler db = new UserDatabaseHandler(context);
+        DatabaseHandler db = new DatabaseHandler(context);
         int count = db.getRowCount();
         if(count > 0) // user logged in
         {
@@ -88,7 +87,7 @@ public class UserFunctions {
      * */
     public boolean logoutUser(Context context)
     {
-        UserDatabaseHandler db = new UserDatabaseHandler(context);
+        DatabaseHandler db = new DatabaseHandler(context);
         db.resetTables();
         return true;
     }
