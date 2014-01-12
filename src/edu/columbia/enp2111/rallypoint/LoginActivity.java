@@ -100,33 +100,30 @@ public class LoginActivity extends ActionBarActivity
 	    {
 	    	try
 	    	{
-	    		Log.v("Testing", "b");
 	    		if (json != null && json.getString(KEY_SUCCESS) != null)
 	    		{
-	    			Log.v("Testing", "c");
 	    			loginErrorMsg.setText("");
 	    			String res = json.getString(KEY_SUCCESS);
 	    			if(Integer.parseInt(res) == 1)
 	    			{
-	    				Log.v("Testing", "b");
 	    				// user successfully logged in
 		                // Store user details in SQLite Database
 		                UserDatabaseHandler db = new UserDatabaseHandler(getApplicationContext());
 		                JSONObject json_user = json.getJSONObject("user");
-	                 
+
 		                // Clear all previous data in database
 		                UserFunctions userFunction = new UserFunctions();
 		                userFunction.logoutUser(getApplicationContext());
 		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_NETWORK),
-		                		json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                 
-		                 
+				                json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                 
+
 		                // Launch Dashboard Screen
 		                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
-		                 
+ 
 		                // Close all views before launching Dashboard
 		                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		                startActivity(dashboard);
-		                 
+ 
 		                finish(); // Close login screen
 	    			}
 	    			else

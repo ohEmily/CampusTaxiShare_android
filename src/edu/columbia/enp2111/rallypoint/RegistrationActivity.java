@@ -164,7 +164,6 @@ public class RegistrationActivity extends Activity {
         {
 	        try 
 	        {
-	            Log.v("Testing", "RegistrationActivity onPostExecute method");
 	        	if (json != null && json.getString(KEY_SUCCESS) != null)
 	            {
 	                Log.v("Testing", "onPostExecute: json != null");
@@ -178,7 +177,6 @@ public class RegistrationActivity extends Activity {
 	                    // Clear all previous data in database
 	                    UserFunctions userFunction = new UserFunctions();
 	                    userFunction.logoutUser(getApplicationContext());
-	                    Log.v("Testing", "The current value for network in RegistrationActivity line 183 is " + json_user.getString(KEY_NETWORK));
 	                    db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_NETWORK), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                  
 	                    // Launch Dashboard Screen
 	                    Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);

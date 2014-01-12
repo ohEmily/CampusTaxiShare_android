@@ -24,8 +24,21 @@ public class WhenWhereActivity extends FragmentActivity
 	private DialogFragment dateFragment;
 	private DialogFragment timeFragment;
 	
+	private TextView meetingPoint;
+	private TextView timeView;
+	private TextView dateView;
+	
 	private String taxiDate;
 	private String taxiTime;
+	private String destination;
+	
+    private static final String KEY_DATE_TIME = "date_time";
+    private static final String KEY_DESTINATION = "destination";
+    private static final String KEY_OWNER_UID = "owner_user";
+//    private static final String KEY_MEMBER1_UID = "member_1";
+//    private static final String KEY_MEMBER2_UID = "member_2";
+//    private static final String KEY_MEMBER3_UID = "member_3";
+    private static final String KEY_GROUP_CREATED_AT = "group_created_at";
 
 	private static String KEY_SUCCESS = "success";
 	
@@ -87,7 +100,7 @@ public class WhenWhereActivity extends FragmentActivity
 		{
 			public void onClick(DialogInterface dialog, int item)
 			{   
-				TextView meetingPoint = (TextView) findViewById(R.id.myDestination);
+				meetingPoint = (TextView) findViewById(R.id.myDestination);
 				meetingPoint.setText(options[item]);
 				levelDialog.dismiss();    
 			}
@@ -98,7 +111,7 @@ public class WhenWhereActivity extends FragmentActivity
 	
 	public void showTimePickerDialog(View v)
 	{
-		TextView timeView = (TextView) findViewById(R.id.myDepartureTime);
+		timeView = (TextView) findViewById(R.id.myDepartureTime);
 		timeFragment = new TimePickerFragment(timeView);
 	    timeFragment.show(getFragmentManager(), "timePicker");
 	    // getFragmentManager() requires at least API level 11. See:
@@ -107,20 +120,25 @@ public class WhenWhereActivity extends FragmentActivity
 	
 	public void showDatePickerDialog(View v)
 	{
-		TextView dateView = (TextView) findViewById(R.id.myDepartureDate);
+		dateView = (TextView) findViewById(R.id.myDepartureDate);
 		dateFragment = new DatePickerFragment(dateView);
 	    dateFragment.show(getFragmentManager(), "datePicker");
 	}
 
 	public void onSubmit(View v)
 	{
-		this.taxiDate = ((DatePickerFragment) dateFragment).getDate();
-		this.taxiTime = ((TimePickerFragment) timeFragment).getTime();
-		Log.v("Testing", "The time is " + taxiTime);
-		Log.v("Testing", "The date is " + taxiDate);
-		// Put all the values from the TextViews into the database
-		
-//		new MyAsyncTask().execute(taxiMonth, taxiYear, taxiDay, taxiHour, taxiMinute);
+		// TODO: double check that none of the values are null!
+		if (timeView.getText() != null && dateView.getText() != null && meetingPoint.getText() != null)
+		{
+			this.taxiDate = ((DatePickerFragment) dateFragment).getDate();
+			this.taxiTime = ((TimePickerFragment) timeFragment).getTime();
+			this.destination = ((TextView) findViewById(R.id.myDestination)).getText().toString();
+			Log.v("Testing", "The time is " + taxiTime);
+			Log.v("Testing", "The date is " + taxiDate);
+			Log.v("Testing", "The destination is " + destination);
+			// Put all the values from the TextViews into the database
+			new MyAsyncTask().execute(taxiDate, taxiTime, destination);
+		}
 	}
 	
 	@Override
@@ -136,10 +154,9 @@ public class WhenWhereActivity extends FragmentActivity
 		// http://stackoverflow.com/questions/12120433/php-mysql-insert-date-format
 		protected JSONObject doInBackground(String ... params)
 	    {
+			// parameters: String date, String time, String destination
 	    	GroupFunctions groupFunction = new GroupFunctions();
-	    	if (params.length != 2)
-	    		return null;
-	        JSONObject json = groupFunction.createGroup(params[0], params[1]);
+	        JSONObject json = groupFunction.createGroup(params[0], params[1], params[2]);
 	        return json;
 	    }
 	   
@@ -149,29 +166,29 @@ public class WhenWhereActivity extends FragmentActivity
 	    	{
 	    		if (json != null && json.getString(KEY_SUCCESS) != null)
 	    		{
-	    			Log.v("Testing", "c");
 	    			String res = json.getString(KEY_SUCCESS);
 	    			if(Integer.parseInt(res) == 1)
 	    			{
-	    				// user successfully logged in
-		                // Store user details in SQLite Database
-		                UserDatabaseHandler db = new UserDatabaseHandler(getApplicationContext());
-		                JSONObject json_user = json.getJSONObject("user");
+	    				// only allow creating new groups if logged in!!
+	    				UserDatabaseHandler db_user = new UserDatabaseHandler(getApplicationContext());
+		                if (db_user.getRowCount() > 0) // user is logged in
+		                {
+			                Log.v("Testing", "User is logged in.");
+		                	GroupDatabaseHandler db_group = new GroupDatabaseHandler(getApplicationContext());
+			                JSONObject json_group = json.getJSONObject("group"); // TODO
+			                
+			                db_group.addGroup(json_group.getString(KEY_DATE_TIME), json_group.getString(KEY_DESTINATION), 
+			                		json_group.getString(KEY_OWNER_UID), json_group.getString(KEY_GROUP_CREATED_AT));
+			                
+		                }
 	                 
-		                // Clear all previous data in database
-		                UserFunctions userFunction = new UserFunctions();
-		                userFunction.logoutUser(getApplicationContext());
-//		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_NETWORK),
-//		                		json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                 
-//		                 
 		                // Launch Dashboard Screen
 		                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
 		                 
 		                // Close all views before launching Dashboard
 		                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		                startActivity(dashboard);
-		                 
-		                finish(); // Close create screen
+		                finish(); // Return to dashboard
 	    			}
 	    			else
 	    			{
