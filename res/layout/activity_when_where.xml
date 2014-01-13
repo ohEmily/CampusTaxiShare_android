@@ -1,130 +1,137 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:fillViewport="true" >
- 
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical"
-	    android:weightSum="1.0"
-	    tools:context=".HomeActivity" 
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fillViewport="true" 
 	>
-    
-    <Button 
-        android:id="@+id/myDestinationPickerButton"
-        style="@style/button_text"
-        android:layout_width="match_parent"
-        android:background="@drawable/custom_button"
-        android:drawableLeft="@drawable/ic_action_place"
-        android:text="@string/button_destination"
-        android:onClick="showDestinationPickerDialog"
-    />
-    
-    <!-- Prompt dates -->
-	<Button 
-        android:id="@+id/myDatePickerButton"
-        style="@style/button_text"
-        android:layout_width="match_parent"
-        android:background="@drawable/custom_button" 
-        android:drawableLeft="@drawable/ic_action_go_to_today"
-        android:text="@string/button_date"
-        android:onClick="showDatePickerDialog"
-    />
-
-    <Button
-		android:background="@drawable/custom_button"
+	
+	<RelativeLayout 
 	    android:layout_width="match_parent"
-	    style="@style/button_text"
-	    android:id="@+id/myTimePickerButton"
-	    android:drawableLeft="@drawable/ic_action_time"
-	    android:text="@string/button_time"
-	    android:onClick="showTimePickerDialog"
-	/>
-    
-    <!-- Displaying all the choices -->
-    <TextView
-    	style="@style/LargeYellowFont"
-    	android:text="@string/summary"  
-    />
-
-    <TextView
-        android:id="@+id/labelMyMeetingPoint"
-        style="@style/YellowFont"
-    	android:text="@string/meeting_point"
-    />
-
-    <TextView
-        android:id="@+id/myMeetingPoint"
-        style="@style/WhiteFont"
-        android:layout_gravity="center"
-        android:text="@string/campus_name"
-    />
-    
-    <TextView
-        android:id="@+id/labelMyDestination"
-        style="@style/YellowFont"
-    	android:text="@string/destination"
-    />
-
-    <TextView
-        android:id="@+id/myDestination"
-        style="@style/WhiteFont"
-        android:layout_gravity="center"
-    />
-    
-    <TextView
-        android:id="@+id/LabelMyDepartureDate"
-        style="@style/YellowFont"
-    	android:text="@string/departure"
-    />  
-    
-    <TextView
-        android:id="@+id/myDepartureDate"
-        android:layout_gravity="center"
-        style="@style/WhiteFont"
-    />  
-
-    <TextView
-        android:id="@+id/labelMyDepartureTime"
-        style="@style/YellowFont"
-    	android:text="@string/time"
-    />  
-    
-    <TextView
-        android:id="@+id/myDepartureTime"
-        android:layout_gravity="center"
-        style="@style/WhiteFont"
-    />  
-    
-    <Button 
-        style="@style/button_text"
-        android:background="@drawable/custom_button" 
-        android:drawableLeft="@drawable/ic_action_send_now"
-        android:text="@string/button_submit"
-        android:onClick="onSubmit"
-    />
-    
-    </LinearLayout>
-    <!-- Footer with logout button -->
-	<LinearLayout
-	    android:id="@+id/footer"
-	    android:layout_width="fill_parent"
-   	 	android:layout_height="wrap_content"
-    	android:orientation="vertical"
-    	android:layout_alignParentBottom="true"
-   		>
-	   	<TextView
-			android:id="@+id/link_to_logout"
-		    style="@style/FooterFont"
-		    android:text="@string/button_logout"
-		    android:clickable="true"
-		    android:onClick="logout"
+	    android:layout_height="match_parent"
+		android:paddingLeft="@dimen/activity_horizontal_margin"
+		android:paddingRight="@dimen/activity_horizontal_margin"
+	    >
+	 
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:weightSum="1.0"
+		    android:layout_alignParentTop="true"
+		>
+	    
+	    <Button 
+	        android:id="@+id/myDestinationPickerButton"
+	        style="@style/button_text"
+	        android:layout_width="match_parent"
+	        android:background="@drawable/custom_button"
+	        android:drawableLeft="@drawable/ic_action_place"
+	        android:text="@string/button_destination"
+	        android:onClick="showDestinationPickerDialog"
+	    />
+	    
+	    <!-- Prompt dates -->
+		<Button 
+	        android:id="@+id/myDatePickerButton"
+	        style="@style/button_text"
+	        android:layout_width="match_parent"
+	        android:background="@drawable/custom_button" 
+	        android:drawableLeft="@drawable/ic_action_go_to_today"
+	        android:text="@string/button_date"
+	        android:onClick="showDatePickerDialog"
+	    />
+	
+	    <Button
+			android:background="@drawable/custom_button"
+		    android:layout_width="match_parent"
+		    style="@style/button_text"
+		    android:id="@+id/myTimePickerButton"
+		    android:drawableLeft="@drawable/ic_action_time"
+		    android:text="@string/button_time"
+		    android:onClick="showTimePickerDialog"
 		/>
-	</LinearLayout>
-</RelativeLayout>
+	    
+	    <!-- Displaying all the choices -->
+	    <TextView
+	    	style="@style/LargeYellowFont"
+	    	android:text="@string/summary"  
+	    />
+	
+	    <TextView
+	        android:id="@+id/labelMyMeetingPoint"
+	        style="@style/YellowFont"
+	    	android:text="@string/meeting_point"
+	    />
+	
+	    <TextView
+	        android:id="@+id/myMeetingPoint"
+	        style="@style/WhiteFont"
+	        android:layout_gravity="center"
+	        android:text="@string/campus_name"
+	    />
+	    
+	    <TextView
+	        android:id="@+id/labelMyDestination"
+	        style="@style/YellowFont"
+	    	android:text="@string/destination"
+	    />
+	
+	    <TextView
+	        android:id="@+id/myDestination"
+	        style="@style/WhiteFont"
+	        android:layout_gravity="center"
+	    />
+	    
+	    <TextView
+	        android:id="@+id/LabelMyDepartureDate"
+	        style="@style/YellowFont"
+	    	android:text="@string/departure"
+	    />  
+	    
+	    <TextView
+	        android:id="@+id/myDepartureDate"
+	        android:layout_gravity="center"
+	        style="@style/WhiteFont"
+	    />  
+	
+	    <TextView
+	        android:id="@+id/labelMyDepartureTime"
+	        style="@style/YellowFont"
+	    	android:text="@string/time"
+	    />  
+	    
+	    <TextView
+	        android:id="@+id/myDepartureTime"
+	        android:layout_gravity="center"
+	        style="@style/WhiteFont"
+	    />  
+	    
+	    <Button 
+	        style="@style/button_text"
+	        android:background="@drawable/custom_button" 
+	        android:drawableLeft="@drawable/ic_action_send_now"
+	        android:text="@string/button_submit"
+	        android:onClick="onSubmit"
+	    />
+	    
+	    </LinearLayout>
+	    <!-- Footer with logout button -->
+		<LinearLayout
+		    android:id="@+id/footer"
+		    android:layout_width="fill_parent"
+	   	 	android:layout_height="wrap_content"
+	    	android:orientation="vertical"
+	    	android:layout_alignParentBottom="true"
+	   		>
+		   	<TextView
+				android:id="@+id/link_to_logout"
+				android:layout_gravity="center"
+			    style="@style/FooterFont"
+			    android:text="@string/button_logout"
+			    android:clickable="true"
+			    android:onClick="logout"
+			/>
+		</LinearLayout>
+	</RelativeLayout>
+</ScrollView>

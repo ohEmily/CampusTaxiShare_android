@@ -88,7 +88,7 @@
 	   	<TextView
 			android:id="@+id/link_to_logout"
 		    android:layout_gravity="center"
-		    style="@style/YellowFont"
+		    style="@style/FooterFont"
 		    android:text="@string/button_logout"
 		    android:clickable="true"
 		    android:onClick="logout"

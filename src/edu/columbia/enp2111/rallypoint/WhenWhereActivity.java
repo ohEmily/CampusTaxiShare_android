@@ -32,13 +32,13 @@ public class WhenWhereActivity extends FragmentActivity
 	private String taxiTime;
 	private String destination;
 	
-    private static final String KEY_DATE_TIME = "date_time";
+    private static final String KEY_DATETIME = "departure_date_time";
     private static final String KEY_DESTINATION = "destination";
-    private static final String KEY_OWNER_UID = "owner_uid";
+    private static final String KEY_OWNER_UID = "owner_id";
 //    private static final String KEY_MEMBER1_UID = "member_1";
 //    private static final String KEY_MEMBER2_UID = "member_2";
 //    private static final String KEY_MEMBER3_UID = "member_3";
-    private static final String KEY_GROUP_CREATED_AT = "group_created_at";
+    private static final String KEY_GROUP_CREATED_AT = "created_at";
 
 	private static String KEY_SUCCESS = "success";
 	
@@ -178,7 +178,7 @@ public class WhenWhereActivity extends FragmentActivity
 		                	DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 			                JSONObject json_group = json.getJSONObject("group"); // TODO
 			                
-			                db.addGroup(json_group.getString(KEY_DATE_TIME), json_group.getString(KEY_DESTINATION), 
+			                db.addGroup(json_group.getString(KEY_DATETIME), json_group.getString(KEY_DESTINATION), 
 			                		json_group.getString(KEY_OWNER_UID), json_group.getString(KEY_GROUP_CREATED_AT));
 			                
 //		                }

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
  
 /**
  * @author Emily Pakulski, modified Tamada's code to include 'network' param
@@ -15,25 +16,21 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHandler extends SQLiteOpenHelper
 {
     // All Static variables
-    // Database Version
     private static final int DATABASE_VERSION = 1;
  
-    // Database Name
     private static final String DATABASE_NAME = "taxi_app";
  
-    // Group table name
     private static final String TABLE_GROUP = "groups";
-    // Login table name
     private static final String TABLE_LOGIN = "login";
     
     // Group Table column names
     private static final String KEY_DATE_TIME = "date_time";
     private static final String KEY_DESTINATION = "destination";
-    private static final String KEY_OWNER_UID = "owner_user";
+    private static final String KEY_OWNER_UID = "owner_uid";
     private static final String KEY_MEMBER1_UID = "member_1";
     private static final String KEY_MEMBER2_UID = "member_2";
     private static final String KEY_MEMBER3_UID = "member_3";
-    private static final String KEY_GROUP_CREATED_AT = "group_created_at";
+    private static final String KEY_GROUP_CREATED_AT = "created_at";
     // Login table column names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
@@ -60,9 +57,9 @@ public class DatabaseHandler extends SQLiteOpenHelper
                 + KEY_CREATED_AT + " TEXT" + ");";
         db.execSQL(CREATE_LOGIN_TABLE);
     	String CREATE_GROUP_TABLE = "CREATE TABLE " + TABLE_GROUP + "("
-                + KEY_DATE_TIME + " INTEGER PRIMARY KEY,"
+                + KEY_DATE_TIME + " TEXT,"
                 + KEY_DESTINATION + " TEXT,"
-                + KEY_OWNER_UID + " TEXT UNIQUE,"
+                + KEY_OWNER_UID + " TEXT,"
                 + KEY_MEMBER1_UID + " TEXT,"
                 + KEY_MEMBER2_UID + " TEXT,"
                 + KEY_MEMBER3_UID + " TEXT,"
@@ -76,6 +73,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
     {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_GROUP);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGIN);
         // Create tables again
         onCreate(db);
     }
