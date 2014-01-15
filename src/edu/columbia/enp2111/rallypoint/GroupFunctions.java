@@ -7,8 +7,12 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import android.util.Log;
- 
+/**
+ * This class is used to manipulate Groups (as in taxi ride sharing groups)
+ * by connecting to the database hosted at the URL provided.
+ * @author Emily Pakulski
+ */
+
 public class GroupFunctions
 {
     private JSONParser jsonParser;
@@ -38,5 +42,5 @@ public class GroupFunctions
         params.add(new BasicNameValuePair("owner_uid", "52cf4405795782.50588600"));
         JSONObject json = jsonParser.getJSONFromUrl(URL, params);
         return json;
-    }
+    }    
 }

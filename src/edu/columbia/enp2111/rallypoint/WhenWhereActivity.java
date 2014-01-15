@@ -51,20 +51,20 @@ public class WhenWhereActivity extends FragmentActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+        userFunctions = new UserFunctions();
 		
         /**
          * When/Where Screen for the application
          * */
         // Check login status in database
-        userFunctions = new UserFunctions();
         if (userFunctions.isUserLoggedIn(getApplicationContext()))
         {
         	// user already logged in show databoard
             setContentView(R.layout.activity_when_where);
             TextView linkLogout = (TextView) findViewById(R.id.link_to_logout);
              
-            linkLogout.setOnClickListener(new View.OnClickListener() {
-                 
+            linkLogout.setOnClickListener(new View.OnClickListener()
+            {     
                 public void onClick(View view)
                 {
                     userFunctions.logoutUser(getApplicationContext());
@@ -86,7 +86,8 @@ public class WhenWhereActivity extends FragmentActivity
 	}
 	
 	/**
-	 * @author: http://learnandroideasily.blogspot.com/2013/01/adding-radio-buttons-in-dialog.html
+	 * Called when the "choose time" button is pressed; opens the dialog to 
+	 * choose a time without changing activity. 
 	 */
 	public void showDestinationPickerDialog(View v)
 	{		
@@ -109,6 +110,8 @@ public class WhenWhereActivity extends FragmentActivity
 		levelDialog.show();
 	}
 	
+	/** Called when the "choose time" button is pressed; opens the dialog to 
+	 * choose a time without changing activity. */
 	public void showTimePickerDialog(View v)
 	{
 		timeView = (TextView) findViewById(R.id.myDepartureTime);
@@ -118,6 +121,8 @@ public class WhenWhereActivity extends FragmentActivity
 	    // http://logs.nslu2-linux.org/livelogs/android-dev/android-dev.20130819.txt
 	}
 	
+	/** Called when the "choose date" button is pressed; opens the dialog to 
+	 * choose a date without changing activity. */
 	public void showDatePickerDialog(View v)
 	{
 		dateView = (TextView) findViewById(R.id.myDepartureDate);
@@ -128,7 +133,7 @@ public class WhenWhereActivity extends FragmentActivity
 	public void onSubmit(View v)
 	{
 		// TODO: double check that none of the values are null!
-		if (timeView.getText() != null && dateView.getText() != null && meetingPoint.getText() != null)
+		if (timeView.getText() != "" || dateView.getText() != "" || meetingPoint.getText() != "")
 		{
 			this.taxiDate = ((DatePickerFragment) dateFragment).getDate();
 			this.taxiTime = ((TimePickerFragment) timeFragment).getTime();
@@ -170,26 +175,23 @@ public class WhenWhereActivity extends FragmentActivity
 	    			String res = json.getString(KEY_SUCCESS);
 	    			if(Integer.parseInt(res) == 1)
 	    			{
-//	    				// only allow creating new groups if logged in!!
-//	    				UserDatabaseHandler db_user = new UserDatabaseHandler(getApplicationContext());
-//		                if (db_user.getRowCount() > 0) // user is logged in
-//		                {
-			                Log.v("Testing", "User is logged in.");
-		                	DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-			                JSONObject json_group = json.getJSONObject("group"); // TODO
-			                
-			                db.addGroup(json_group.getString(KEY_DATETIME), json_group.getString(KEY_DESTINATION), 
-			                		json_group.getString(KEY_OWNER_UID), json_group.getString(KEY_GROUP_CREATED_AT));
-			                
-//		                }
-	                 
-		                // Launch Dashboard Screen
-		                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
-		                 
-		                // Close all views before launching Dashboard
-		                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		                startActivity(dashboard);
-		                finish(); // Return to dashboard
+	    				 if (userFunctions.isUserLoggedIn(getApplicationContext()))
+	    		        {
+//		                	DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+//			                JSONObject json_group = json.getJSONObject("group"); 
+//			                
+//			                db.addGroup(json_group.getString(KEY_DATETIME), json_group.getString(KEY_DESTINATION), 
+//			                		json_group.getString(KEY_OWNER_UID), (String) json_group.get(KEY_GROUP_CREATED_AT));
+		                
+			                // Launch Dashboard Screen
+			                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
+			                 
+			                // Close all views before launching Dashboard
+			                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			                startActivity(dashboard);
+			                // TODO put extra so that a message is shown to confirm group
+			                finish(); // Return to dashboard
+	    		        }
 	    			}
 	    			else
 	    			{

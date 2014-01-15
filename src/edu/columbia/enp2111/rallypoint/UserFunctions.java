@@ -1,10 +1,15 @@
 package edu.columbia.enp2111.rallypoint;
 
 /**
- * @author Ravi Tamada, from androidhive.info
+ * This class contains methods that deal with the user using the application.
+ * No other users' details can be accessed. 
+ * 
+ * @author Emily Pakulski, modified Tamada's code
+ * @author Ravi Tamada, original code from tutorial on AndroidHive.info
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -12,7 +17,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.util.Log;
  
 public class UserFunctions {
      
@@ -26,7 +30,7 @@ public class UserFunctions {
     private static String login_tag = "login";
     private static String register_tag = "register";
      
-    // constructor
+    /** Constructor. */
     public UserFunctions()
     {
     	jsonParser = new JSONParser();
@@ -34,8 +38,8 @@ public class UserFunctions {
      
     /**
      * Method to make a login request.
-     * @param email
-     * @param password
+     * @param email address (serves as the username) entered by user
+     * @param password entered by user
      * */
     public JSONObject loginUser(String email, String password)
     {
@@ -50,9 +54,10 @@ public class UserFunctions {
      
     /**
      * Method to make a registration request.
-     * @param name
-     * @param email
-     * @param password
+     * @param name: user provided name
+     * @param email: user's email address
+     * @param network: campus network derived from email address
+     * @param password: user provided pass
      * */
     public JSONObject registerUser(String name, String email, String network, String password)
     {
@@ -69,7 +74,9 @@ public class UserFunctions {
     }
      
     /**
-     * Method to get login status. Returns true if logged in, false if not.
+     * Method to get login status. (See DatabaseHandler class for more info
+     * on how this works.)
+     * @return true if logged in, false if not.
      * */
     public boolean isUserLoggedIn(Context context)
     {
@@ -80,6 +87,27 @@ public class UserFunctions {
         	return true;
         }
         return false;
+    }
+    
+    /** Returns this user's name. */
+    public String getName(Context context)
+    {
+    	DatabaseHandler db = new DatabaseHandler(context);
+    	HashMap<String, String> user = db.getUserDetails();
+    	return user.get("name");
+    }
+    
+    /** Returns this user's network. */
+    public String getNetworkName(Context context)
+    {
+    	DatabaseHandler db = new DatabaseHandler(context);
+    	HashMap<String, String> user = db.getUserDetails();
+    	String networkVal = user.get("network").toLowerCase();
+    	if (networkVal.equals("columbia"))
+    		return "Columbia University";
+    	if (networkVal.equals("barnard"))
+    		return "Barnard College";
+    	return "Default";
     }
      
     /**

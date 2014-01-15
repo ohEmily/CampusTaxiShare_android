@@ -17,65 +17,68 @@
     	android:layout_alignParentTop="true"
     >
         
-    <!-- If account is not confirmed, show message -->
-    <TextView android:id="@+id/confirmation_error"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/errorColor"
-        android:textStyle="bold"
-    />
-	        
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/WhiteFont"
-        android:text="@string/greet_user"
-     />
-    
-    <!-- Name of university/college -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/LargeYellowFont"
-        android:layout_gravity="center"
-        android:text="@string/campus_name"
-     />
-    
-    <TextView
-        android:layout_marginTop="20dp"
-        style="@style/WhiteFont"
-        android:text="@string/prompt_activity"
-     />
-
-	<Button
-       android:id="@+id/browseGroupsButton"
-       style="@style/button_text"
-       android:layout_width="match_parent"
-       android:drawableLeft="@drawable/ic_action_search"
-       android:background="@drawable/custom_button"
-       android:text="@string/button_browse_groups" 
-       android:onClick="browseGroups"
-    />
-    
-   <Button
-       android:id="@+id/groupFromSchoolButton"
-       style="@style/button_text"
-       android:layout_width="match_parent"
-       android:drawableLeft="@drawable/ic_action_new_event"
-       android:background="@drawable/custom_button"
-       android:text="@string/button_new_from_school_trip"
-       android:onClick="createFromSchoolGroup"
-    />
-
-    <Button
-       android:id="@+id/groupToSchoolButton"
-       style="@style/button_text"
-       android:layout_width="match_parent"
-       android:drawableLeft="@drawable/ic_action_new_event"
-       android:background="@drawable/custom_button"
-       android:text="@string/button_new_to_school_trip"
-    />
-    
+	    <!-- If account email is not confirmed, show error message here -->
+	    <TextView android:id="@+id/confirmation_error"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/errorColor"
+	        android:textStyle="bold"
+	    />
+		
+	    <!-- Welcome message -->
+	    <TextView
+	        android:id="@+id/welcome_message"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        style="@style/WhiteFont"
+	        android:text="@string/greet_user"
+	     />
+	    
+	    <!-- Name of campus network -->
+	    <TextView
+	        android:id="@+id/campus_network_name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        style="@style/LargeYellowFont"
+	        android:layout_gravity="center"
+	        android:text="@string/campus_name"
+	     />
+	    
+	    <TextView
+	        android:layout_marginTop="20dp"
+	        style="@style/WhiteFont"
+	        android:text="@string/prompt_activity"
+	     />
+	
+		<Button
+	       android:id="@+id/browseGroupsButton"
+	       style="@style/button_text"
+	       android:layout_width="match_parent"
+	       android:drawableLeft="@drawable/ic_action_search"
+	       android:background="@drawable/custom_button"
+	       android:text="@string/button_browse_groups" 
+	       android:onClick="browseGroups"
+	    />
+	    
+	   <Button
+	       android:id="@+id/groupFromSchoolButton"
+	       style="@style/button_text"
+	       android:layout_width="match_parent"
+	       android:drawableLeft="@drawable/ic_action_new_event"
+	       android:background="@drawable/custom_button"
+	       android:text="@string/button_new_from_school_trip"
+	       android:onClick="createFromSchoolGroup"
+	    />
+	
+	    <Button
+	       android:id="@+id/groupToSchoolButton"
+	       style="@style/button_text"
+	       android:layout_width="match_parent"
+	       android:drawableLeft="@drawable/ic_action_new_event"
+	       android:background="@drawable/custom_button"
+	       android:text="@string/button_new_to_school_trip"
+	    />
+	    
 	</LinearLayout>
 	
 	<LinearLayout
