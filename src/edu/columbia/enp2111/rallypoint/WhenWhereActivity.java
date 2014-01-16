@@ -15,12 +15,20 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * This class manages the activity wherein the user selects the destination
+ * and the departure date and time in order to create a new group. 
+ * The class then connects to the database and uploads these values into
+ * the corresponding table.
+ * 
+ * @author Emily Pakulski
+ *
+ */
+
+/* has to extend FragmentActivity because:
+ * stackoverflow.com/questions/13121432/the-method-is-getsupportfragmentmanager-is-unsuported */
 public class WhenWhereActivity extends FragmentActivity
 {
-	/* has to extend FragmentActivity:
-	 * stackoverflow.com/questions/13121432/the-method-is-getsupportfragmentmanager-is-unsuported */
-
-	// TODO limit how many people?
 	private DialogFragment dateFragment;
 	private DialogFragment timeFragment;
 	
@@ -31,20 +39,12 @@ public class WhenWhereActivity extends FragmentActivity
 	private String taxiDate;
 	private String taxiTime;
 	private String destination;
-	
-    private static final String KEY_DATETIME = "departure_date_time";
-    private static final String KEY_DESTINATION = "destination";
-    private static final String KEY_OWNER_UID = "owner_id";
-//    private static final String KEY_MEMBER1_UID = "member_1";
-//    private static final String KEY_MEMBER2_UID = "member_2";
-//    private static final String KEY_MEMBER3_UID = "member_3";
-    private static final String KEY_GROUP_CREATED_AT = "created_at";
 
 	private static String KEY_SUCCESS = "success";
 	
 	private UserFunctions userFunctions;
 	
-	AlertDialog levelDialog;
+	AlertDialog destinationDialog;
 	static final int DATE_DIALOG_ID = 0;
 	
 	@Override
@@ -53,9 +53,6 @@ public class WhenWhereActivity extends FragmentActivity
 		super.onCreate(savedInstanceState);
         userFunctions = new UserFunctions();
 		
-        /**
-         * When/Where Screen for the application
-         * */
         // Check login status in database
         if (userFunctions.isUserLoggedIn(getApplicationContext()))
         {
@@ -103,11 +100,11 @@ public class WhenWhereActivity extends FragmentActivity
 			{   
 				meetingPoint = (TextView) findViewById(R.id.myDestination);
 				meetingPoint.setText(options[item]);
-				levelDialog.dismiss();    
+				destinationDialog.dismiss();    
 			}
 		});
-		levelDialog = builder.create();
-		levelDialog.show();
+		destinationDialog = builder.create();
+		destinationDialog.show();
 	}
 	
 	/** Called when the "choose time" button is pressed; opens the dialog to 
@@ -176,13 +173,7 @@ public class WhenWhereActivity extends FragmentActivity
 	    			if(Integer.parseInt(res) == 1)
 	    			{
 	    				 if (userFunctions.isUserLoggedIn(getApplicationContext()))
-	    		        {
-//		                	DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-//			                JSONObject json_group = json.getJSONObject("group"); 
-//			                
-//			                db.addGroup(json_group.getString(KEY_DATETIME), json_group.getString(KEY_DESTINATION), 
-//			                		json_group.getString(KEY_OWNER_UID), (String) json_group.get(KEY_GROUP_CREATED_AT));
-		                
+	    		        {      
 			                // Launch Dashboard Screen
 			                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
 			                 

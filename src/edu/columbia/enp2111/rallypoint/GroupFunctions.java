@@ -7,20 +7,18 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 /**
- * This class is used to manipulate Groups (as in taxi ride sharing groups)
- * by connecting to the database hosted at the URL provided.
+ * This class is used to create and get groups of people sharing taxis stored
+ * in the database.
  * @author Emily Pakulski
  */
 
 public class GroupFunctions
 {
     private JSONParser jsonParser;
-
-    private static String URL = "http://10.0.2.2/taxi_login_api/";
     
-    private static String create_tag = "create_group";
-
     /** Default constructor. */
     public GroupFunctions()
     {
@@ -34,13 +32,27 @@ public class GroupFunctions
      * */
     public JSONObject createGroup(String datetime, String destination)
     {
-        // Building parameters
+        // Building parameters. Mapping to constants
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", create_tag));
-        params.add(new BasicNameValuePair("datetime", datetime));
-        params.add(new BasicNameValuePair("destination", destination));
-        params.add(new BasicNameValuePair("owner_uid", "52cf4405795782.50588600"));
-        JSONObject json = jsonParser.getJSONFromUrl(URL, params);
+        params.add(new BasicNameValuePair(Constants.KEY_TAG, Constants.CREATE_GROUP_TAG));
+        params.add(new BasicNameValuePair(Constants.KEY_DATETIME, datetime));
+        params.add(new BasicNameValuePair(Constants.KEY_DESTINATION, destination));
+        params.add(new BasicNameValuePair(Constants.KEY_OWNER_UID, "52cf4405795782.50588600")); // TODO
+        JSONObject json = jsonParser.getJSONFromUrl(Constants.API_URL, params);
         return json;
-    }    
+    }
+    
+    /**
+     * Returns a selection of groups depending on the params passed.
+     * @param search_params can be: all - all the groups, 
+     * @return
+     */
+    public JSONObject getAllGroups()
+    {
+    	List<NameValuePair> params = new ArrayList<NameValuePair>();
+    	params.add(new BasicNameValuePair(Constants.KEY_TAG, Constants.GET_GROUPS_TAG));
+    	params.add(new BasicNameValuePair("search_params", "all"));
+    	JSONObject json = jsonParser.getJSONFromUrl(Constants.API_URL, params);
+    	return json;
+    }
 }

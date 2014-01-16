@@ -28,7 +28,7 @@ public class JSONParser
     static InputStream is = null;
     static JSONObject jObj = null;
     static String json = "";
- 
+    
     /** Default constructor */
     public JSONParser() {}
  
@@ -37,10 +37,9 @@ public class JSONParser
         Log.v("Testing", "JSONParser class, getJSONFromUrl method");
     	// Making HTTP request
         try {
-            DefaultHttpClient httpClient = new DefaultHttpClient();
+        	DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
             httpPost.setEntity(new UrlEncodedFormEntity(params));
- 
             HttpResponse httpResponse = httpClient.execute(httpPost);
             HttpEntity httpEntity = httpResponse.getEntity();
             is = httpEntity.getContent();
@@ -63,6 +62,7 @@ public class JSONParser
             }
             is.close();
             json = sb.toString();
+            Log.v("Testing", json); // TODO
             Log.e("JSON", json);
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());

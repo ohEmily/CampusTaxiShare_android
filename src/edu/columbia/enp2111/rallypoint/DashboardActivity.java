@@ -70,6 +70,13 @@ public class DashboardActivity extends Activity
             finish(); // Closing dashboard screen
         }       
     }
+
+	/** Called when the relevant button is pressed. */
+	public void searchGroups(View v)
+	{
+    	DashboardActivity.this.startActivity(new Intent(DashboardActivity.this, 
+    			SearchActivity.class));
+	}
 	
 	/** Called when the relevant button is pressed. */
 	public void createFromSchoolGroup(View v)

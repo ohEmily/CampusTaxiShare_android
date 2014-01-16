@@ -10,7 +10,7 @@
     <!-- Action Bar -->
     <string name="settings_label">Settings</string>
     <string name="action_search">Search</string>
-    
+
     <!-- Login screen -->
     <string name="welcome_message">Find or start  a cab share group 
         going between your school and a popular destination.</string>
@@ -27,12 +27,12 @@
     <string name="button_signup">sign me up!</string>
     <string name="password_hint">pick a password</string>
     <string name="go_to_login">Already a user? Login here!</string>
-	<string name="error_message_name_length">Names must be 2–20 characters long.</string>
+    <string name="error_message_name_length">Names must be 2–20 characters long.</string>
     <string name="error_message_invalid_edu_email">Invalid .edu email address.</string>
-	<string name="error_message_registered_schools">You must use a registered school\'s edu address.</string>
+    <string name="error_message_registered_schools">You must use a registered school\'s edu address.</string>
     <string name="error_message_registration">Error occurred in registration. (Account already exists?)</string>
     <string name="error_message_password_length">Your password must be between 5 and 25 characters long.</string>
-    
+
     <string-array name="registered_colleges">
         <item>"columbia"</item>
         <item>"barnard"</item>
@@ -59,5 +59,8 @@
     <string name="time"><b>Exact taxi departure time</b>: </string>
     <string name="title_activity_when_where">WhenWhereActivity</string>
     <string name="button_submit">Submit</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_single_contact">SingleContactActivity</string>
 
 </resources>

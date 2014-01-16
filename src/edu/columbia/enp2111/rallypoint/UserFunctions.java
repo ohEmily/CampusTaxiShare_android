@@ -11,25 +11,15 @@ package edu.columbia.enp2111.rallypoint;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
-
 import android.content.Context;
- 
-public class UserFunctions {
-     
+
+public class UserFunctions
+{     
     private JSONParser jsonParser;
-     
-    // Testing in localhost using wamp or xampp
-    // use http://10.0.2.2/ to connect to your localhost ie http://localhost/
-    private static String loginURL = "http://10.0.2.2/taxi_login_api/";
-    private static String registerURL = "http://10.0.2.2/taxi_login_api/";
-     
-    private static String login_tag = "login";
-    private static String register_tag = "register";
-     
+
     /** Constructor. */
     public UserFunctions()
     {
@@ -45,10 +35,10 @@ public class UserFunctions {
     {
         // Building parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", login_tag));
+        params.add(new BasicNameValuePair(Constants.KEY_TAG, Constants.LOGIN_USER_TAG));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
-        JSONObject json = jsonParser.getJSONFromUrl(loginURL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(Constants.API_URL, params);
         return json;
     }
      
@@ -63,13 +53,13 @@ public class UserFunctions {
     {
         // Building parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("tag", register_tag));
+        params.add(new BasicNameValuePair(Constants.KEY_TAG, Constants.REGISTER_USER_TAG));
         params.add(new BasicNameValuePair("name", name));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("network", network));
         params.add(new BasicNameValuePair("password", password));
         // getting JSON Object
-        JSONObject json = jsonParser.getJSONFromUrl(registerURL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(Constants.API_URL, params);
         return json; // return json
     }
      
@@ -110,9 +100,7 @@ public class UserFunctions {
     	return "Default";
     }
      
-    /**
-     * Method to logout user and reset database.
-     * */
+    /** Method to logout user and reset database. */
     public boolean logoutUser(Context context)
     {
         DatabaseHandler db = new DatabaseHandler(context);

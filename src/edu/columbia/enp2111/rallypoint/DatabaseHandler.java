@@ -45,15 +45,15 @@ public class DatabaseHandler extends SQLiteOpenHelper
     private static final String KEY_NETWORK_FULL_NAME = "network_full_name";
     private static final String KEY_NETWORK_DESTINATION_LIST = "network_destination_list";
 
-    /* Group table specific constants */
-    private static final String TABLE_GROUP = "groups";
-    // Group Table column names
-    private static final String KEY_DATE_TIME = "date_time";
-    private static final String KEY_DESTINATION = "destination";
-    private static final String KEY_OWNER_UID = "owner_uid";
-    private static final String KEY_MEMBER1_UID = "member_1";
-    private static final String KEY_MEMBER2_UID = "member_2";
-    private static final String KEY_MEMBER3_UID = "member_3";
+//    /* Group table specific constants */
+//    private static final String TABLE_GROUP = "groups";
+//    // Group Table column names
+//    private static final String KEY_DATE_TIME = "date_time";
+//    private static final String KEY_DESTINATION = "destination";
+//    private static final String KEY_OWNER_UID = "owner_uid";
+//    private static final String KEY_MEMBER1_UID = "member_1";
+//    private static final String KEY_MEMBER2_UID = "member_2";
+//    private static final String KEY_MEMBER3_UID = "member_3";
     private static final String KEY_GROUP_CREATED_AT = "created_at";
     
     /** Constructor. */
@@ -84,33 +84,33 @@ public class DatabaseHandler extends SQLiteOpenHelper
                 + KEY_CREATED_AT + " TEXT" + ");";
         db.execSQL(CREATE_NETWORK_TABLE);
         
-    	String CREATE_GROUP_TABLE = "CREATE TABLE " + TABLE_GROUP + "("
-                + KEY_DATE_TIME + " TEXT,"
-                + KEY_DESTINATION + " TEXT,"
-                + KEY_OWNER_UID + " TEXT,"
-                + KEY_MEMBER1_UID + " TEXT,"
-                + KEY_MEMBER2_UID + " TEXT,"
-                + KEY_MEMBER3_UID + " TEXT,"
-                + KEY_GROUP_CREATED_AT + " TEXT" + ");";
-        db.execSQL(CREATE_GROUP_TABLE);
+//    	String CREATE_GROUP_TABLE = "CREATE TABLE " + TABLE_GROUP + "("
+//                + KEY_DATE_TIME + " TEXT,"
+//                + KEY_DESTINATION + " TEXT,"
+//                + KEY_OWNER_UID + " TEXT,"
+//                + KEY_MEMBER1_UID + " TEXT,"
+//                + KEY_MEMBER2_UID + " TEXT,"
+//                + KEY_MEMBER3_UID + " TEXT,"
+//                + KEY_GROUP_CREATED_AT + " TEXT" + ");";
+//        db.execSQL(CREATE_GROUP_TABLE);
     }
- 
-    /**
-     * Storing group details in database.
-     * */
-    public void addGroup(String datetime, String destination, String owner_uid, String created_at)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
- 
-        ContentValues values = new ContentValues();
-        values.put(KEY_DATE_TIME, datetime); // Date and time
-        values.put(KEY_DESTINATION, destination); // Destination
-        values.put(KEY_OWNER_UID, owner_uid); // owner's UID
-        values.put(KEY_GROUP_CREATED_AT, created_at); // Created at
-        // Inserting Row
-        db.insert(TABLE_GROUP, null, values);
-        db.close(); // Closing database connection
-    }
+    
+//    /**
+//     * Storing group details in database.
+//     * */
+//    public void addGroup(String datetime, String destination, String owner_uid, String created_at)
+//    {
+//        SQLiteDatabase db = this.getWritableDatabase();
+// 
+//        ContentValues values = new ContentValues();
+//        values.put(KEY_DATE_TIME, datetime); // Date and time
+//        values.put(KEY_DESTINATION, destination); // Destination
+//        values.put(KEY_OWNER_UID, owner_uid); // owner's UID
+//        values.put(KEY_GROUP_CREATED_AT, created_at); // Created at
+//        // Inserting Row
+//        db.insert(TABLE_GROUP, null, values);
+//        db.close(); // Closing database connection
+//    }
     
     /**
      * Storing user details in database (called when user logs in).
@@ -186,7 +186,6 @@ public class DatabaseHandler extends SQLiteOpenHelper
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_GROUP);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGIN);
         // Create tables again
         onCreate(db);

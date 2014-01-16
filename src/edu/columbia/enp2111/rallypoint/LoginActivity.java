@@ -43,7 +43,8 @@ public class LoginActivity extends ActionBarActivity
     TextView loginErrorMsg;
     
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		actionBar = getActionBar();
@@ -63,7 +64,6 @@ public class LoginActivity extends ActionBarActivity
 
 	public void submitLoginFields(View view) 
 	{
-		Log.v("Testing", "submitLoginFields method");
 		final EditText emailField = (EditText) findViewById(R.id.emailEditTextLogin);
 		final EditText passwordField = (EditText) findViewById(R.id.passEditTextLogin);
 		loginErrorMsg = (TextView) findViewById(R.id.login_error);
@@ -104,7 +104,7 @@ public class LoginActivity extends ActionBarActivity
 	    		{
 	    			loginErrorMsg.setText("");
 	    			String res = json.getString(KEY_SUCCESS);
-	    			if(Integer.parseInt(res) == 1)
+	    			if (Integer.parseInt(res) == 1)
 	    			{
 	    				// user successfully logged in
 		                // Store user details in SQLite Database
