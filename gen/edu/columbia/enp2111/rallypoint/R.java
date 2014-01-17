@@ -1009,7 +1009,7 @@ containing a value of this type.
         public static final int icon=0x7f020067;
     }
     public static final class id {
-        public static final int LabelMyDepartureDate=0x7f05005c;
+        public static final int LabelMyDepartureDate=0x7f05005b;
         public static final int action_bar=0x7f05001c;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05001b;
@@ -1021,8 +1021,8 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_search=0x7f050065;
-        public static final int action_settings=0x7f050066;
+        public static final int action_search=0x7f050064;
+        public static final int action_settings=0x7f050065;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1038,7 +1038,7 @@ containing a value of this type.
         public static final int disableHome=0x7f050008;
         public static final int dropdown=0x7f05000f;
         public static final int edit_query=0x7f050030;
-        public static final int email=0x7f050061;
+        public static final int email=0x7f050060;
         public static final int emailEditTextLogin=0x7f050046;
         public static final int emailEditTextRegistration=0x7f05004d;
         public static final int email_label=0x7f050053;
@@ -1054,10 +1054,10 @@ containing a value of this type.
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
         public static final int imageViewBanner=0x7f050045;
-        public static final int label=0x7f050064;
-        public static final int labelMyDepartureTime=0x7f05005e;
-        public static final int labelMyDestination=0x7f05005a;
-        public static final int labelMyMeetingPoint=0x7f050058;
+        public static final int label=0x7f050063;
+        public static final int labelMyDepartureTime=0x7f05005d;
+        public static final int labelMyDestination=0x7f050059;
+        public static final int labelMyMeetingPoint=0x7f050057;
         public static final int link_to_login=0x7f050051;
         public static final int link_to_logout=0x7f050044;
         public static final int link_to_registration=0x7f05004a;
@@ -1065,16 +1065,15 @@ containing a value of this type.
         public static final int list_item=0x7f050029;
         public static final int login_error=0x7f050048;
         public static final int middle=0x7f050012;
-        public static final int mobile=0x7f050062;
-        public static final int mobile_label=0x7f050054;
-        public static final int myDatePickerButton=0x7f050056;
-        public static final int myDepartureDate=0x7f05005d;
-        public static final int myDepartureTime=0x7f05005f;
-        public static final int myDestination=0x7f05005b;
-        public static final int myDestinationPickerButton=0x7f050055;
-        public static final int myMeetingPoint=0x7f050059;
-        public static final int myTimePickerButton=0x7f050057;
-        public static final int name=0x7f050060;
+        public static final int mobile=0x7f050061;
+        public static final int myDatePickerButton=0x7f050055;
+        public static final int myDepartureDate=0x7f05005c;
+        public static final int myDepartureTime=0x7f05005e;
+        public static final int myDestination=0x7f05005a;
+        public static final int myDestinationPickerButton=0x7f050054;
+        public static final int myMeetingPoint=0x7f050058;
+        public static final int myTimePickerButton=0x7f050056;
+        public static final int name=0x7f05005f;
         public static final int nameEditTextRegistration=0x7f05004c;
         public static final int name_label=0x7f050052;
         public static final int never=0x7f050009;
@@ -1109,7 +1108,7 @@ containing a value of this type.
         public static final int up=0x7f050021;
         public static final int upperPortionDashboard=0x7f05003c;
         public static final int useLogo=0x7f050003;
-        public static final int value=0x7f050063;
+        public static final int value=0x7f050062;
         public static final int welcome_message=0x7f05003e;
         public static final int withText=0x7f05000c;
     }

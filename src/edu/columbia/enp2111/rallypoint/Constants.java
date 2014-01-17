@@ -6,8 +6,11 @@ package edu.columbia.enp2111.rallypoint;
  * @author Emily Pakulski
  */
 
-public class Constants
+public final class Constants
 {
+	// make constructor private (prevent instantiation outside this object)
+	private Constants() {}
+	
 	public static final String API_URL = "http://10.0.2.2/taxi_project/api/";
 	
 	/*

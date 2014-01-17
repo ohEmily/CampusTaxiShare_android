@@ -53,6 +53,7 @@
         <activity
             android:name="edu.columbia.enp2111.rallypoint.SearchActivity"
             android:label="@string/title_activity_search" >
+            
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.columbia.enp2111.rallypoint.DashboardActivity" />

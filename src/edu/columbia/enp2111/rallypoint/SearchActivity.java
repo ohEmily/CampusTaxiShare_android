@@ -2,7 +2,10 @@ package edu.columbia.enp2111.rallypoint;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,23 +29,22 @@ public class SearchActivity extends ListActivity
 	private ProgressDialog pDialog;
 
 	// URL to get contacts JSON
-	private static String url = "http://api.androidhive.info/contacts/";
+	private static String url = "http://10.0.2.2/contacts";
 
 	// JSON Node names
-	private static final String TAG_ALL_GROUPS = "all_groups";
-	private static final String TAG_ID = "id";
-	private static final String TAG_NAME = "name";
-	private static final String TAG_EMAIL = "email";
-	private static final String TAG_PHONE_MOBILE = "mobile";
+	public static final String TAG_GROUPS = "groups";
+	public static final String TAG_DESTINATION = "destination";
+	public static final String TAG_DATETIME = "datetime";
 
 	// contacts JSONArray
-	JSONArray groups_array = null;
+	JSONArray all_groups = null;
 
 	// Hashmap for ListView
 	ArrayList<HashMap<String, String>> groupList;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
 
@@ -51,8 +53,8 @@ public class SearchActivity extends ListActivity
 		ListView lv = getListView();
 
 		// Listview on item click listener
-		lv.setOnItemClickListener(new OnItemClickListener() {
-
+		lv.setOnItemClickListener(new OnItemClickListener()
+		{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
@@ -61,74 +63,72 @@ public class SearchActivity extends ListActivity
 						.getText().toString();
 				String cost = ((TextView) view.findViewById(R.id.email))
 						.getText().toString();
-				String description = ((TextView) view.findViewById(R.id.mobile))
-						.getText().toString();
 
 				// Starting single contact activity
 				Intent in = new Intent(getApplicationContext(),
 						SingleContactActivity.class);
-				in.putExtra(TAG_NAME, name);
-				in.putExtra(TAG_EMAIL, cost);
-				in.putExtra(TAG_PHONE_MOBILE, description);
+				in.putExtra(TAG_DESTINATION, name);
+				in.putExtra(TAG_DATETIME, cost);
 				startActivity(in);
-
 			}
 		});
 
 		// Calling async task to get json
-		new GetContacts().execute();
+		new GetGroups().execute();
 	}
 
 	/**
-	 * Async task class to get json by making HTTP call
+	 * Async task class to get json by making HTTP call.
 	 * */
-	private class GetContacts extends AsyncTask<Void, Void, Void> {
+	private class GetGroups extends AsyncTask<Void, Void, Void> {
 
 		@Override
-		protected void onPreExecute() {
+		protected void onPreExecute()
+		{
 			super.onPreExecute();
 			// Showing progress dialog
 			pDialog = new ProgressDialog(SearchActivity.this);
 			pDialog.setMessage("Please wait...");
 			pDialog.setCancelable(false);
 			pDialog.show();
-
 		}
 
 		@Override
-		protected Void doInBackground(Void... arg0)
+		protected Void doInBackground(Void ... arg0)
 		{
 			// Creating service handler class instance
 			ServiceHandler sh = new ServiceHandler();
-
+			
+			// adding params: telling JSON what type of request it'll be
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+	        params.add(new BasicNameValuePair(Constants.KEY_TAG, Constants.GET_GROUPS_TAG));
+			
 			// Making a request to url and getting response
-			String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
-
+			String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET, params);
 			Log.d("Response: ", "> " + jsonStr);
 
 			if (jsonStr != null) {
 				try {
 					JSONObject jsonObj = new JSONObject(jsonStr); // TODO, why does this work?
 					
+					Log.v("Testing", "line 111");
 					// Getting JSON Array node
-					groups_array = jsonObj.getJSONArray(TAG_ALL_GROUPS);
-
+					all_groups = jsonObj.getJSONArray(TAG_GROUPS);
+					Log.v("Testing", "line 114");
 					// looping through All Contacts
-					for (int i = 0; i < groups_array.length(); i++)
+					for (int i = 0; i < all_groups.length(); i++)
 					{
-						JSONObject aGroup = groups_array.getJSONObject(i);
+						JSONObject aGroup = all_groups.getJSONObject(i);
 						
-						String id = aGroup.getString(TAG_ID);
-						String name = aGroup.getString(TAG_NAME);
-						String email = aGroup.getString(TAG_EMAIL);
+						String name = aGroup.getString(TAG_DESTINATION);
+						String email = aGroup.getString(TAG_DATETIME);
 
 						// One HashMap per group of taxi sharers
 						HashMap<String, String> group_object = new HashMap<String, String>();
 
 						// adding each child node to HashMap key => value
-						group_object.put(TAG_ID, id);
-						group_object.put(TAG_NAME, name);
-						group_object.put(TAG_EMAIL, email);
+						group_object.put(TAG_DESTINATION, name);
+						group_object.put(TAG_DATETIME, email);
 
 						// adding contact to contact list
 						groupList.add(group_object);
@@ -144,20 +144,20 @@ public class SearchActivity extends ListActivity
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(Void result)
+		{
 			super.onPostExecute(result);
 			// Dismiss the progress dialog
 			if (pDialog.isShowing())
 				pDialog.dismiss();
+
 			/**
 			 * Updating parsed JSON data into ListView
 			 * */
 			ListAdapter adapter = new SimpleAdapter(
 					SearchActivity.this, groupList,
-					R.layout.list_item, new String[] { TAG_NAME, TAG_EMAIL,
-							TAG_PHONE_MOBILE }, new int[] { R.id.name,
-							R.id.email, R.id.mobile });
-
+					R.layout.list_item, new String[] { TAG_DESTINATION, TAG_DESTINATION }, new int[] { R.id.name,
+							R.id.email });
 			setListAdapter(adapter);
 		}
 

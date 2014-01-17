@@ -32,9 +32,9 @@ public class JSONParser
     /** Default constructor */
     public JSONParser() {}
  
-    public JSONObject getJSONFromUrl(String url, List<NameValuePair> params)
+    public JSONObject getJSONFromUrl(String url, 
+    		List<NameValuePair> params)
     {
-        Log.v("Testing", "JSONParser class, getJSONFromUrl method");
     	// Making HTTP request
         try {
         	DefaultHttpClient httpClient = new DefaultHttpClient();

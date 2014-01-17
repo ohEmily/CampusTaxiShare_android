@@ -15,6 +15,8 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import android.util.Log;
+
 public class ServiceHandler
 {
 	static String response = null;
@@ -39,7 +41,8 @@ public class ServiceHandler
 	 * @param method - http request method
 	 * @param params - http request params
 	 * */
-	public String makeServiceCall(String url, int method, List<NameValuePair> params)
+	public String makeServiceCall(String url, int method, 
+			List<NameValuePair> params)
 	{
 		try {
 			// http client
@@ -48,29 +51,31 @@ public class ServiceHandler
 			HttpResponse httpResponse = null;
 			
 			// Checking http request method type
-			if (method == POST) {
+			if (method == POST)
+			{
 				HttpPost httpPost = new HttpPost(url);
 				// adding post params
-				if (params != null) {
+				if (params != null)
+				{
 					httpPost.setEntity(new UrlEncodedFormEntity(params));
 				}
 
 				httpResponse = httpClient.execute(httpPost);
 
-			} else if (method == GET) {
-				// appending params to url
-				if (params != null) {
-					String paramString = URLEncodedUtils
-							.format(params, "utf-8");
+			} 
+			else if (method == GET)
+			{
+				// appending params (if any) to url
+				if (params != null) 
+				{
+					String paramString = URLEncodedUtils.format(params, "utf-8");
 					url += "?" + paramString;
 				}
 				HttpGet httpGet = new HttpGet(url);
-
 				httpResponse = httpClient.execute(httpGet);
-
 			}
-			httpEntity = httpResponse.getEntity();
-			response = EntityUtils.toString(httpEntity);
+				httpEntity = httpResponse.getEntity();
+				response = EntityUtils.toString(httpEntity);
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
