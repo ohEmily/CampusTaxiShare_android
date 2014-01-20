@@ -27,7 +27,7 @@ public final class Constants
     public static final String KEY_TAG = "tag";
     
     // Group-related keys
-    public static final String KEY_DATETIME = "datetime";
+    public static final String KEY_DATETIME = "departure_date_time";
     public static final String KEY_DESTINATION = "destination";
     public static final String KEY_OWNER_UID = "owner_uid";
     public static final String KEY_MEMBER1_UID = "member_1";

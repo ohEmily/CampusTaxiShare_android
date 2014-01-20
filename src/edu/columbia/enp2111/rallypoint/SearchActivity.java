@@ -29,7 +29,8 @@ public class SearchActivity extends ListActivity
 	private ProgressDialog pDialog;
 
 	// URL to get contacts JSON
-	private static String url = "http://10.0.2.2/contacts";
+//	private static String url = "http://10.0.2.2/contacts";
+	private static String url = Constants.API_URL;
 
 	// JSON Node names
 	public static final String TAG_GROUPS = "groups";
@@ -95,50 +96,42 @@ public class SearchActivity extends ListActivity
 
 		@Override
 		protected Void doInBackground(Void ... arg0)
-		{
-			// Creating service handler class instance
-			ServiceHandler sh = new ServiceHandler();
-			
+		{			
 			// adding params: telling JSON what type of request it'll be
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 	        params.add(new BasicNameValuePair(Constants.KEY_TAG, Constants.GET_GROUPS_TAG));
 			
-			// Making a request to url and getting response
-			String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET, params);
-			Log.d("Response: ", "> " + jsonStr);
-
-			if (jsonStr != null) {
-				try {
-					JSONObject jsonObj = new JSONObject(jsonStr); // TODO, why does this work?
+			// Creating a JSONParser
+			JSONParser jp = new JSONParser();
+			JSONObject jsonObj = jp.getJSONFromUrl(url, params);
+			
+			try
+			{
+				// Getting JSON Array node
+				all_groups = jsonObj.getJSONArray("groups");
+				
+				// looping through All Contacts
+				for (int i = 0; i < all_groups.length(); i++)
+				{
+					JSONObject aGroup = all_groups.getJSONObject(i);
 					
-					Log.v("Testing", "line 111");
-					// Getting JSON Array node
-					all_groups = jsonObj.getJSONArray(TAG_GROUPS);
-					Log.v("Testing", "line 114");
-					// looping through All Contacts
-					for (int i = 0; i < all_groups.length(); i++)
-					{
-						JSONObject aGroup = all_groups.getJSONObject(i);
-						
-						String name = aGroup.getString(TAG_DESTINATION);
-						String email = aGroup.getString(TAG_DATETIME);
-
-						// One HashMap per group of taxi sharers
-						HashMap<String, String> group_object = new HashMap<String, String>();
-
+					String destination = aGroup.getString(TAG_DESTINATION);
+					Log.v("Testing", destination);
+					String datetime = aGroup.getString(TAG_DATETIME);
+					// One HashMap per group of taxi sharers
+					HashMap<String, String> group_object = new HashMap<String, String>();
 						// adding each child node to HashMap key => value
-						group_object.put(TAG_DESTINATION, name);
-						group_object.put(TAG_DATETIME, email);
-
+					group_object.put(TAG_DESTINATION, destination);
+					group_object.put(TAG_DATETIME, datetime);
 						// adding contact to contact list
-						groupList.add(group_object);
-					}
-				} catch (JSONException e) {
+					groupList.add(group_object);
+				}
+			} catch (JSONException e) {
 					e.printStackTrace();
 				}
-			} else {
-				Log.e("ServiceHandler", "Couldn't get any data from the url");
-			}
+//			} else {
+//				Log.e("ServiceHandler", "Couldn't get any data from the url");
+//			}
 
 			return null;
 		}
