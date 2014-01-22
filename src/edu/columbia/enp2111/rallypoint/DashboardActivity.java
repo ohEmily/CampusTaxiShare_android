@@ -45,8 +45,17 @@ public class DashboardActivity extends Activity
     		String nameOfNetwork = userFunctions.getNetworkName(getApplicationContext());
     		if (nameOfNetwork != null)
     			networkName.setText(nameOfNetwork);
-        	
-    		Log.v("Testing", "e");
+
+    		// if user just created a new taxi group, show confirmation message
+            Intent previousScreen = getIntent();
+            String message = previousScreen.getStringExtra(WhenWhereActivity.KEY_CONFIRMATION_MESSAGE);
+            if (message != null)
+            {
+            	Log.v("Testing", "Val: " + message);
+            	TextView messageView = (TextView) findViewById(R.id.extra_message);
+            	messageView.setTextColor(this.getResources().getColor(R.color.myGreen));
+            	messageView.setText(message);
+            }
             // set listener for the logout link in the layout footer
             TextView linkLogout = (TextView) findViewById(R.id.link_to_logout);
             linkLogout.setOnClickListener(new View.OnClickListener()

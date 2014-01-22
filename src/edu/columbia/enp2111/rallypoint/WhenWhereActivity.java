@@ -29,6 +29,8 @@ import android.widget.TextView;
  * stackoverflow.com/questions/13121432/the-method-is-getsupportfragmentmanager-is-unsuported */
 public class WhenWhereActivity extends FragmentActivity
 {
+	public static final String KEY_CONFIRMATION_MESSAGE = "confirmation_message"; 
+	
 	private DialogFragment dateFragment;
 	private DialogFragment timeFragment;
 	
@@ -179,8 +181,9 @@ public class WhenWhereActivity extends FragmentActivity
 			                 
 			                // Close all views before launching Dashboard
 			                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			                dashboard.putExtra(KEY_CONFIRMATION_MESSAGE, getString(R.string.confirmation_message));
 			                startActivity(dashboard);
-			                // TODO put extra so that a message is shown to confirm group
+			                // TODO put extra so that a message is shown to confirm group making
 			                finish(); // Return to dashboard
 	    		        }
 	    			}

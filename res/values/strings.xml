@@ -46,6 +46,7 @@
     <string name="button_browse_groups">Browse cab shares</string>
     <string name="button_new_from_school_trip">Create new cab share from campus</string>
     <string name="button_new_to_school_trip">Create new cab share to campus</string>
+    <string name="confirmation_message">Confirmed! You made a new cab share group.</string>
     <string name="button_logout">Logout</string>
 
     <!-- When/Where Activity -->

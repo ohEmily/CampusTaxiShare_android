@@ -29,7 +29,6 @@ public class SearchActivity extends ListActivity
 	private ProgressDialog pDialog;
 
 	// URL to get contacts JSON
-//	private static String url = "http://10.0.2.2/contacts";
 	private static String url = Constants.API_URL;
 
 	// JSON Node names
@@ -60,17 +59,17 @@ public class SearchActivity extends ListActivity
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// getting values from selected ListItem
-				String name = ((TextView) view.findViewById(R.id.name))
+				String destination = ((TextView) view.findViewById(R.id.destination))
 						.getText().toString();
-				String cost = ((TextView) view.findViewById(R.id.email))
+				String datetime = ((TextView) view.findViewById(R.id.datetime))
 						.getText().toString();
 
 				// Starting single contact activity
-				Intent in = new Intent(getApplicationContext(),
-						SingleContactActivity.class);
-				in.putExtra(TAG_DESTINATION, name);
-				in.putExtra(TAG_DATETIME, cost);
-				startActivity(in);
+				Intent singleContact = new Intent(getApplicationContext(),
+						SingleGroupActivity.class);
+				singleContact.putExtra(Constants.KEY_DESTINATION, destination);
+				singleContact.putExtra(Constants.KEY_DATETIME, datetime);
+				startActivity(singleContact);
 			}
 		});
 
@@ -115,23 +114,21 @@ public class SearchActivity extends ListActivity
 				{
 					JSONObject aGroup = all_groups.getJSONObject(i);
 					
-					String destination = aGroup.getString(TAG_DESTINATION);
+					String destination = aGroup.getString(Constants.KEY_DESTINATION);
 					Log.v("Testing", destination);
-					String datetime = aGroup.getString(TAG_DATETIME);
+					String datetime = aGroup.getString(Constants.KEY_DATETIME);
+					Log.v("Testing", datetime);
 					// One HashMap per group of taxi sharers
 					HashMap<String, String> group_object = new HashMap<String, String>();
 						// adding each child node to HashMap key => value
-					group_object.put(TAG_DESTINATION, destination);
-					group_object.put(TAG_DATETIME, datetime);
-						// adding contact to contact list
+					group_object.put(Constants.KEY_DESTINATION, destination);
+					group_object.put(Constants.KEY_DATETIME, datetime);
+					// adding contact to contact list
 					groupList.add(group_object);
 				}
 			} catch (JSONException e) {
 					e.printStackTrace();
 				}
-//			} else {
-//				Log.e("ServiceHandler", "Couldn't get any data from the url");
-//			}
 
 			return null;
 		}
@@ -149,8 +146,9 @@ public class SearchActivity extends ListActivity
 			 * */
 			ListAdapter adapter = new SimpleAdapter(
 					SearchActivity.this, groupList,
-					R.layout.list_item, new String[] { TAG_DESTINATION, TAG_DESTINATION }, new int[] { R.id.name,
-							R.id.email });
+					R.layout.list_item, 
+					new String[] {Constants.KEY_DESTINATION, Constants.KEY_DATETIME}, 
+					new int[] { R.id.destination, R.id.datetime});
 			setListAdapter(adapter);
 		}
 

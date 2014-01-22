@@ -7,34 +7,30 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp" >
 
-    <!-- Name Label -->
-
+    <!-- Datetime Label -->
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/datetime"
+        style="@style/LargePinkFont"
+    />
+
+    <!-- Destination label -->
+    <TextView
+        android:id="@+id/destination"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="2dip"
-        android:paddingTop="6dip"
-        android:textColor="#43bd00"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:paddingBottom="2dp"
+        android:textColor="@color/myWhite"
+    />
 
-    <!-- Email label -->
+    <!-- Owner ID label -->
     <TextView
-        android:id="@+id/email"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="2dip"
-        android:textColor="#acacac" />
-
-    <!-- Mobile number label -->
-    <TextView
-        android:id="@+id/mobile"
+        android:id="@+id/owner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="Mobile: "
+        android:text="Owner: "
         android:textColor="#5d5d5d"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+    />
 
 </LinearLayout>

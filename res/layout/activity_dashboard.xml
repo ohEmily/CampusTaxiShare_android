@@ -18,9 +18,11 @@
     >
         
 	    <!-- If account email is not confirmed, show error message here -->
-	    <TextView android:id="@+id/confirmation_error"
+	    <TextView android:id="@+id/extra_message"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:layout_marginBottom="10dp"
 	        android:textColor="@color/errorColor"
 	        android:textStyle="bold"
 	    />

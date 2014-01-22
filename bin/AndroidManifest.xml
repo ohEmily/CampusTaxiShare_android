@@ -59,8 +59,12 @@
                 android:value="edu.columbia.enp2111.rallypoint.DashboardActivity" />
         </activity>
         <activity
-            android:name="edu.columbia.enp2111.rallypoint.SingleContactActivity"
+            android:name="edu.columbia.enp2111.rallypoint.SingleGroupActivity"
             android:label="@string/title_activity_single_contact" >
+            
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="edu.columbia.enp2111.rallypoint.SearchActivity" />
         </activity>
     </application>
 
