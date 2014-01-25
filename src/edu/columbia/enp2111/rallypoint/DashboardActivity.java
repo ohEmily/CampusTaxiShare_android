@@ -51,7 +51,6 @@ public class DashboardActivity extends Activity
             String message = previousScreen.getStringExtra(WhenWhereActivity.KEY_CONFIRMATION_MESSAGE);
             if (message != null)
             {
-            	Log.v("Testing", "Val: " + message);
             	TextView messageView = (TextView) findViewById(R.id.extra_message);
             	messageView.setTextColor(this.getResources().getColor(R.color.myGreen));
             	messageView.setText(message);

@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
  
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -17,15 +18,21 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
  
+
 import android.util.Log;
 
 /**
+ * Deals with getting and storing data on the database.
+ * 
  * @author Ravi Tamada, from androidhive.info
  */
 
 public class JSONParser 
 { 
-    static InputStream is = null;
+	// location of the API for the whole program
+	public static final String API_URL = "http://10.0.2.2/taxi_project/api/";
+	
+	static InputStream is = null;
     static JSONObject jObj = null;
     static String json = "";
     

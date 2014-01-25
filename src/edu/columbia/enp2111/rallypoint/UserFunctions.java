@@ -38,7 +38,7 @@ public class UserFunctions
         params.add(new BasicNameValuePair(Constants.KEY_TAG, Constants.LOGIN_USER_TAG));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
-        JSONObject json = jsonParser.getJSONFromUrl(Constants.API_URL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
         return json;
     }
      
@@ -59,7 +59,7 @@ public class UserFunctions
         params.add(new BasicNameValuePair("network", network));
         params.add(new BasicNameValuePair("password", password));
         // getting JSON Object
-        JSONObject json = jsonParser.getJSONFromUrl(Constants.API_URL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
         return json; // return json
     }
      
@@ -78,6 +78,14 @@ public class UserFunctions
         }
         return false;
     }
+
+    /** Returns this user's UID. */
+    public String getID(Context context)
+    {
+    	DatabaseHandler db = new DatabaseHandler(context);
+    	HashMap<String, String> user = db.getUserDetails();
+    	return user.get("uid");
+    }
     
     /** Returns this user's name. */
     public String getName(Context context)
@@ -85,6 +93,14 @@ public class UserFunctions
     	DatabaseHandler db = new DatabaseHandler(context);
     	HashMap<String, String> user = db.getUserDetails();
     	return user.get("name");
+    }
+    
+    /** Returns this user's email. */
+    public String getEmail(Context context)
+    {
+    	DatabaseHandler db = new DatabaseHandler(context);
+    	HashMap<String, String> user = db.getUserDetails();
+    	return user.get("email");
     }
     
     /** Returns this user's network. */

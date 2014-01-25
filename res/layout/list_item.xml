@@ -7,9 +7,15 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp" >
 
-    <!-- Datetime Label -->
+    <!-- Date Label -->
     <TextView
-        android:id="@+id/datetime"
+        android:id="@+id/date"
+        style="@style/LargePinkFont"
+    />
+    
+    <!-- Time Label -->
+    <TextView
+        android:id="@+id/time"
         style="@style/LargePinkFont"
     />
 

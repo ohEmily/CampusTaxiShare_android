@@ -11,8 +11,6 @@ public final class Constants
 	// make constructor private (prevent instantiation outside this object)
 	private Constants() {}
 	
-	public static final String API_URL = "http://10.0.2.2/taxi_project/api/";
-	
 	/*
 	 * NOTE: If making changes to these constants, changes must be made on
 	 * the API_URL's index.php file, too.
@@ -20,8 +18,7 @@ public final class Constants
 	/* tags for what index.php should do: */
     public static final String LOGIN_USER_TAG = "login";
     public static final String REGISTER_USER_TAG = "register";
-    public static final String CREATE_GROUP_TAG = "create_group";
-    public static final String GET_GROUPS_TAG = "get_groups";
+
     
     /* keys for value mapping: */
     public static final String KEY_TAG = "tag";

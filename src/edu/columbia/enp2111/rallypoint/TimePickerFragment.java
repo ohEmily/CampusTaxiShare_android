@@ -18,11 +18,12 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 {	
 	private TextView departureTimeView;
 	
+	// default times when you open the TimePicker dialog
 	private static final int DEFAULT_HOUR = 12;
 	private static final int DEFAULT_MINUTE = 0;
 	
-	private String hour;
-	private String minute;
+	private String militaryHour;
+	private String militaryMinute;
 	
 	// TODO: restrict time picker to 15 minute intervals
 //	private static final int TIME_PICKER_INTERVAL = 15;
@@ -43,27 +44,44 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 				DEFAULT_MINUTE,	DateFormat.is24HourFormat(getActivity()));
 	}
 
+	/**
+	 * Converts time in a 24 hour format to "HH:MM AM/PM".
+	 * @param militaryHour, hours out of 24
+	 * @param oneDigitMinutes, minutes are only 1 digit if less than 10
+	 * @return new time, with hours always <= 12 and AM or PM designated
+	 */
+	public static String convertToPrettyTime(int militaryHour, int oneDigitMinutes)
+	{
+		// set hour to non-military time
+		String stringHour = Integer.toString(militaryHour);
+		String AMorPM = "AM";
+		if (militaryHour > 12)
+			stringHour = Integer.toString(militaryHour - 12);
+		if (militaryHour >= 12)
+			AMorPM = "PM";
+		// make sure minutes are always 2 digits (eg. not 12:1 PM, but 12:01 PM)
+		String stringMinute  = Integer.toString(oneDigitMinutes);
+		if (oneDigitMinutes < 10)
+			stringMinute = 0 + stringMinute; // string addition
+		return (stringHour + ":" + stringMinute + " " + AMorPM);
+	}
+	
+	
 	/** Sets the values for time on the relevant TextView. */
 	public void onTimeSet(TimePicker view, int hourOfDay, int minuteOfHour)
 	{
-		hour = Integer.toString(hourOfDay);
-		// sets hourString to non-military time (e.g. 2 o clock instead of 14 o clock)
-		String hourString = hour;
-		String AMorPM = "AM";
-		if (hourOfDay > 12)
-			hourString = Integer.toString(hourOfDay - 12);
-		if (hourOfDay >= 12)
-			AMorPM = "PM";
-		minute = Integer.toString(minuteOfHour);
+		// set the 24-hour, military time
+		this.militaryHour = Integer.toString(hourOfDay);
+		this.militaryMinute = Integer.toString(minuteOfHour);
 		if (minuteOfHour < 10)
-			minute = 0 + minute; 
-		String time = (hourString + ":" + minute + " " + AMorPM);
-		departureTimeView.setText(time);
+			this.militaryMinute = 0 + this.militaryMinute;
+		// set full 'pretty' time, i.e. 2:45 PM
+		departureTimeView.setText(convertToPrettyTime(hourOfDay, minuteOfHour));
 	}
 	
 	/** Returns the time in HH:SS format. */
 	public String getTime()
 	{
-		return hour + ":" + minute;
+		return militaryHour + ":" + militaryMinute;
 	}
 }

@@ -19,7 +19,7 @@ public class SingleGroupActivity extends Activity
     public void onCreate(Bundle savedInstanceState) 
 	{
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_contact);
+        setContentView(R.layout.activity_single_group);
         
         // getting intent data
         Intent previousActivity = getIntent();

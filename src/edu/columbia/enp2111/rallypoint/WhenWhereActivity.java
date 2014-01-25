@@ -37,17 +37,12 @@ public class WhenWhereActivity extends FragmentActivity
 	private TextView meetingPoint;
 	private TextView timeView;
 	private TextView dateView;
-	
-	private String taxiDate;
-	private String taxiTime;
-	private String destination;
 
 	private static String KEY_SUCCESS = "success";
 	
 	private UserFunctions userFunctions;
 	
 	AlertDialog destinationDialog;
-	static final int DATE_DIALOG_ID = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -129,20 +124,26 @@ public class WhenWhereActivity extends FragmentActivity
 	    dateFragment.show(getFragmentManager(), "datePicker");
 	}
 
+	/**
+	 * Called when the "submit" button is pressed. Pushes the user's selection
+	 * onto the database.
+	 */
 	public void onSubmit(View v)
 	{
 		// TODO: double check that none of the values are null!
 		if (timeView.getText() != "" || dateView.getText() != "" || meetingPoint.getText() != "")
 		{
-			this.taxiDate = ((DatePickerFragment) dateFragment).getDate();
-			this.taxiTime = ((TimePickerFragment) timeFragment).getTime();
-			this.destination = ((TextView) findViewById(R.id.myDestination)).getText().toString();
+			String taxiDate = ((DatePickerFragment) dateFragment).getDate();
+			String taxiTime = ((TimePickerFragment) timeFragment).getTime();
+			String destination = ((TextView) findViewById(R.id.myDestination)).getText().toString();
+			String userID = userFunctions.getID(getApplicationContext());
 			Log.v("Testing", "The time is " + taxiTime);
 			Log.v("Testing", "The date is " + taxiDate);
 			Log.v("Testing", "The destination is " + destination);
+			Log.v("Testing", userID);
 			String taxiDateTime = taxiDate + " " + taxiTime;
 			// Put all the values from the TextViews into the database
-			new MyAsyncTask().execute(taxiDateTime, destination);
+			new MyAsyncTask().execute(taxiDateTime, destination, userID);
 		}
 	}
 	
@@ -161,7 +162,7 @@ public class WhenWhereActivity extends FragmentActivity
 	    {
 			// parameters: String datetime, String destination
 	    	GroupFunctions groupFunction = new GroupFunctions();
-	        JSONObject json = groupFunction.createGroup(params[0], params[1]);
+	        JSONObject json = groupFunction.createGroup(params[0], params[1], params[2]);
 	        return json;
 	    }
 	   

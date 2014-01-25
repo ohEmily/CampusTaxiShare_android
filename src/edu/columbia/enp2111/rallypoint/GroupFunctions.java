@@ -7,8 +7,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 /**
  * This class is used to create and get groups of people sharing taxis stored
  * in the database.
@@ -17,7 +15,10 @@ import android.util.Log;
 
 public class GroupFunctions
 {
-    private JSONParser jsonParser;
+    public static final String CREATE_GROUP_TAG = "create_group";
+    public static final String GET_GROUPS_TAG = "get_groups";
+	
+	private JSONParser jsonParser;
     
     /** Default constructor. */
     public GroupFunctions()
@@ -30,15 +31,15 @@ public class GroupFunctions
      * @param email
      * @param password
      * */
-    public JSONObject createGroup(String datetime, String destination)
+    public JSONObject createGroup(String datetime, String destination, String userID)
     {
         // Building parameters. Mapping to constants
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(Constants.KEY_TAG, Constants.CREATE_GROUP_TAG));
+        params.add(new BasicNameValuePair(Constants.KEY_TAG, CREATE_GROUP_TAG));
         params.add(new BasicNameValuePair(Constants.KEY_DATETIME, datetime));
         params.add(new BasicNameValuePair(Constants.KEY_DESTINATION, destination));
-        params.add(new BasicNameValuePair(Constants.KEY_OWNER_UID, "52cf4405795782.50588600")); // TODO
-        JSONObject json = jsonParser.getJSONFromUrl(Constants.API_URL, params);
+        params.add(new BasicNameValuePair(Constants.KEY_OWNER_UID, userID));
+        JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
         return json;
     }
     
@@ -50,9 +51,9 @@ public class GroupFunctions
     public JSONObject getAllGroups()
     {
     	List<NameValuePair> params = new ArrayList<NameValuePair>();
-    	params.add(new BasicNameValuePair(Constants.KEY_TAG, Constants.GET_GROUPS_TAG));
+    	params.add(new BasicNameValuePair(Constants.KEY_TAG, GET_GROUPS_TAG));
     	params.add(new BasicNameValuePair("search_params", "all"));
-    	JSONObject json = jsonParser.getJSONFromUrl(Constants.API_URL, params);
+    	JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
     	return json;
     }
 }
