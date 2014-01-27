@@ -797,15 +797,18 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f060002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f07000b;
+        public static final int abc_search_url_text_holo=0x7f07000c;
         public static final int abc_search_url_text_normal=0x7f070000;
         public static final int abc_search_url_text_pressed=0x7f070002;
         public static final int abc_search_url_text_selected=0x7f070001;
         public static final int background=0x7f070005;
-        public static final int errorColor=0x7f07000a;
-        public static final int myBlack=0x7f070008;
+        public static final int errorColor=0x7f07000b;
+        public static final int myBlack=0x7f070009;
         public static final int myDarkPink=0x7f070004;
-        public static final int myGreen=0x7f070009;
+        /**  Message colors 
+         */
+        public static final int myGreen=0x7f07000a;
+        public static final int myLightGray=0x7f070008;
         public static final int myPink=0x7f070003;
         public static final int myWhite=0x7f070006;
         public static final int myYellow=0x7f070007;
@@ -993,7 +996,7 @@ containing a value of this type.
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
         public static final int actionbar_background=0x7f020057;
         public static final int app_name_banner=0x7f020058;
-        public static final int custom_button=0x7f020059;
+        public static final int gray_button=0x7f020059;
         public static final int ic_action_add_person=0x7f02005a;
         public static final int ic_action_error=0x7f02005b;
         public static final int ic_action_event=0x7f02005c;
@@ -1008,6 +1011,7 @@ containing a value of this type.
         public static final int ic_action_warning=0x7f020065;
         public static final int ic_launcher=0x7f020066;
         public static final int icon=0x7f020067;
+        public static final int pink_button=0x7f020068;
     }
     public static final class id {
         public static final int LabelMyDepartureDate=0x7f05005b;
@@ -1022,8 +1026,8 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_search=0x7f050063;
-        public static final int action_settings=0x7f050064;
+        public static final int action_search=0x7f050062;
+        public static final int action_settings=0x7f050063;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
@@ -1078,7 +1082,6 @@ containing a value of this type.
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
-        public static final int owner=0x7f050062;
         public static final int passEditTextLogin=0x7f050047;
         public static final int passEditTextRegistration=0x7f05004e;
         public static final int progress_circular=0x7f050018;
@@ -1224,53 +1227,54 @@ containing a value of this type.
         /**  General 
          */
         public static final int app_name=0x7f0a000d;
-        public static final int button_browse_groups=0x7f0a0026;
-        public static final int button_date=0x7f0a002f;
-        public static final int button_destination=0x7f0a0030;
+        public static final int button_browse_groups=0x7f0a0027;
+        public static final int button_date=0x7f0a0030;
+        public static final int button_destination=0x7f0a0031;
         public static final int button_login=0x7f0a0015;
-        public static final int button_logout=0x7f0a002a;
-        public static final int button_new_from_school_trip=0x7f0a0027;
-        public static final int button_new_to_school_trip=0x7f0a0028;
-        public static final int button_signup=0x7f0a001b;
-        public static final int button_submit=0x7f0a0034;
-        public static final int button_time=0x7f0a002e;
+        public static final int button_logout=0x7f0a002b;
+        public static final int button_new_from_school_trip=0x7f0a0028;
+        public static final int button_new_to_school_trip=0x7f0a0029;
+        public static final int button_signup=0x7f0a001c;
+        public static final int button_submit=0x7f0a0035;
+        public static final int button_time=0x7f0a002f;
         public static final int campus_name=0x7f0a000f;
         /**  Registration screen 
          */
-        public static final int confirmation_email_notice=0x7f0a0018;
-        public static final int confirmation_message=0x7f0a0029;
+        public static final int confirmation_email_notice=0x7f0a0019;
+        public static final int confirmation_message=0x7f0a002a;
         /**  Dashboard 
          */
-        public static final int dashboard_activity_title=0x7f0a0023;
-        public static final int departure=0x7f0a0031;
-        public static final int destination=0x7f0a002d;
-        public static final int error_message_invalid_edu_email=0x7f0a001f;
+        public static final int dashboard_activity_title=0x7f0a0024;
+        public static final int departure=0x7f0a0032;
+        public static final int destination=0x7f0a002e;
+        public static final int error_message_invalid_edu_email=0x7f0a0020;
         public static final int error_message_login=0x7f0a0017;
-        public static final int error_message_name_length=0x7f0a001e;
-        public static final int error_message_password_length=0x7f0a0022;
-        public static final int error_message_registered_schools=0x7f0a0020;
-        public static final int error_message_registration=0x7f0a0021;
-        public static final int first_name=0x7f0a001a;
-        public static final int go_to_login=0x7f0a001d;
+        public static final int error_message_name_length=0x7f0a001f;
+        public static final int error_message_password_length=0x7f0a0023;
+        public static final int error_message_registered_schools=0x7f0a0021;
+        public static final int error_message_registration=0x7f0a0022;
+        public static final int error_message_server=0x7f0a0018;
+        public static final int first_name=0x7f0a001b;
+        public static final int go_to_login=0x7f0a001e;
         public static final int go_to_registration=0x7f0a0014;
-        public static final int greet_user=0x7f0a0024;
-        public static final int hello_world=0x7f0a0036;
-        public static final int input_email=0x7f0a0019;
+        public static final int greet_user=0x7f0a0025;
+        public static final int hello_world=0x7f0a0037;
+        public static final int input_email=0x7f0a001a;
         public static final int logo_description=0x7f0a0010;
-        public static final int meeting_point=0x7f0a002c;
+        public static final int meeting_point=0x7f0a002d;
         public static final int password_field=0x7f0a0016;
-        public static final int password_hint=0x7f0a001c;
-        public static final int prompt_activity=0x7f0a0025;
+        public static final int password_hint=0x7f0a001d;
+        public static final int prompt_activity=0x7f0a0026;
         /**  Action Bar 
          */
         public static final int settings_label=0x7f0a0011;
         /**  When/Where Activity 
          */
-        public static final int summary=0x7f0a002b;
-        public static final int time=0x7f0a0032;
-        public static final int title_activity_search=0x7f0a0035;
-        public static final int title_activity_single_contact=0x7f0a0037;
-        public static final int title_activity_when_where=0x7f0a0033;
+        public static final int summary=0x7f0a002c;
+        public static final int time=0x7f0a0033;
+        public static final int title_activity_search=0x7f0a0036;
+        public static final int title_activity_single_contact=0x7f0a0038;
+        public static final int title_activity_when_where=0x7f0a0034;
         /**  Login screen 
          */
         public static final int welcome_message=0x7f0a0013;

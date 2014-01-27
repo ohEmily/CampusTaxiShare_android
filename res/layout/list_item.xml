@@ -3,40 +3,40 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp" >
-
-    <!-- Date Label -->
-    <TextView
-        android:id="@+id/date"
-        style="@style/LargePinkFont"
-    />
-    
-    <!-- Time Label -->
-    <TextView
-        android:id="@+id/time"
-        style="@style/LargePinkFont"
-    />
-
-    <!-- Destination label -->
-    <TextView
-        android:id="@+id/destination"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="2dp"
-        android:textColor="@color/myWhite"
-    />
-
-    <!-- Owner ID label -->
-    <TextView
-        android:id="@+id/owner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="Owner: "
-        android:textColor="#5d5d5d"
-        android:textStyle="bold"
-    />
+    >
+    <LinearLayout
+        android:background="@drawable/gray_button"
+    	android:drawableLeft="@drawable/ic_action_add_person"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="vertical"
+    	android:layout_gravity="center"
+    	android:clickable="true"
+        >
+	        
+	    <!-- Date Label -->
+	    <TextView
+	        android:id="@+id/date"
+	        android:layout_gravity="center"
+	        style="@style/YellowFont"
+	    />
+	    
+	    <!-- Time Label -->
+	    <TextView
+	        android:id="@+id/time"
+	        android:layout_gravity="center"
+	        style="@style/YellowFont"
+	    />
+	
+	    <!-- Destination label -->
+	    <TextView
+	        android:id="@+id/destination"
+	        android:gravity="center"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/myWhite"
+	    />
+	    
+    </LinearLayout>
 
 </LinearLayout>

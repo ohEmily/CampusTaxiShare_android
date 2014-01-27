@@ -25,7 +25,7 @@
 	        android:id="@+id/myDestinationPickerButton"
 	        style="@style/button_text"
 	        android:layout_width="match_parent"
-	        android:background="@drawable/custom_button"
+	        android:background="@drawable/pink_button"
 	        android:drawableLeft="@drawable/ic_action_place"
 	        android:text="@string/button_destination"
 	        android:onClick="showDestinationPickerDialog"
@@ -36,14 +36,14 @@
 	        android:id="@+id/myDatePickerButton"
 	        style="@style/button_text"
 	        android:layout_width="match_parent"
-	        android:background="@drawable/custom_button" 
+	        android:background="@drawable/pink_button" 
 	        android:drawableLeft="@drawable/ic_action_go_to_today"
 	        android:text="@string/button_date"
 	        android:onClick="showDatePickerDialog"
 	    />
 	
 	    <Button
-			android:background="@drawable/custom_button"
+			android:background="@drawable/pink_button"
 		    android:layout_width="match_parent"
 		    style="@style/button_text"
 		    android:id="@+id/myTimePickerButton"
@@ -109,7 +109,7 @@
 	    
 	    <Button 
 	        style="@style/button_text"
-	        android:background="@drawable/custom_button" 
+	        android:background="@drawable/pink_button" 
 	        android:drawableLeft="@drawable/ic_action_send_now"
 	        android:text="@string/button_submit"
 	        android:onClick="onSubmit"

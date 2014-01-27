@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 /**
+ * Handles the TimePickerFragment that opens when a user touches the "choose 
+ * time" button.
  * From here: http://developer.android.com/guide/topics/ui/controls/pickers.html
  */
 
@@ -43,30 +45,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 		return new TimePickerDialog(getActivity(), this, DEFAULT_HOUR, 
 				DEFAULT_MINUTE,	DateFormat.is24HourFormat(getActivity()));
 	}
-
-	/**
-	 * Converts time in a 24 hour format to "HH:MM AM/PM".
-	 * @param militaryHour, hours out of 24
-	 * @param oneDigitMinutes, minutes are only 1 digit if less than 10
-	 * @return new time, with hours always <= 12 and AM or PM designated
-	 */
-	public static String convertToPrettyTime(int militaryHour, int oneDigitMinutes)
-	{
-		// set hour to non-military time
-		String stringHour = Integer.toString(militaryHour);
-		String AMorPM = "AM";
-		if (militaryHour > 12)
-			stringHour = Integer.toString(militaryHour - 12);
-		if (militaryHour >= 12)
-			AMorPM = "PM";
-		// make sure minutes are always 2 digits (eg. not 12:1 PM, but 12:01 PM)
-		String stringMinute  = Integer.toString(oneDigitMinutes);
-		if (oneDigitMinutes < 10)
-			stringMinute = 0 + stringMinute; // string addition
-		return (stringHour + ":" + stringMinute + " " + AMorPM);
-	}
-	
-	
+		
 	/** Sets the values for time on the relevant TextView. */
 	public void onTimeSet(TimePicker view, int hourOfDay, int minuteOfHour)
 	{
@@ -76,7 +55,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 		if (minuteOfHour < 10)
 			this.militaryMinute = 0 + this.militaryMinute;
 		// set full 'pretty' time, i.e. 2:45 PM
-		departureTimeView.setText(convertToPrettyTime(hourOfDay, minuteOfHour));
+		departureTimeView.setText(DateTime.parseTime(hourOfDay, minuteOfHour));
 	}
 	
 	/** Returns the time in HH:SS format. */

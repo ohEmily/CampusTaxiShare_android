@@ -57,7 +57,7 @@
 	       style="@style/button_text"
 	       android:layout_width="match_parent"
 	       android:drawableLeft="@drawable/ic_action_search"
-	       android:background="@drawable/custom_button"
+	       android:background="@drawable/pink_button"
 	       android:text="@string/button_browse_groups" 
 	       android:onClick="searchGroups"
 	    />
@@ -67,7 +67,7 @@
 	       style="@style/button_text"
 	       android:layout_width="match_parent"
 	       android:drawableLeft="@drawable/ic_action_new_event"
-	       android:background="@drawable/custom_button"
+	       android:background="@drawable/pink_button"
 	       android:text="@string/button_new_from_school_trip"
 	       android:onClick="createFromSchoolGroup"
 	    />
@@ -77,7 +77,7 @@
 	       style="@style/button_text"
 	       android:layout_width="match_parent"
 	       android:drawableLeft="@drawable/ic_action_new_event"
-	       android:background="@drawable/custom_button"
+	       android:background="@drawable/pink_button"
 	       android:text="@string/button_new_to_school_trip"
 	    />
 	    

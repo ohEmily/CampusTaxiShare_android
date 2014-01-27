@@ -18,6 +18,7 @@
     <string name="button_login">log me in!</string>
     <string name="password_field">your password</string>
     <string name="error_message_login">Incorrect email/password.</string>
+    <string name="error_message_server">Server error. Please try again later.</string>
 
     <!-- Registration screen -->
     <string name="confirmation_email_notice">Sign up and we\'ll send you a 

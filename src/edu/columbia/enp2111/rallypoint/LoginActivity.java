@@ -50,6 +50,7 @@ public class LoginActivity extends ActionBarActivity
 		actionBar = getActionBar();
 		actionBar.show();
 		
+		// set text link to switch to registration page
 		final TextView toRegistration = (TextView) this.findViewById(R.id.link_to_registration);
 		toRegistration.setOnClickListener(new OnClickListener() 
 		{
@@ -62,6 +63,7 @@ public class LoginActivity extends ActionBarActivity
 	    });
 	}
 
+	/** Called when login button is pressed. */
 	public void submitLoginFields(View view) 
 	{
 		final EditText emailField = (EditText) findViewById(R.id.emailEditTextLogin);
@@ -85,6 +87,9 @@ public class LoginActivity extends ActionBarActivity
 		return super.onCreateOptionsMenu(menu);
 	}
 	
+	/** 
+	 * AsyncTask to connect to database in order to check login information.
+	 */
 	private class MyAsyncTask extends AsyncTask<String, Void, JSONObject>
 	{   
 	    protected JSONObject doInBackground(String ... params)
@@ -111,16 +116,16 @@ public class LoginActivity extends ActionBarActivity
 		                DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 		                JSONObject json_user = json.getJSONObject("user");
 
-		                // Clear all previous data in database
 		                UserFunctions userFunction = new UserFunctions();
 		                userFunction.logoutUser(getApplicationContext());
-		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_NETWORK),
+		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), 
+		                		json_user.getString(KEY_NETWORK),
 				                json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                 
 
 		                // Launch Dashboard Screen
 		                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
  
-		                // Close all views before launching Dashboard
+		                // Close all activities before launching Dashboard
 		                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		                startActivity(dashboard);
  
@@ -135,7 +140,7 @@ public class LoginActivity extends ActionBarActivity
 	    	} 
 		    catch (JSONException e)
 		    {
-		        loginErrorMsg.setText("Server error. Please try again later.");
+		        loginErrorMsg.setText(R.string.error_message_server);
 		    	e.printStackTrace();
 		    }
 		}

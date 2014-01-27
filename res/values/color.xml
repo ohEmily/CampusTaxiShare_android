@@ -5,7 +5,10 @@
     <color name="background">#3f3f3f</color>
     <color name="myWhite">#eaeaea</color>
     <color name="myYellow">#f6eb2d</color>
+    <color name="myLightGray">#525252</color>
     <color name="myBlack">#151515</color>
+    
+    <!-- Message colors -->
     <color name="myGreen">#0ac92b</color>
     <color name="errorColor">#af2525</color>
 </resources>

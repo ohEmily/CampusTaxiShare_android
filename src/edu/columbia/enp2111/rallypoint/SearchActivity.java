@@ -15,7 +15,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -39,7 +38,6 @@ public class SearchActivity extends ListActivity
 	public static final String TAG_DESTINATION = "destination";
 	public static final String TAG_DATETIME = "datetime";
 	
-	// 
 	public static final String LIST_KEY_DESTINATION = "destinationText";
 	public static final String LIST_KEY_DATE = "dateText";
 	public static final String LIST_KEY_TIME = "timeText";
@@ -98,12 +96,13 @@ public class SearchActivity extends ListActivity
 	 */
 	public void setDateAndTime(String datetime)
 	{
-		// 10 is the length of a date (MM-DD-YYYY )
+		// 10 is the length of a date (MM-DD-YYYY ) so use substring(0,10)
 		                            // 12345678910
-		stringDate = datetime.substring(0, 10).trim(); 
-		stringTime = datetime.substring(10, datetime.length()).trim();
-		Log.v("Testing", "Date is: " + stringDate);
-		Log.v("Testing", "Time is: " + stringTime);
+		String dateSubstring = DateTime.parseDate(datetime.substring(0, 10).trim());
+		stringDate = dateSubstring; 
+		
+		String timeSubstring = datetime.substring(10, datetime.length()).trim();
+		stringTime = DateTime.parseTime(timeSubstring);
 	}
 
 	/**
@@ -117,7 +116,7 @@ public class SearchActivity extends ListActivity
 			super.onPreExecute();
 			// Showing progress dialog
 			pDialog = new ProgressDialog(SearchActivity.this);
-			pDialog.setMessage("Please wait...");
+			pDialog.setMessage("Getting groups...");
 			pDialog.setCancelable(false);
 			pDialog.show();
 		}

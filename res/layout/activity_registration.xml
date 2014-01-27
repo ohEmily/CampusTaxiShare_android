@@ -77,7 +77,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center"
-	        android:background="@drawable/custom_button"
+	        android:background="@drawable/pink_button"
 	        android:layout_marginTop="30dp"
 	    	android:text="@string/button_signup"
 	    	android:onClick="submitRegistrationFields"
