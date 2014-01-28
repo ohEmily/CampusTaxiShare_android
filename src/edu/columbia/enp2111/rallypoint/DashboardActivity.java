@@ -41,11 +41,17 @@ public class DashboardActivity extends Activity
     			welcomeMessage.setText("Hi " + nameOfUser + "! Your network is: ");
     		
     		// show network name (e.g. "Columbia University", not 'columbia')
+//    		TextView networkName = (TextView) findViewById(R.id.campus_network_name);
+//    		String nameOfNetwork = userFunctions.getNetworkName(getApplicationContext());
+//    		if (nameOfNetwork != null)
+//    			networkName.setText(nameOfNetwork);
+    		// TODO
+    		NetworkFunctions networkFunction = new NetworkFunctions();
     		TextView networkName = (TextView) findViewById(R.id.campus_network_name);
-    		String nameOfNetwork = userFunctions.getNetworkName(getApplicationContext());
+    		String nameOfNetwork = networkFunction.getName(getApplicationContext());
     		if (nameOfNetwork != null)
     			networkName.setText(nameOfNetwork);
-
+    		
     		// if user just created a new taxi group, show confirmation message
             Intent previousScreen = getIntent();
             String message = previousScreen.getStringExtra(WhenWhereActivity.KEY_CONFIRMATION_MESSAGE);
@@ -100,4 +106,6 @@ public class DashboardActivity extends Activity
 		getMenuInflater().inflate(R.menu.dashboard, menu);
 		return true;
 	}
+	
+	
 }

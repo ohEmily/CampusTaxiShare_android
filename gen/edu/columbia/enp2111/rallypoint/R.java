@@ -1228,15 +1228,15 @@ containing a value of this type.
          */
         public static final int app_name=0x7f0a000d;
         public static final int button_browse_groups=0x7f0a0027;
-        public static final int button_date=0x7f0a0030;
-        public static final int button_destination=0x7f0a0031;
+        public static final int button_date=0x7f0a0031;
+        public static final int button_destination=0x7f0a0032;
         public static final int button_login=0x7f0a0015;
         public static final int button_logout=0x7f0a002b;
         public static final int button_new_from_school_trip=0x7f0a0028;
         public static final int button_new_to_school_trip=0x7f0a0029;
         public static final int button_signup=0x7f0a001c;
         public static final int button_submit=0x7f0a0035;
-        public static final int button_time=0x7f0a002f;
+        public static final int button_time=0x7f0a0030;
         public static final int campus_name=0x7f0a000f;
         /**  Registration screen 
          */
@@ -1245,8 +1245,8 @@ containing a value of this type.
         /**  Dashboard 
          */
         public static final int dashboard_activity_title=0x7f0a0024;
-        public static final int departure=0x7f0a0032;
-        public static final int destination=0x7f0a002e;
+        public static final int departure=0x7f0a0033;
+        public static final int destination=0x7f0a002f;
         public static final int error_message_invalid_edu_email=0x7f0a0020;
         public static final int error_message_login=0x7f0a0017;
         public static final int error_message_name_length=0x7f0a001f;
@@ -1258,23 +1258,22 @@ containing a value of this type.
         public static final int go_to_login=0x7f0a001e;
         public static final int go_to_registration=0x7f0a0014;
         public static final int greet_user=0x7f0a0025;
-        public static final int hello_world=0x7f0a0037;
         public static final int input_email=0x7f0a001a;
         public static final int logo_description=0x7f0a0010;
-        public static final int meeting_point=0x7f0a002d;
+        public static final int meeting_point=0x7f0a002e;
         public static final int password_field=0x7f0a0016;
         public static final int password_hint=0x7f0a001d;
         public static final int prompt_activity=0x7f0a0026;
         /**  Action Bar 
          */
         public static final int settings_label=0x7f0a0011;
+        public static final int summary=0x7f0a002d;
+        public static final int time=0x7f0a0034;
+        public static final int title_activity_search=0x7f0a0036;
+        public static final int title_activity_single_contact=0x7f0a0037;
         /**  When/Where Activity 
          */
-        public static final int summary=0x7f0a002c;
-        public static final int time=0x7f0a0033;
-        public static final int title_activity_search=0x7f0a0036;
-        public static final int title_activity_single_contact=0x7f0a0038;
-        public static final int title_activity_when_where=0x7f0a0034;
+        public static final int title_activity_when_where=0x7f0a002c;
         /**  Login screen 
          */
         public static final int welcome_message=0x7f0a0013;

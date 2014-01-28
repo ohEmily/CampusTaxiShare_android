@@ -2,6 +2,7 @@ package edu.columbia.enp2111.rallypoint;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -11,8 +12,6 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.app.ActionBar;
-
-
 
 // handling login event
 import org.json.JSONException;
@@ -72,11 +71,8 @@ public class LoginActivity extends ActionBarActivity
 		
 		email = emailField.getText().toString();
 		password = passwordField.getText().toString();
-        
-		Log.v("Testing", "Login email: " + email);
-		Log.v("Testing", "Login Password: " + password);
 		
-		 new MyAsyncTask().execute(email, password);
+		 new LoginTask().execute(email, password);
     }
 	
 	@Override
@@ -90,7 +86,7 @@ public class LoginActivity extends ActionBarActivity
 	/** 
 	 * AsyncTask to connect to database in order to check login information.
 	 */
-	private class MyAsyncTask extends AsyncTask<String, Void, JSONObject>
+	private class LoginTask extends AsyncTask<String, Void, JSONObject>
 	{   
 	    protected JSONObject doInBackground(String ... params)
 	    {
@@ -118,12 +114,18 @@ public class LoginActivity extends ActionBarActivity
 
 		                UserFunctions userFunction = new UserFunctions();
 		                userFunction.logoutUser(getApplicationContext());
-		                db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), 
+		                db.addUser(json_user.getString(KEY_NAME), 
+		                		json_user.getString(KEY_EMAIL), 
 		                		json_user.getString(KEY_NETWORK),
-				                json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                 
+				                json.getString(KEY_UID), 
+				                json_user.getString(KEY_CREATED_AT));                 
 
+		                // set up the network table in the SQLite Database
+		                new GetNetworkInfoTask().execute(json_user.getString(KEY_NETWORK));
+		                
 		                // Launch Dashboard Screen
-		                Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
+		                Intent dashboard = new Intent(getApplicationContext(), 
+		                		DashboardActivity.class);
  
 		                // Close all activities before launching Dashboard
 		                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -131,9 +133,64 @@ public class LoginActivity extends ActionBarActivity
  
 		                finish(); // Close login screen
 	    			}
+	    			else // Error in login
+	    			{
+	    				loginErrorMsg.setText(R.string.error_message_login);
+	    			}
+	    		}
+	    	} 
+		    catch (JSONException e)
+		    {
+		        loginErrorMsg.setText(R.string.error_message_server);
+		    	e.printStackTrace();
+		    }
+		}
+	}
+	
+	/** 
+	 * AsyncTask to build the user's network information in the SqLite database.
+	 */
+	private class GetNetworkInfoTask extends AsyncTask<String, Void, JSONObject>
+	{		
+//		private Context context;
+//		
+//        public GetNetworkInfoTask(Context context)
+//        {
+//            this.context = context;
+//        }
+//		
+		protected JSONObject doInBackground(String ... params)
+	    {
+	    	NetworkFunctions networkFunction = new NetworkFunctions();
+	    	if (params.length != 1)
+	    		return null;
+	        JSONObject json = networkFunction.getUserNetwork(params[0]);
+	        return json;
+	    }
+	   
+	    protected void onPostExecute(JSONObject json)
+	    {
+	    	try
+	    	{
+	    		if (json != null && json.getString(KEY_SUCCESS) != null)
+	    		{
+	    			String res = json.getString(KEY_SUCCESS);
+	    			if (Integer.parseInt(res) == 1)
+	    			{
+	    				// network data successfully gotten
+		                DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+		                JSONObject json_network = json.getJSONObject("network");
+
+		                NetworkFunctions networkFunction = new NetworkFunctions();
+		                networkFunction.clearNetwork(getApplicationContext());
+		                db.addNetwork(json_network.getString(DatabaseHandler.KEY_DOMAIN_STRING),
+		                		json_network.getString(DatabaseHandler.KEY_NETWORK_NAME), 
+		                		json_network.getString(DatabaseHandler.KEY_DEFAULT_MEETING_POINT),
+				                json_network.getString(DatabaseHandler.KEY_DESTINATION_LIST));
+	    			}
 	    			else
 	    			{
-	    				// Error in login
+	    				// Error - this network doesn't exist
 	    				loginErrorMsg.setText(R.string.error_message_login);
 	    			}
 	    		}

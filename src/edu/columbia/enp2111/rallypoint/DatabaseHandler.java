@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
  
 /**
  * Database handler that deals with the temporary login table, which allows
@@ -39,22 +40,12 @@ public class DatabaseHandler extends SQLiteOpenHelper
     private static final String KEY_CREATED_AT = "created_at"; 
     
     /* Network table specific constants */
-    private static final String TABLE_NETWORK = "network";
+    private static final String TABLE_NETWORK = "networks";
     
-    private static final String KEY_NETWORK_ORIGINAL = "network_original";
-    private static final String KEY_NETWORK_FULL_NAME = "network_full_name";
-    private static final String KEY_NETWORK_DESTINATION_LIST = "network_destination_list";
-
-//    /* Group table specific constants */
-//    private static final String TABLE_GROUP = "groups";
-//    // Group Table column names
-//    private static final String KEY_DATE_TIME = "date_time";
-//    private static final String KEY_DESTINATION = "destination";
-//    private static final String KEY_OWNER_UID = "owner_uid";
-//    private static final String KEY_MEMBER1_UID = "member_1";
-//    private static final String KEY_MEMBER2_UID = "member_2";
-//    private static final String KEY_MEMBER3_UID = "member_3";
-    private static final String KEY_GROUP_CREATED_AT = "created_at";
+    public static final String KEY_DOMAIN_STRING = "domain_string";
+    public static final String KEY_NETWORK_NAME = "network_name";
+    public static final String KEY_DEFAULT_MEETING_POINT = "default_meeting_point";
+    public static final String KEY_DESTINATION_LIST = "destination_list";
     
     /** Constructor. */
     public DatabaseHandler(Context context)
@@ -62,7 +53,10 @@ public class DatabaseHandler extends SQLiteOpenHelper
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
  
-    // Creating Tables
+    /**
+     * Creating tables containing login data and logged in user's network's
+     * data.
+     */
     @Override
     public void onCreate(SQLiteDatabase db)
     {
@@ -75,42 +69,65 @@ public class DatabaseHandler extends SQLiteOpenHelper
                 + KEY_CREATED_AT + " TEXT" + ");";
         db.execSQL(CREATE_LOGIN_TABLE);
 
+        Log.v("Testing", "adding network table");
+        
         String CREATE_NETWORK_TABLE = "CREATE TABLE " + TABLE_NETWORK + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
-                + KEY_NAME + " TEXT,"
-                + KEY_EMAIL + " TEXT UNIQUE,"
-                + KEY_NETWORK + " TEXT,"
-                + KEY_UID + " TEXT,"
-                + KEY_CREATED_AT + " TEXT" + ");";
+                + KEY_DOMAIN_STRING + " TEXT,"
+                + KEY_NETWORK_NAME + " TEXT,"
+                + KEY_DEFAULT_MEETING_POINT + " TEXT,"
+                + KEY_DESTINATION_LIST + " TEXT" + ");";
         db.execSQL(CREATE_NETWORK_TABLE);
-        
-//    	String CREATE_GROUP_TABLE = "CREATE TABLE " + TABLE_GROUP + "("
-//                + KEY_DATE_TIME + " TEXT,"
-//                + KEY_DESTINATION + " TEXT,"
-//                + KEY_OWNER_UID + " TEXT,"
-//                + KEY_MEMBER1_UID + " TEXT,"
-//                + KEY_MEMBER2_UID + " TEXT,"
-//                + KEY_MEMBER3_UID + " TEXT,"
-//                + KEY_GROUP_CREATED_AT + " TEXT" + ");";
-//        db.execSQL(CREATE_GROUP_TABLE);
+    }
+
+    /**
+     * Store the user's network's details in the database (called when user
+     * 
+     * @param domainString
+     * @param networkName
+     * @param meetingPoint
+     * @param destinationList
+     */
+    public void addNetwork(String domainString, String networkName, 
+    		String meetingPoint, String destinationList)
+    {
+    	Log.v("Testing", "addNetwork in DatabaseHandler");
+    	SQLiteDatabase db = this.getWritableDatabase();
+    	// creating row containing network data
+    	ContentValues values = new ContentValues();
+    	values.put(KEY_DOMAIN_STRING, domainString);
+    	values.put(KEY_NETWORK_NAME, networkName);
+    	values.put(KEY_DEFAULT_MEETING_POINT, meetingPoint);
+    	values.put(KEY_DESTINATION_LIST, destinationList);
+    	
+    	db.insert(TABLE_NETWORK, null, values);
+    	db.close();
     }
     
-//    /**
-//     * Storing group details in database.
-//     * */
-//    public void addGroup(String datetime, String destination, String owner_uid, String created_at)
-//    {
-//        SQLiteDatabase db = this.getWritableDatabase();
-// 
-//        ContentValues values = new ContentValues();
-//        values.put(KEY_DATE_TIME, datetime); // Date and time
-//        values.put(KEY_DESTINATION, destination); // Destination
-//        values.put(KEY_OWNER_UID, owner_uid); // owner's UID
-//        values.put(KEY_GROUP_CREATED_AT, created_at); // Created at
-//        // Inserting Row
-//        db.insert(TABLE_GROUP, null, values);
-//        db.close(); // Closing database connection
-//    }
+    /**
+     * Getting the logged in user's network's data from database.
+     * @return HashMap with user's name, email, network, uid & created_at
+     * */
+    public HashMap<String, String> getNetworkDetails()
+    {
+    	HashMap<String,String> network = new HashMap<String,String>();
+        String selectQuery = "SELECT  * FROM " + TABLE_NETWORK;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToFirst(); // Move to first row (only one row in table)
+        // fill hashmap "network"
+        if(cursor.getCount() > 0)
+        {
+            network.put(KEY_DOMAIN_STRING, cursor.getString(1));
+            network.put(KEY_NETWORK_NAME, cursor.getString(2));
+            network.put(KEY_DEFAULT_MEETING_POINT, cursor.getString(3)); 
+            network.put(KEY_DESTINATION_LIST, cursor.getString(4));
+        }
+        cursor.close();
+        db.close();
+        return network;
+    }
     
     /**
      * Storing user details in database (called when user logs in).
@@ -161,7 +178,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
      * Used for getting user login status; user is logged in when there are
      * rows in the table.
      * */
-    public int getRowCount()
+    public int getLoginRowCount()
     {
         String countQuery = "SELECT  * FROM " + TABLE_LOGIN;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -179,6 +196,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
     {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_LOGIN, null, null); // Delete all rows
+        db.delete(TABLE_NETWORK, null, null);
         db.close();
     }
     
@@ -187,6 +205,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
     {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGIN);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NETWORK);
         // Create tables again
         onCreate(db);
     }

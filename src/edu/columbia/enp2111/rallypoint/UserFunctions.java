@@ -71,7 +71,7 @@ public class UserFunctions
     public boolean isUserLoggedIn(Context context)
     {
         DatabaseHandler db = new DatabaseHandler(context);
-        int count = db.getRowCount();
+        int count = db.getLoginRowCount();
         if(count > 0) // user logged in
         {
         	return true;
