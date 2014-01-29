@@ -40,8 +40,8 @@ public class DatabaseHandler extends SQLiteOpenHelper
     private static final String KEY_CREATED_AT = "created_at"; 
     
     /* Network table specific constants */
-    private static final String TABLE_NETWORK = "networks";
-    
+    private static final String TABLE_NETWORK = "network";
+    // column names
     public static final String KEY_DOMAIN_STRING = "domain_string";
     public static final String KEY_NETWORK_NAME = "network_name";
     public static final String KEY_DEFAULT_MEETING_POINT = "default_meeting_point";
@@ -68,8 +68,6 @@ public class DatabaseHandler extends SQLiteOpenHelper
                 + KEY_UID + " TEXT,"
                 + KEY_CREATED_AT + " TEXT" + ");";
         db.execSQL(CREATE_LOGIN_TABLE);
-
-        Log.v("Testing", "adding network table");
         
         String CREATE_NETWORK_TABLE = "CREATE TABLE " + TABLE_NETWORK + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
@@ -91,7 +89,6 @@ public class DatabaseHandler extends SQLiteOpenHelper
     public void addNetwork(String domainString, String networkName, 
     		String meetingPoint, String destinationList)
     {
-    	Log.v("Testing", "addNetwork in DatabaseHandler");
     	SQLiteDatabase db = this.getWritableDatabase();
     	// creating row containing network data
     	ContentValues values = new ContentValues();
@@ -99,6 +96,8 @@ public class DatabaseHandler extends SQLiteOpenHelper
     	values.put(KEY_NETWORK_NAME, networkName);
     	values.put(KEY_DEFAULT_MEETING_POINT, meetingPoint);
     	values.put(KEY_DESTINATION_LIST, destinationList);
+    	
+    	Log.v("Testing", "AddNetwork in DBHandler: " + domainString);
     	
     	db.insert(TABLE_NETWORK, null, values);
     	db.close();
@@ -124,6 +123,10 @@ public class DatabaseHandler extends SQLiteOpenHelper
             network.put(KEY_DEFAULT_MEETING_POINT, cursor.getString(3)); 
             network.put(KEY_DESTINATION_LIST, cursor.getString(4));
         }
+        if (network.get(KEY_NETWORK_NAME) == null)
+        	Log.v("Testing", "DBHandler: Network_name is null");
+//        Log.v("Testing", (String) network.get(KEY_NETWORK_NAME));
+        
         cursor.close();
         db.close();
         return network;

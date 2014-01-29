@@ -88,6 +88,9 @@ public class WhenWhereActivity extends FragmentActivity
 		// Strings to Show In Dialog with Radio Buttons
 		final CharSequence[] options = {"John F. Kennedy International Airport", "LaGuardia Airport","Newark Liberty International Airport"};
 		
+//		NetworkFunctions networkFunction = new NetworkFunctions();
+//		final String[] destinationOptions = networkFunction.getDestinations(getApplicationContext());
+		
 		// Creating and Building the Dialog 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.destination); 

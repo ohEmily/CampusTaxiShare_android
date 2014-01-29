@@ -12,10 +12,13 @@ package edu.columbia.enp2111.rallypoint;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+
 import android.content.Context;
+import android.util.Log;
 
 public class NetworkFunctions
 {     
@@ -48,8 +51,25 @@ public class NetworkFunctions
     public String getName(Context context)
     {
     	DatabaseHandler db = new DatabaseHandler(context);
-    	HashMap<String, String> network = db.getUserDetails();
-    	return network.get(DatabaseHandler.KEY_NETWORK_NAME);
+    	HashMap<String, String> network = db.getNetworkDetails();
+    	String name = network.get(DatabaseHandler.KEY_NETWORK_NAME);
+    	if(name == null)
+    		Log.v("Testing", "Name is set to null");
+//    	Log.v("Testing", "Network name: "+ name);
+    	return name;
+    }
+    
+    /** Returns this network's destinations in the form of an array. */
+    public String[] getDestinations(Context context)
+    {
+    	DatabaseHandler db = new DatabaseHandler(context);
+    	HashMap<String, String> network = db.getNetworkDetails();
+    	String destinations = network.get(DatabaseHandler.KEY_DESTINATION_LIST);
+    	String[] destinationArray = destinations.split("#");
+    	// remove all trailing and leading spaces on the destination names
+    	for (int i = 0; i < destinationArray.length; i++)
+    		destinationArray[i] = destinationArray[i].trim();
+    	return destinationArray;
     }
     
     /** Method to clear network data and reset database. */

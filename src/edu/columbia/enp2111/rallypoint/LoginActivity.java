@@ -29,7 +29,7 @@ public class LoginActivity extends ActionBarActivity
 	private String password;
 	private ActionBar actionBar;
 	
-	// JSON Response node names
+	// JSON response node names
     private static String KEY_SUCCESS = "success";
 //    private static String KEY_ERROR = "error";
 //    private static String KEY_ERROR_MSG = "error_msg";
@@ -41,6 +41,8 @@ public class LoginActivity extends ActionBarActivity
 	
     TextView loginErrorMsg;
     
+    DatabaseHandler db;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -50,13 +52,13 @@ public class LoginActivity extends ActionBarActivity
 		actionBar.show();
 		
 		// set text link to switch to registration page
-		final TextView toRegistration = (TextView) this.findViewById(R.id.link_to_registration);
+		TextView toRegistration = (TextView) this.findViewById(R.id.link_to_registration);
 		toRegistration.setOnClickListener(new OnClickListener() 
 		{
 	        @Override
 	        public void onClick(View v)
 	        {
-	        	LoginActivity.this.startActivity(new Intent(LoginActivity.this, 
+	        	startActivity(new Intent(LoginActivity.this, 
 	        			RegistrationActivity.class));
 	        }
 	    });
@@ -109,19 +111,19 @@ public class LoginActivity extends ActionBarActivity
 	    			{
 	    				// user successfully logged in
 		                // Store user details in SQLite Database
-		                DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-		                JSONObject json_user = json.getJSONObject("user");
+		                db = new DatabaseHandler(getApplicationContext());
+		                JSONObject jsonUser = json.getJSONObject("user");
 
 		                UserFunctions userFunction = new UserFunctions();
 		                userFunction.logoutUser(getApplicationContext());
-		                db.addUser(json_user.getString(KEY_NAME), 
-		                		json_user.getString(KEY_EMAIL), 
-		                		json_user.getString(KEY_NETWORK),
+		                db.addUser(jsonUser.getString(KEY_NAME), 
+		                		jsonUser.getString(KEY_EMAIL), 
+		                		jsonUser.getString(KEY_NETWORK),
 				                json.getString(KEY_UID), 
-				                json_user.getString(KEY_CREATED_AT));                 
+				                jsonUser.getString(KEY_CREATED_AT));                 
 
 		                // set up the network table in the SQLite Database
-		                new GetNetworkInfoTask().execute(json_user.getString(KEY_NETWORK));
+		                new GetNetworkInfoTask().execute(jsonUser.getString(KEY_NETWORK));
 		                
 		                // Launch Dashboard Screen
 		                Intent dashboard = new Intent(getApplicationContext(), 
@@ -178,15 +180,25 @@ public class LoginActivity extends ActionBarActivity
 	    			if (Integer.parseInt(res) == 1)
 	    			{
 	    				// network data successfully gotten
-		                DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-		                JSONObject json_network = json.getJSONObject("network");
+//		                db = new DatabaseHandler(getApplicationContext());
+		                JSONObject jsonNetwork = json.getJSONObject("network");
 
 		                NetworkFunctions networkFunction = new NetworkFunctions();
 		                networkFunction.clearNetwork(getApplicationContext());
-		                db.addNetwork(json_network.getString(DatabaseHandler.KEY_DOMAIN_STRING),
-		                		json_network.getString(DatabaseHandler.KEY_NETWORK_NAME), 
-		                		json_network.getString(DatabaseHandler.KEY_DEFAULT_MEETING_POINT),
-				                json_network.getString(DatabaseHandler.KEY_DESTINATION_LIST));
+		                
+		                db.addNetwork(
+		                		jsonNetwork.getString(DatabaseHandler.KEY_DOMAIN_STRING),
+		                		jsonNetwork.getString(DatabaseHandler.KEY_NETWORK_NAME), 
+		                		jsonNetwork.getString(DatabaseHandler.KEY_DEFAULT_MEETING_POINT),
+				                jsonNetwork.getString(DatabaseHandler.KEY_DESTINATION_LIST)
+				                );
+		                
+		                Log.v("Testing", "Default meeting point: " + 
+				                jsonNetwork.getString(DatabaseHandler.KEY_DEFAULT_MEETING_POINT));
+		                Log.v("Testing", "Domain name: " + 
+				                jsonNetwork.getString(DatabaseHandler.KEY_DOMAIN_STRING));
+		                Log.v("Testing", "Default meeting point: " + 
+				                jsonNetwork.getString(DatabaseHandler.KEY_DEFAULT_MEETING_POINT));
 	    			}
 	    			else
 	    			{
