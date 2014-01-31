@@ -41,7 +41,7 @@
             android:label="@string/dashboard_activity_title" >
         </activity>
         <activity
-            android:name="edu.columbia.enp2111.rallypoint.WhenWhereActivity"
+            android:name="edu.columbia.enp2111.rallypoint.NewGroupActivity"
             android:label="@string/title_activity_when_where"
             android:parentActivityName="edu.columbia.enp2111.rallypoint.DashboardActivity" >
 

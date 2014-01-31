@@ -41,7 +41,7 @@ public class NetworkFunctions
     {
         // Building parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(Constants.KEY_TAG, TAG_GET_NETWORK_INFO));
+        params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_GET_NETWORK_INFO));
         params.add(new BasicNameValuePair(KEY_NETWORK, network));
         JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
         return json;

@@ -15,8 +15,21 @@ import org.json.JSONObject;
 
 public class GroupFunctions
 {
-    public static final String CREATE_GROUP_TAG = "create_group";
-    public static final String GET_GROUPS_TAG = "get_groups";
+	/* tags for what index.php should do: 
+	 * NOTE: If making changes to these constants, changes must be made on
+	 * the API_URL's index.php file, too.
+	 */
+	public static final String TAG_CREATE_GROUP = "create_group";
+    public static final String TAG_GET_GROUPS = "get_groups";
+    
+    // keys for passing values
+    public static final String KEY_DATETIME = "departure_date_time";
+    public static final String KEY_DESTINATION = "destination";
+    public static final String KEY_OWNER_UID = "owner_uid";
+    public static final String KEY_MEMBER1_UID = "member_1";
+    public static final String KEY_MEMBER2_UID = "member_2";
+    public static final String KEY_MEMBER3_UID = "member_3";
+    public static final String KEY_GROUP_CREATED_AT = "created_at";
 	
 	private JSONParser jsonParser;
     
@@ -35,10 +48,10 @@ public class GroupFunctions
     {
         // Building parameters. Mapping to constants
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(Constants.KEY_TAG, CREATE_GROUP_TAG));
-        params.add(new BasicNameValuePair(Constants.KEY_DATETIME, datetime));
-        params.add(new BasicNameValuePair(Constants.KEY_DESTINATION, destination));
-        params.add(new BasicNameValuePair(Constants.KEY_OWNER_UID, userID));
+        params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_CREATE_GROUP));
+        params.add(new BasicNameValuePair(KEY_DATETIME, datetime));
+        params.add(new BasicNameValuePair(KEY_DESTINATION, destination));
+        params.add(new BasicNameValuePair(KEY_OWNER_UID, userID));
         JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
         return json;
     }
@@ -51,7 +64,7 @@ public class GroupFunctions
     public JSONObject getAllGroups()
     {
     	List<NameValuePair> params = new ArrayList<NameValuePair>();
-    	params.add(new BasicNameValuePair(Constants.KEY_TAG, GET_GROUPS_TAG));
+    	params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_GET_GROUPS));
     	params.add(new BasicNameValuePair("search_params", "all"));
     	JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
     	return json;

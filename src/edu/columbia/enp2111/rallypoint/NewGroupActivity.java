@@ -18,8 +18,8 @@ import android.widget.TextView;
 /**
  * This class manages the activity wherein the user selects the destination
  * and the departure date and time in order to create a new group. 
- * The class then connects to the database and uploads these values into
- * the corresponding table.
+ * The class also handles connecting to the database and pushing the user-
+ * provided values onto the corresponding table.
  * 
  * @author Emily Pakulski
  *
@@ -27,22 +27,23 @@ import android.widget.TextView;
 
 /* has to extend FragmentActivity because:
  * stackoverflow.com/questions/13121432/the-method-is-getsupportfragmentmanager-is-unsuported */
-public class WhenWhereActivity extends FragmentActivity
+public class NewGroupActivity extends FragmentActivity
 {
 	public static final String KEY_CONFIRMATION_MESSAGE = "confirmation_message"; 
+	private static String KEY_SUCCESS = "success";
 	
+	// dialogs
+	private AlertDialog destinationDialog;
 	private DialogFragment dateFragment;
 	private DialogFragment timeFragment;
 	
+	// TextViews
 	private TextView meetingPoint;
 	private TextView timeView;
 	private TextView dateView;
-
-	private static String KEY_SUCCESS = "success";
 	
+	// functionality
 	private UserFunctions userFunctions;
-	
-	AlertDialog destinationDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -52,11 +53,12 @@ public class WhenWhereActivity extends FragmentActivity
 		
         // Check login status in database
         if (userFunctions.isUserLoggedIn(getApplicationContext()))
+//        if (1 == 1)
         {
         	// user already logged in show databoard
             setContentView(R.layout.activity_when_where);
             TextView linkLogout = (TextView) findViewById(R.id.link_to_logout);
-             
+            
             linkLogout.setOnClickListener(new View.OnClickListener()
             {     
                 public void onClick(View view)
@@ -146,7 +148,7 @@ public class WhenWhereActivity extends FragmentActivity
 			Log.v("Testing", userID);
 			String taxiDateTime = taxiDate + " " + taxiTime;
 			// Put all the values from the TextViews into the database
-			new MyAsyncTask().execute(taxiDateTime, destination, userID);
+			new CreateGroupTask().execute(taxiDateTime, destination, userID);
 		}
 	}
 	
@@ -157,7 +159,7 @@ public class WhenWhereActivity extends FragmentActivity
 		return true;
 	}
 	
-	private class MyAsyncTask extends AsyncTask<String, Void, JSONObject>
+	private class CreateGroupTask extends AsyncTask<String, Void, JSONObject>
 	{   
 	    // pass date and time as strings
 		// http://stackoverflow.com/questions/12120433/php-mysql-insert-date-format

@@ -69,7 +69,7 @@
 	       android:drawableLeft="@drawable/ic_action_new_event"
 	       android:background="@drawable/pink_button"
 	       android:text="@string/button_new_from_school_trip"
-	       android:onClick="createFromSchoolGroup"
+	       android:onClick="createFromCampusGroup"
 	    />
 	
 	    <Button
@@ -79,6 +79,7 @@
 	       android:drawableLeft="@drawable/ic_action_new_event"
 	       android:background="@drawable/pink_button"
 	       android:text="@string/button_new_to_school_trip"
+	       android:onClick="createToCampusGroup"
 	    />
 	    
 	</LinearLayout>

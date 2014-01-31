@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
  
 
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -19,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
  
 
+
 import android.util.Log;
 
 /**
@@ -29,8 +31,10 @@ import android.util.Log;
 
 public class JSONParser 
 { 
-	// location of the API for the whole program
+	// location of the API for the whole application
 	public static final String API_URL = "http://10.0.2.2/taxi_project/api/";
+	
+	public static final String KEY_TAG = "tag";
 	
 	static InputStream is = null;
     static JSONObject jObj = null;
@@ -69,7 +73,7 @@ public class JSONParser
             }
             is.close();
             json = sb.toString();
-//            Log.v("Testing", json); // TODO
+            Log.v("Testing", json); // TODO
             Log.e("JSON", json);
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());

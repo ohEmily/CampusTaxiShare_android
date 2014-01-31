@@ -24,8 +24,8 @@ public class SingleGroupActivity extends Activity
         // getting intent data
         Intent previousActivity = getIntent();
         // Get JSON values from previous intent
-        String destination = previousActivity.getStringExtra(Constants.KEY_DESTINATION);
-        String datetime = previousActivity.getStringExtra(Constants.KEY_DATETIME);
+        String destination = previousActivity.getStringExtra(GroupFunctions.KEY_DESTINATION);
+        String datetime = previousActivity.getStringExtra(GroupFunctions.KEY_DATETIME);
         // Displaying all values on the screen
         TextView labelDestination = (TextView) findViewById(R.id.name_label);
         TextView labelDatetime = (TextView) findViewById(R.id.email_label);

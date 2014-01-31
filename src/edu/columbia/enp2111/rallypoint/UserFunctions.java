@@ -11,14 +11,24 @@ package edu.columbia.enp2111.rallypoint;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+
 import android.content.Context;
+import android.util.Log;
 
 public class UserFunctions
 {     
-    private JSONParser jsonParser;
+	/* tags for what index.php should do: 
+	 * NOTE: If making changes to these constants, changes must be made on
+	 * the API_URL's index.php file, too.
+	 */
+    public static final String LOGIN_USER_TAG = "login";
+    public static final String REGISTER_USER_TAG = "register";
+	
+	private JSONParser jsonParser;
 
     /** Constructor. */
     public UserFunctions()
@@ -35,9 +45,9 @@ public class UserFunctions
     {
         // Building parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(Constants.KEY_TAG, Constants.LOGIN_USER_TAG));
-        params.add(new BasicNameValuePair("email", email));
-        params.add(new BasicNameValuePair("password", password));
+        params.add(new BasicNameValuePair(JSONParser.KEY_TAG, LOGIN_USER_TAG));
+        params.add(new BasicNameValuePair(DatabaseHandler.KEY_EMAIL, email));
+        params.add(new BasicNameValuePair(DatabaseHandler.KEY_PASSWORD, password));
         JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
         return json;
     }
@@ -53,11 +63,11 @@ public class UserFunctions
     {
         // Building parameters
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair(Constants.KEY_TAG, Constants.REGISTER_USER_TAG));
-        params.add(new BasicNameValuePair("name", name));
-        params.add(new BasicNameValuePair("email", email));
-        params.add(new BasicNameValuePair("network", network));
-        params.add(new BasicNameValuePair("password", password));
+        params.add(new BasicNameValuePair(JSONParser.KEY_TAG, REGISTER_USER_TAG));
+        params.add(new BasicNameValuePair(DatabaseHandler.KEY_NAME, name));
+        params.add(new BasicNameValuePair(DatabaseHandler.KEY_EMAIL, email));
+        params.add(new BasicNameValuePair(DatabaseHandler.KEY_NETWORK, network));
+        params.add(new BasicNameValuePair(DatabaseHandler.KEY_PASSWORD, password));
         // getting JSON Object
         JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
         return json; // return json
@@ -70,12 +80,14 @@ public class UserFunctions
      * */
     public boolean isUserLoggedIn(Context context)
     {
-        DatabaseHandler db = new DatabaseHandler(context);
+    	Log.v("Testing", "Is the user logged in?");
+    	DatabaseHandler db = new DatabaseHandler(context);
         int count = db.getLoginRowCount();
         if(count > 0) // user logged in
         {
         	return true;
         }
+        Log.v("Testing", "no the user isn't logged in");
         return false;
     }
 
@@ -84,7 +96,7 @@ public class UserFunctions
     {
     	DatabaseHandler db = new DatabaseHandler(context);
     	HashMap<String, String> user = db.getUserDetails();
-    	return user.get("uid");
+    	return user.get(DatabaseHandler.KEY_UID);
     }
     
     /** Returns this user's name. */
@@ -92,7 +104,7 @@ public class UserFunctions
     {
     	DatabaseHandler db = new DatabaseHandler(context);
     	HashMap<String, String> user = db.getUserDetails();
-    	return user.get("name");
+    	return user.get(DatabaseHandler.KEY_NAME);
     }
     
     /** Returns this user's email. */
@@ -100,7 +112,7 @@ public class UserFunctions
     {
     	DatabaseHandler db = new DatabaseHandler(context);
     	HashMap<String, String> user = db.getUserDetails();
-    	return user.get("email");
+    	return user.get(DatabaseHandler.KEY_EMAIL);
     }
     
     /** Returns this user's network. */

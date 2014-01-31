@@ -29,15 +29,19 @@ public class DatabaseHandler extends SQLiteOpenHelper
  
     private static final String DATABASE_NAME = "taxi_app";
 
+    /** Note: constants must be changed server-side on the database as well as
+     * in the Android Application Project. */
     /* Login table specific constants */
     private static final String TABLE_LOGIN = "login";
+    
     // Login table column names
-    private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "name";
-    private static final String KEY_EMAIL = "email";
-    private static final String KEY_NETWORK = "network";
-    private static final String KEY_UID = "uid";
-    private static final String KEY_CREATED_AT = "created_at"; 
+    public static final String KEY_UNIQUE_ID = "unique_id";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_PASSWORD = "password";
+    public static final String KEY_NETWORK = "network";
+    public static final String KEY_UID = "uid";
+    public static final String KEY_CREATED_AT = "created_at"; 
     
     /* Network table specific constants */
     private static final String TABLE_NETWORK = "network";
@@ -61,7 +65,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db)
     {
         String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_LOGIN + "("
-                + KEY_ID + " INTEGER PRIMARY KEY,"
+                + KEY_UNIQUE_ID + " INTEGER PRIMARY KEY,"
                 + KEY_NAME + " TEXT,"
                 + KEY_EMAIL + " TEXT UNIQUE,"
                 + KEY_NETWORK + " TEXT,"
@@ -70,7 +74,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
         db.execSQL(CREATE_LOGIN_TABLE);
         
         String CREATE_NETWORK_TABLE = "CREATE TABLE " + TABLE_NETWORK + "("
-                + KEY_ID + " INTEGER PRIMARY KEY,"
+                + KEY_UNIQUE_ID + " INTEGER PRIMARY KEY,"
                 + KEY_DOMAIN_STRING + " TEXT,"
                 + KEY_NETWORK_NAME + " TEXT,"
                 + KEY_DEFAULT_MEETING_POINT + " TEXT,"
@@ -97,9 +101,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
     	values.put(KEY_DEFAULT_MEETING_POINT, meetingPoint);
     	values.put(KEY_DESTINATION_LIST, destinationList);
     	
-    	Log.v("Testing", "AddNetwork in DBHandler: " + domainString);
-    	
-    	db.insert(TABLE_NETWORK, null, values);
+    	db.insert(TABLE_NETWORK, null, values); // insert row
     	db.close();
     }
     
@@ -135,18 +137,23 @@ public class DatabaseHandler extends SQLiteOpenHelper
     /**
      * Storing user details in database (called when user logs in).
      * */
-    public void addUser(String name, String email, String network, String uid, String created_at)
+    public void addUser(String name, String email, String network, String uid,
+    		String created_at)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         // creating row containing user data
         ContentValues values = new ContentValues();
+        
+        Log.v("Testing", "Values to be inserted: " + name + " " + email + " " + 
+        		network + " " + uid + " " + created_at);
         values.put(KEY_NAME, name); 
         values.put(KEY_EMAIL, email);
         values.put(KEY_NETWORK, network); 
         values.put(KEY_UID, uid);
         values.put(KEY_CREATED_AT, created_at);
         
-        db.insert(TABLE_LOGIN, null, values); // insert row
+        long row_tag = db.insert(TABLE_LOGIN, null, values); // insert row
+        Log.v("Testing", "login row: " + row_tag);
         db.close(); // Closing database connection
     }
      
@@ -166,11 +173,11 @@ public class DatabaseHandler extends SQLiteOpenHelper
         // fill hashmap "user"
         if(cursor.getCount() > 0)
         {
-            user.put("name", cursor.getString(1));
-            user.put("email", cursor.getString(2));
-            user.put("network", cursor.getString(3)); 
-            user.put("uid", cursor.getString(4));
-            user.put("created_at", cursor.getString(5));
+            user.put(KEY_NAME, cursor.getString(1));
+            user.put(KEY_EMAIL, cursor.getString(2));
+            user.put(KEY_NETWORK, cursor.getString(3)); 
+            user.put(KEY_UID, cursor.getString(4));
+            user.put(KEY_CREATED_AT, cursor.getString(5));
         }
         cursor.close();
         db.close();
@@ -189,6 +196,7 @@ public class DatabaseHandler extends SQLiteOpenHelper
         int rowCount = cursor.getCount();
         db.close();
         cursor.close();
+        Log.v("Testing", "login row count: " + rowCount);
         return rowCount;
     }
      

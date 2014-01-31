@@ -78,8 +78,8 @@ public class SearchActivity extends ListActivity
 				// Starting single group activity
 				Intent singleGroup = new Intent(getApplicationContext(),
 						SingleGroupActivity.class);
-				singleGroup.putExtra(Constants.KEY_DESTINATION, destination);
-				singleGroup.putExtra(Constants.KEY_DATETIME, datetime);
+				singleGroup.putExtra(GroupFunctions.KEY_DESTINATION, destination);
+				singleGroup.putExtra(GroupFunctions.KEY_DATETIME, datetime);
 				startActivity(singleGroup);
 			}
 		});
@@ -126,7 +126,7 @@ public class SearchActivity extends ListActivity
 		{			
 			// adding params: telling JSON what type of request it'll be
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-	        params.add(new BasicNameValuePair(Constants.KEY_TAG, GroupFunctions.GET_GROUPS_TAG));
+	        params.add(new BasicNameValuePair(JSONParser.KEY_TAG, GroupFunctions.TAG_GET_GROUPS));
 			
 			// Creating a JSONParser
 			JSONParser jp = new JSONParser();
@@ -142,8 +142,8 @@ public class SearchActivity extends ListActivity
 				{
 					JSONObject aGroup = all_groups.getJSONObject(i);
 					
-					String destination = aGroup.getString(Constants.KEY_DESTINATION);
-					String datetime = aGroup.getString(Constants.KEY_DATETIME);
+					String destination = aGroup.getString(GroupFunctions.KEY_DESTINATION);
+					String datetime = aGroup.getString(GroupFunctions.KEY_DATETIME);
 					setDateAndTime(datetime);
 					
 					// One HashMap per group of taxi sharers

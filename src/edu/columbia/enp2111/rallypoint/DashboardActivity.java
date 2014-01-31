@@ -29,8 +29,8 @@ public class DashboardActivity extends Activity
 		userFunctions = new UserFunctions(); 
 		
         // Check login status in database
-        if (userFunctions.isUserLoggedIn(getApplicationContext()))
-        {
+		if (userFunctions.isUserLoggedIn(getApplicationContext()))
+		{
         	// user already logged in, so show databoard
         	setContentView(R.layout.activity_dashboard);
             
@@ -54,7 +54,7 @@ public class DashboardActivity extends Activity
     		
     		// if user just created a new taxi group, show confirmation message
             Intent previousScreen = getIntent();
-            String message = previousScreen.getStringExtra(WhenWhereActivity.KEY_CONFIRMATION_MESSAGE);
+            String message = previousScreen.getStringExtra(NewGroupActivity.KEY_CONFIRMATION_MESSAGE);
             if (message != null)
             {
             	TextView messageView = (TextView) findViewById(R.id.extra_message);
@@ -92,11 +92,21 @@ public class DashboardActivity extends Activity
     			SearchActivity.class));
 	}
 	
-	/** Called when the relevant button is pressed. */
-	public void createFromSchoolGroup(View v)
+	/** Called when the relevant button is pressed: creates a new taxi share
+	 * group going from campus. */
+	public void createFromCampusGroup(View v)
 	{
     	DashboardActivity.this.startActivity(new Intent(DashboardActivity.this, 
-    			WhenWhereActivity.class));
+    			NewGroupActivity.class));
+	}
+	
+	/** Called when the relevant button is pressed: creates a new taxi share
+	 * group going back to campus. */
+	public void createToCampusGroup(View v)
+	{
+		Intent toSchoolGroup = new Intent(DashboardActivity.this, 
+    			NewGroupActivity.class);
+		startActivity(toSchoolGroup);
 	}
 	
 	@Override
