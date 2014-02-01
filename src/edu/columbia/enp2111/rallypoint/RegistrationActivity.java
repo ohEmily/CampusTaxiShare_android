@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
-
-//handling registration event
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,13 +30,6 @@ public class RegistrationActivity extends Activity {
 	
     // JSON Response node names
     private static String KEY_SUCCESS = "success";
-//    private static String KEY_ERROR = "error";
-//    private static String KEY_ERROR_MSG = "error_msg";
-    private static String KEY_UID = "uid";
-    private static String KEY_NAME = "name";
-    private static String KEY_EMAIL = "email";
-    private static String KEY_NETWORK = "network";
-    private static String KEY_CREATED_AT = "created_at";
 
     // Activity page elements
     TextView registerErrorMsg;
@@ -48,7 +39,6 @@ public class RegistrationActivity extends Activity {
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registration);
-		Log.v("Testing", "opened registration activity");
 		
 		final TextView toLogin = (TextView) this.findViewById(R.id.link_to_login);
 		toLogin.setOnClickListener(new OnClickListener()
@@ -61,8 +51,11 @@ public class RegistrationActivity extends Activity {
 	    });
 	}
 	
-	// sources: http://stackoverflow.com/questions/4531396/get-value-of-a-edit-text-field
-	// http://developer.android.com/training/basics/firstapp/starting-activity.html
+
+	/**
+	 * Called when the user submits all the fields; checks that .
+	 * @param view
+	 */
 	public void submitRegistrationFields(View view)
 	{
 		final EditText emailField = (EditText) findViewById(R.id.emailEditTextRegistration);
@@ -76,15 +69,14 @@ public class RegistrationActivity extends Activity {
 		
 		if (setFirstName(tempName) && setEmailAndNetwork(tempEmail) && setPassword(tempPass))
 		{
-	        // testing
-	        Log.v("Testing", "Email: " + email);
-			Log.v("Testing", "Name: " + firstName);
-			Log.v("Testing", "Network: " + network); 
-			Log.v("Testing", "Password: " + password);
-			new MyAsyncTask().execute(firstName, email, network, password);
+			new RegisterAndNetworkTask().execute(firstName, email, network, password);
 		}
 	}
 	
+	/**
+	 * Sets the user's first name if the length is appropriate.
+	 * @param the String the user included
+	 */
 	private boolean setFirstName(String name)
 	{
 		int length = name.length();
@@ -146,28 +138,26 @@ public class RegistrationActivity extends Activity {
 		return true;
 	}
 
-//	from http://stackoverflow.com/questions/13136539/caused-by-android-os-networkonmainthreadexception
-//	http://stackoverflow.com/questions/6343166/android-os-networkonmainthreadexception
-//	http://pastebin.com/TbdAwS5g
-	private class MyAsyncTask extends AsyncTask<String, Void, JSONObject> {
+	/** 
+	 * Deals with registering the user and setting the new user's network.
+	 * @author Emily Pakulski
+	 *
+	 */
+	private class RegisterAndNetworkTask extends AsyncTask<String, Void, String> {
 	       
-        protected JSONObject doInBackground(String ... params)
+        protected String doInBackground(String ... params)
         {
-                UserFunctions userFunction = new UserFunctions();
-                if (params.length != 4)
-                        return null;
-                JSONObject json = userFunction.registerUser(params[0], params[1], params[2], params[3]);
-                return json;
-        }
-       
-        protected void onPostExecute(JSONObject json)
-        {
+        	String errorSource = null; // by default, there is no error
+        	
+        	UserFunctions userFunction = new UserFunctions();
+            if (params.length != 4)
+                errorSource = "Please fill in all the fields.";
+            JSONObject json = userFunction.registerUser(params[0], params[1], params[2], params[3]);
+
 	        try 
 	        {
 	        	if (json != null && json.getString(KEY_SUCCESS) != null)
 	            {
-	                Log.v("Testing", "onPostExecute: json != null");
-	        		registerErrorMsg.setText("");
 	                String res = json.getString(KEY_SUCCESS);
 	                if(Integer.parseInt(res) == 1) // user successfully registered
 	                {
@@ -175,19 +165,17 @@ public class RegistrationActivity extends Activity {
 	                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 	                    JSONObject json_user = json.getJSONObject("user");
 	                    // Clear all previous data in database
-	                    UserFunctions userFunction = new UserFunctions();
 	                    userFunction.logoutUser(getApplicationContext());
-	                    db.addUser(json_user.getString(KEY_NAME), json_user.getString(KEY_EMAIL), json_user.getString(KEY_NETWORK), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT));                  
-	                    // Launch Dashboard Screen
-	                    Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
-	                    // Close all views before launching Dashboard
-	                    dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	                    startActivity(dashboard);
-	                    finish(); // Close Registration Activity
+	                    
+	                    db.addUser(json_user.getString(DatabaseHandler.KEY_NAME), 
+	                    		json_user.getString(DatabaseHandler.KEY_EMAIL), 
+	                    		json_user.getString(DatabaseHandler.KEY_NETWORK), 
+	                    		json.getString(DatabaseHandler.KEY_UID), 
+	                    		json_user.getString(DatabaseHandler.KEY_CREATED_AT));
 	                }
 	                else
 	                {
-	                    registerErrorMsg.setText(R.string.error_message_registration);
+//	                    registerErrorMsg.setText(R.string.error_message_registration);
 	                }
 	            }
 	        	else
@@ -199,6 +187,57 @@ public class RegistrationActivity extends Activity {
 	        {
 	            e.printStackTrace();
 	        }
+	        
+	        /** network table */
+	        NetworkFunctions networkFunction = new NetworkFunctions();
+	        JSONObject jsonNetworkObject = networkFunction.getUserNetwork(network);
+	        
+	        try
+	    	{
+	    		if (jsonNetworkObject != null && jsonNetworkObject.getString(KEY_SUCCESS) != null)
+	    		{
+	    			String res = jsonNetworkObject.getString(KEY_SUCCESS);
+	    			if (Integer.parseInt(res) == 1)
+	    			{
+	    				// network data successfully gotten
+	    				DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+		                JSONObject jsonNetwork = jsonNetworkObject.getJSONObject("network");
+
+		                networkFunction.clearNetwork(getApplicationContext());
+		                
+		                db.addNetwork(
+		                		jsonNetwork.getString(DatabaseHandler.KEY_DOMAIN_STRING),
+		                		jsonNetwork.getString(DatabaseHandler.KEY_NETWORK_NAME),
+		                		jsonNetwork.getString(DatabaseHandler.KEY_CAMPUS_PLACES),
+				                jsonNetwork.getString(DatabaseHandler.KEY_NON_CAMPUS_PLACES)
+				                );
+	    			}
+	    			else
+	    			{
+	    				// Error - this network doesn't exist
+//	    				loginErrorMsg.setText(R.string.error_message_login);
+	    			}
+	    		}
+	    	} 
+		    catch (JSONException e)
+		    {
+//		        loginErrorMsg.setText(R.string.error_message_server);
+		    	e.printStackTrace();
+		    }	        
+	        
+	        return errorSource;
+        }
+        
+        protected void onPostExecute(String error)
+        {
+        	registerErrorMsg.setText(error);
+        	
+        	// Launch Dashboard Screen
+            Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
+            // Close all views before launching Dashboard
+            dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(dashboard);
+            finish(); // Close Registration Activity
         }
 	}
 }

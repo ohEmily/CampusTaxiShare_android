@@ -7,7 +7,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
  
 /**
  * Database handler that deals with the temporary login table, which allows
@@ -48,8 +47,8 @@ public class DatabaseHandler extends SQLiteOpenHelper
     // column names
     public static final String KEY_DOMAIN_STRING = "domain_string";
     public static final String KEY_NETWORK_NAME = "network_name";
-    public static final String KEY_DEFAULT_MEETING_POINT = "default_meeting_point";
-    public static final String KEY_DESTINATION_LIST = "destination_list";
+    public static final String KEY_CAMPUS_PLACES = "campus_places";
+    public static final String KEY_NON_CAMPUS_PLACES = "non_campus_places";
     
     /** Constructor. */
     public DatabaseHandler(Context context)
@@ -77,8 +76,8 @@ public class DatabaseHandler extends SQLiteOpenHelper
                 + KEY_UNIQUE_ID + " INTEGER PRIMARY KEY,"
                 + KEY_DOMAIN_STRING + " TEXT,"
                 + KEY_NETWORK_NAME + " TEXT,"
-                + KEY_DEFAULT_MEETING_POINT + " TEXT,"
-                + KEY_DESTINATION_LIST + " TEXT" + ");";
+                + KEY_CAMPUS_PLACES + " TEXT,"
+                + KEY_NON_CAMPUS_PLACES + " TEXT" + ");";
         db.execSQL(CREATE_NETWORK_TABLE);
     }
 
@@ -87,19 +86,19 @@ public class DatabaseHandler extends SQLiteOpenHelper
      * 
      * @param domainString
      * @param networkName
-     * @param meetingPoint
-     * @param destinationList
+     * @param campusPlaces
+     * @param nonCampusPlaces
      */
     public void addNetwork(String domainString, String networkName, 
-    		String meetingPoint, String destinationList)
+    		String campusPlaces, String nonCampusPlaces)
     {
     	SQLiteDatabase db = this.getWritableDatabase();
     	// creating row containing network data
     	ContentValues values = new ContentValues();
     	values.put(KEY_DOMAIN_STRING, domainString);
     	values.put(KEY_NETWORK_NAME, networkName);
-    	values.put(KEY_DEFAULT_MEETING_POINT, meetingPoint);
-    	values.put(KEY_DESTINATION_LIST, destinationList);
+    	values.put(KEY_CAMPUS_PLACES, campusPlaces);
+    	values.put(KEY_NON_CAMPUS_PLACES, nonCampusPlaces);
     	
     	db.insert(TABLE_NETWORK, null, values); // insert row
     	db.close();
@@ -122,13 +121,10 @@ public class DatabaseHandler extends SQLiteOpenHelper
         {
             network.put(KEY_DOMAIN_STRING, cursor.getString(1));
             network.put(KEY_NETWORK_NAME, cursor.getString(2));
-            network.put(KEY_DEFAULT_MEETING_POINT, cursor.getString(3)); 
-            network.put(KEY_DESTINATION_LIST, cursor.getString(4));
+            network.put(KEY_CAMPUS_PLACES, cursor.getString(3)); 
+            network.put(KEY_NON_CAMPUS_PLACES, cursor.getString(4));
         }
-        if (network.get(KEY_NETWORK_NAME) == null)
-        	Log.v("Testing", "DBHandler: Network_name is null");
-//        Log.v("Testing", (String) network.get(KEY_NETWORK_NAME));
-        
+         
         cursor.close();
         db.close();
         return network;
@@ -143,17 +139,14 @@ public class DatabaseHandler extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         // creating row containing user data
         ContentValues values = new ContentValues();
-        
-        Log.v("Testing", "Values to be inserted: " + name + " " + email + " " + 
-        		network + " " + uid + " " + created_at);
+
         values.put(KEY_NAME, name); 
         values.put(KEY_EMAIL, email);
         values.put(KEY_NETWORK, network); 
         values.put(KEY_UID, uid);
         values.put(KEY_CREATED_AT, created_at);
         
-        long row_tag = db.insert(TABLE_LOGIN, null, values); // insert row
-        Log.v("Testing", "login row: " + row_tag);
+        db.insert(TABLE_LOGIN, null, values); // insert row
         db.close(); // Closing database connection
     }
      
@@ -196,7 +189,6 @@ public class DatabaseHandler extends SQLiteOpenHelper
         int rowCount = cursor.getCount();
         db.close();
         cursor.close();
-        Log.v("Testing", "login row count: " + rowCount);
         return rowCount;
     }
      
@@ -208,6 +200,20 @@ public class DatabaseHandler extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_LOGIN, null, null); // Delete all rows
         db.delete(TABLE_NETWORK, null, null);
+        db.close();
+    }
+    
+    public void resetLoginTable()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_LOGIN, null, null); // Delete all rows
+        db.close();
+    }
+    
+    public void resetNetworkTable()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NETWORK, null, null); // Delete all rows
         db.close();
     }
     

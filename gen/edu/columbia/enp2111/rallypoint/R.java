@@ -1014,7 +1014,7 @@ containing a value of this type.
         public static final int pink_button=0x7f020068;
     }
     public static final class id {
-        public static final int LabelMyDepartureDate=0x7f05005b;
+        public static final int LabelMyDepartureDate=0x7f050052;
         public static final int action_bar=0x7f05001c;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05001b;
@@ -1031,9 +1031,9 @@ containing a value of this type.
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
-        public static final int bigLogo=0x7f05004b;
+        public static final int bigLogo=0x7f050056;
         public static final int button_send=0x7f050049;
-        public static final int button_send_registration=0x7f050050;
+        public static final int button_send_registration=0x7f05005b;
         public static final int campus_network_name=0x7f05003f;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
@@ -1045,8 +1045,8 @@ containing a value of this type.
         public static final int dropdown=0x7f05000f;
         public static final int edit_query=0x7f050030;
         public static final int emailEditTextLogin=0x7f050046;
-        public static final int emailEditTextRegistration=0x7f05004d;
-        public static final int email_label=0x7f050053;
+        public static final int emailEditTextRegistration=0x7f050058;
+        public static final int email_label=0x7f05005e;
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
@@ -1060,34 +1060,34 @@ containing a value of this type.
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
         public static final int imageViewBanner=0x7f050045;
-        public static final int labelMyDepartureTime=0x7f05005d;
-        public static final int labelMyDestination=0x7f050059;
-        public static final int labelMyMeetingPoint=0x7f050057;
-        public static final int link_to_login=0x7f050051;
+        public static final int labelMyDepartureTime=0x7f050054;
+        public static final int labelMyDestination=0x7f050050;
+        public static final int labelMyMeetingPoint=0x7f05004e;
+        public static final int link_to_login=0x7f05005c;
         public static final int link_to_logout=0x7f050044;
         public static final int link_to_registration=0x7f05004a;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
         public static final int login_error=0x7f050048;
         public static final int middle=0x7f050012;
-        public static final int myDatePickerButton=0x7f050055;
-        public static final int myDepartureDate=0x7f05005c;
-        public static final int myDepartureTime=0x7f05005e;
-        public static final int myDestination=0x7f05005a;
-        public static final int myDestinationPickerButton=0x7f050054;
-        public static final int myMeetingPoint=0x7f050058;
-        public static final int myTimePickerButton=0x7f050056;
-        public static final int nameEditTextRegistration=0x7f05004c;
-        public static final int name_label=0x7f050052;
+        public static final int myDatePickerButton=0x7f05004c;
+        public static final int myDepartureDate=0x7f050053;
+        public static final int myDepartureTime=0x7f050055;
+        public static final int myDestination=0x7f050051;
+        public static final int myDestinationPickerButton=0x7f05004b;
+        public static final int myMeetingPoint=0x7f05004f;
+        public static final int myTimePickerButton=0x7f05004d;
+        public static final int nameEditTextRegistration=0x7f050057;
+        public static final int name_label=0x7f05005d;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
         public static final int passEditTextLogin=0x7f050047;
-        public static final int passEditTextRegistration=0x7f05004e;
+        public static final int passEditTextRegistration=0x7f050059;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
         public static final int radio=0x7f05002f;
-        public static final int registration_error=0x7f05004f;
+        public static final int registration_error=0x7f05005a;
         public static final int searchGroupsButton=0x7f050040;
         public static final int search_badge=0x7f050032;
         public static final int search_bar=0x7f050031;
@@ -1166,10 +1166,10 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030016;
         public static final int activity_dashboard=0x7f030017;
         public static final int activity_login=0x7f030018;
-        public static final int activity_registration=0x7f030019;
-        public static final int activity_search=0x7f03001a;
-        public static final int activity_single_group=0x7f03001b;
-        public static final int activity_when_where=0x7f03001c;
+        public static final int activity_new_group=0x7f030019;
+        public static final int activity_registration=0x7f03001a;
+        public static final int activity_search=0x7f03001b;
+        public static final int activity_single_group=0x7f03001c;
         public static final int list_item=0x7f03001d;
         public static final int support_simple_spinner_dropdown_item=0x7f03001e;
     }
@@ -1228,15 +1228,16 @@ containing a value of this type.
          */
         public static final int app_name=0x7f0a000d;
         public static final int button_browse_groups=0x7f0a0027;
-        public static final int button_date=0x7f0a0031;
-        public static final int button_destination=0x7f0a0032;
+        public static final int button_date=0x7f0a0034;
+        public static final int button_destination=0x7f0a0036;
         public static final int button_login=0x7f0a0015;
         public static final int button_logout=0x7f0a002b;
+        public static final int button_meeting_point=0x7f0a0035;
         public static final int button_new_from_school_trip=0x7f0a0028;
         public static final int button_new_to_school_trip=0x7f0a0029;
         public static final int button_signup=0x7f0a001c;
-        public static final int button_submit=0x7f0a0035;
-        public static final int button_time=0x7f0a0030;
+        public static final int button_submit=0x7f0a0039;
+        public static final int button_time=0x7f0a0033;
         public static final int campus_name=0x7f0a000f;
         /**  Registration screen 
          */
@@ -1245,8 +1246,11 @@ containing a value of this type.
         /**  Dashboard 
          */
         public static final int dashboard_activity_title=0x7f0a0024;
-        public static final int departure=0x7f0a0033;
-        public static final int destination=0x7f0a002f;
+        public static final int departure=0x7f0a0037;
+        public static final int dialog_title_date=0x7f0a0031;
+        public static final int dialog_title_end_location=0x7f0a002f;
+        public static final int dialog_title_start_location=0x7f0a0030;
+        public static final int dialog_title_time=0x7f0a0032;
         public static final int error_message_invalid_edu_email=0x7f0a0020;
         public static final int error_message_login=0x7f0a0017;
         public static final int error_message_name_length=0x7f0a001f;
@@ -1268,10 +1272,10 @@ containing a value of this type.
          */
         public static final int settings_label=0x7f0a0011;
         public static final int summary=0x7f0a002d;
-        public static final int time=0x7f0a0034;
-        public static final int title_activity_search=0x7f0a0036;
-        public static final int title_activity_single_contact=0x7f0a0037;
-        /**  When/Where Activity 
+        public static final int time=0x7f0a0038;
+        public static final int title_activity_search=0x7f0a003a;
+        public static final int title_activity_single_contact=0x7f0a003b;
+        /**  New Group Activity 
          */
         public static final int title_activity_when_where=0x7f0a002c;
         /**  Login screen 

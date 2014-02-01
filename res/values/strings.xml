@@ -50,13 +50,17 @@
     <string name="confirmation_message">Confirmed! You made a new cab share group.</string>
     <string name="button_logout">Logout</string>
 
-    <!-- When/Where Activity -->
+    <!-- New Group Activity -->
     <string name="title_activity_when_where">Trip details</string>
     <string name="summary">Summary:</string>
     <string name="meeting_point"><b>Meeting point</b>:</string>
-    <string name="destination"><b>Taxi\'s destination</b>: </string>
+    <string name="dialog_title_end_location"><b>Destination:</b></string>
+    <string name="dialog_title_start_location"><b>Meeting point:</b></string>
+    <string name="dialog_title_date"><b>Set date:</b></string>
+    <string name="dialog_title_time"><b>Set time:</b></string>
     <string name="button_time">Select time</string>
     <string name="button_date">Select date</string>
+    <string name="button_meeting_point">Select meeting point</string>
     <string name="button_destination">Select destination</string>
     <string name="departure"><b>Taxi departure date</b>: </string>
     <string name="time"><b>Exact taxi departure time</b>: </string>

@@ -45,7 +45,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 //		// Create a new instance of DatePickerDialog and return it
 		DatePickerDialog dialog = new DatePickerDialog(getActivity(), 
 				this, todaysYear, todaysMonth, todaysDay);
-		dialog.setTitle(R.string.button_date);
+		dialog.setTitle(R.string.dialog_title_date);
 		return dialog;
 	}
 	

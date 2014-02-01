@@ -42,8 +42,10 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
 	{
 		// Create a new instance of TimePickerDialog and return it
-		return new TimePickerDialog(getActivity(), this, DEFAULT_HOUR, 
+		TimePickerDialog timePicker = new TimePickerDialog(getActivity(), this, DEFAULT_HOUR, 
 				DEFAULT_MINUTE,	DateFormat.is24HourFormat(getActivity()));
+		timePicker.setTitle(R.string.dialog_title_time);
+		return timePicker;
 	}
 		
 	/** Sets the values for time on the relevant TextView. */

@@ -61,7 +61,8 @@ public class SearchActivity extends ListActivity
 
 		ListView lv = getListView();
 
-		// Listview on item click listener
+		// Listview on item click listener. Called when you click any of the
+		// groups displayed -- opens that group's activity
 		lv.setOnItemClickListener(new OnItemClickListener()
 		{
 			@Override
@@ -144,6 +145,7 @@ public class SearchActivity extends ListActivity
 					
 					String destination = aGroup.getString(GroupFunctions.KEY_DESTINATION);
 					String datetime = aGroup.getString(GroupFunctions.KEY_DATETIME);
+					String ownerEmail = aGroup.getString(GroupFunctions.KEY_OWNER_EMAIL);
 					setDateAndTime(datetime);
 					
 					// One HashMap per group of taxi sharers
@@ -152,6 +154,7 @@ public class SearchActivity extends ListActivity
 					group_object.put(LIST_KEY_DESTINATION, destination);
 					group_object.put(LIST_KEY_DATE, stringDate);
 					group_object.put(LIST_KEY_TIME, stringTime);
+					group_object.put(GroupFunctions.KEY_OWNER_EMAIL, ownerEmail);
 					// adding group to group list
 					groupList.add(group_object);
 				}

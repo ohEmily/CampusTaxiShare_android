@@ -38,7 +38,8 @@ public class NewGroupActivity extends FragmentActivity
 	private DialogFragment timeFragment;
 	
 	// TextViews
-	private TextView meetingPoint;
+	private TextView startingLocation;
+	private TextView destination;
 	private TextView timeView;
 	private TextView dateView;
 	
@@ -53,12 +54,12 @@ public class NewGroupActivity extends FragmentActivity
 		
         // Check login status in database
         if (userFunctions.isUserLoggedIn(getApplicationContext()))
-//        if (1 == 1)
         {
         	// user already logged in show databoard
-            setContentView(R.layout.activity_when_where);
-            TextView linkLogout = (TextView) findViewById(R.id.link_to_logout);
+            setContentView(R.layout.activity_new_group);
             
+            // set logout link
+            TextView linkLogout = (TextView) findViewById(R.id.link_to_logout);
             linkLogout.setOnClickListener(new View.OnClickListener()
             {     
                 public void onClick(View view)
@@ -80,28 +81,51 @@ public class NewGroupActivity extends FragmentActivity
             finish(); // Closing dashboard screen
         }   
 	}
+
+	/**
+	 * Called when the "choose time" button is pressed; opens the dialog to 
+	 * choose a time without changing activity. 
+	 */
+	public void showStartLocationPickerDialog(View v)
+	{
+		NetworkFunctions networkFunction = new NetworkFunctions();
+		final String[] destinationOptions = networkFunction.getCampusPlaces(getApplicationContext());
+		
+		// Creating and Building the Dialog 
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.dialog_title_end_location); 
+		builder.setSingleChoiceItems(destinationOptions, -1, new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog, int item)
+			{   
+				startingLocation = (TextView) findViewById(R.id.myDestination);
+				startingLocation.setText(destinationOptions[item]);
+				destinationDialog.dismiss();    
+			}
+		});
+		destinationDialog = builder.create();
+		destinationDialog.show();
+	}
+	
 	
 	/**
 	 * Called when the "choose time" button is pressed; opens the dialog to 
 	 * choose a time without changing activity. 
 	 */
 	public void showDestinationPickerDialog(View v)
-	{		
-		// Strings to Show In Dialog with Radio Buttons
-		final CharSequence[] options = {"John F. Kennedy International Airport", "LaGuardia Airport","Newark Liberty International Airport"};
-		
-//		NetworkFunctions networkFunction = new NetworkFunctions();
-//		final String[] destinationOptions = networkFunction.getDestinations(getApplicationContext());
+	{
+		NetworkFunctions networkFunction = new NetworkFunctions();
+		final String[] destinationOptions = networkFunction.getNonCampusPlaces(getApplicationContext());
 		
 		// Creating and Building the Dialog 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.destination); 
-		builder.setSingleChoiceItems(options, -1, new DialogInterface.OnClickListener()
+		builder.setTitle(R.string.dialog_title_end_location); 
+		builder.setSingleChoiceItems(destinationOptions, -1, new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int item)
 			{   
-				meetingPoint = (TextView) findViewById(R.id.myDestination);
-				meetingPoint.setText(options[item]);
+				destination = (TextView) findViewById(R.id.myDestination);
+				destination.setText(destinationOptions[item]);
 				destinationDialog.dismiss();    
 			}
 		});
@@ -136,19 +160,21 @@ public class NewGroupActivity extends FragmentActivity
 	public void onSubmit(View v)
 	{
 		// TODO: double check that none of the values are null!
-		if (timeView.getText() != "" || dateView.getText() != "" || meetingPoint.getText() != "")
+		if (timeView.getText() != "" || dateView.getText() != "" || destination.getText() != "")
 		{
 			String taxiDate = ((DatePickerFragment) dateFragment).getDate();
 			String taxiTime = ((TimePickerFragment) timeFragment).getTime();
+			String startLocation = ((TextView) findViewById(R.id.myMeetingPoint)).getText().toString();
 			String destination = ((TextView) findViewById(R.id.myDestination)).getText().toString();
-			String userID = userFunctions.getID(getApplicationContext());
+			String ownerEmail = userFunctions.getEmail(getApplicationContext());
+			String network = userFunctions.getNetwork(getApplicationContext());
 			Log.v("Testing", "The time is " + taxiTime);
 			Log.v("Testing", "The date is " + taxiDate);
 			Log.v("Testing", "The destination is " + destination);
-			Log.v("Testing", userID);
+			Log.v("Testing", "The owner's email is: " + ownerEmail);
 			String taxiDateTime = taxiDate + " " + taxiTime;
 			// Put all the values from the TextViews into the database
-			new CreateGroupTask().execute(taxiDateTime, destination, userID);
+			new CreateGroupTask().execute(ownerEmail, network, taxiDateTime, startLocation, destination);
 		}
 	}
 	
@@ -165,9 +191,9 @@ public class NewGroupActivity extends FragmentActivity
 		// http://stackoverflow.com/questions/12120433/php-mysql-insert-date-format
 		protected JSONObject doInBackground(String ... params)
 	    {
-			// parameters: String datetime, String destination
+			// parameters: String datetime, String destination, String ownerEmail
 	    	GroupFunctions groupFunction = new GroupFunctions();
-	        JSONObject json = groupFunction.createGroup(params[0], params[1], params[2]);
+	        JSONObject json = groupFunction.createGroup(params[0], params[1], params[2], params[3], params[4]);
 	        return json;
 	    }
 	   

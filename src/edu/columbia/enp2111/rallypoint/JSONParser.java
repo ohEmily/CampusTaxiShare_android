@@ -32,7 +32,8 @@ import android.util.Log;
 public class JSONParser 
 { 
 	// location of the API for the whole application
-	public static final String API_URL = "http://10.0.2.2/taxi_project/api/";
+//	public static final String API_URL = "http://10.0.2.2/taxi_project/api/";
+	public static final String API_URL = "http://209.2.222.136/taxi_project/api/";
 	
 	public static final String KEY_TAG = "tag";
 	
@@ -63,25 +64,32 @@ public class JSONParser
             e.printStackTrace();
         }
  
-        try {
+        try 
+        {
             BufferedReader reader = new BufferedReader(new 
             		InputStreamReader(is, "iso-8859-1"), 8);
             StringBuilder sb = new StringBuilder();
             String line = null;
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) 
+            {
                 sb.append(line + "n");
             }
             is.close();
             json = sb.toString();
-            Log.v("Testing", json); // TODO
+//            Log.v("Testing", json); // TODO
             Log.e("JSON", json);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }
         // try parse the string to a JSON object
-        try {
+        try
+        {
             jObj = new JSONObject(json);           
-        } catch (JSONException e) {
+        }
+        catch (JSONException e)
+        {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
         return jObj; // return JSON String

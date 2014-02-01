@@ -17,7 +17,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.util.Log;
 
 public class UserFunctions
 {     
@@ -80,14 +79,12 @@ public class UserFunctions
      * */
     public boolean isUserLoggedIn(Context context)
     {
-    	Log.v("Testing", "Is the user logged in?");
     	DatabaseHandler db = new DatabaseHandler(context);
         int count = db.getLoginRowCount();
         if(count > 0) // user logged in
         {
         	return true;
         }
-        Log.v("Testing", "no the user isn't logged in");
         return false;
     }
 
@@ -107,25 +104,19 @@ public class UserFunctions
     	return user.get(DatabaseHandler.KEY_NAME);
     }
     
+    /** Return this user's network. */
+	public String getNetwork(Context applicationContext) {
+		DatabaseHandler db = new DatabaseHandler(applicationContext);
+    	HashMap<String, String> user = db.getUserDetails();
+    	return user.get(DatabaseHandler.KEY_NETWORK);
+	}
+    
     /** Returns this user's email. */
     public String getEmail(Context context)
     {
     	DatabaseHandler db = new DatabaseHandler(context);
     	HashMap<String, String> user = db.getUserDetails();
     	return user.get(DatabaseHandler.KEY_EMAIL);
-    }
-    
-    /** Returns this user's network. */
-    public String getNetworkName(Context context)
-    {
-    	DatabaseHandler db = new DatabaseHandler(context);
-    	HashMap<String, String> user = db.getUserDetails();
-    	String networkVal = user.get("network").toLowerCase();
-    	if (networkVal.equals("columbia"))
-    		return "Columbia University";
-    	if (networkVal.equals("barnard"))
-    		return "Barnard College";
-    	return "Default";
     }
      
     /** Method to logout user and reset database. */
@@ -134,6 +125,5 @@ public class UserFunctions
         DatabaseHandler db = new DatabaseHandler(context);
         db.resetTables();
         return true;
-    }
-     
+    }    
 }

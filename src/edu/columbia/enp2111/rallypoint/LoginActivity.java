@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -82,11 +81,12 @@ public class LoginActivity extends ActionBarActivity
 	 */
 	private class LoginAndNetworkTask extends AsyncTask<String, Void, String>
 	{   
-	   private String errorSource;
+		private String errorSource;
 		
 		protected String doInBackground(String ... params)
 	    {
-	    	errorSource = null; // by default, there is noerror
+	    	errorSource = null; // by default, there is no error
+			String network = "default";
 			
 	    	// get user information by connecting to database
 			UserFunctions userFunction = new UserFunctions();
@@ -113,7 +113,10 @@ public class LoginActivity extends ActionBarActivity
 		                		jsonUser.getString(DatabaseHandler.KEY_NETWORK),
 				                jsonUser.getString(DatabaseHandler.KEY_UNIQUE_ID), 
 				                jsonUser.getString(DatabaseHandler.KEY_CREATED_AT));                 
-		            }
+		            
+		                // set network value to set up the network SQLite table
+		                network = jsonUser.getString(DatabaseHandler.KEY_NETWORK);
+	    			}
 	    			else // Error in login
 	    			{
 //	    				errorSource = R.string.error_message_login;
@@ -128,7 +131,7 @@ public class LoginActivity extends ActionBarActivity
 	        
 	        /** network table */
 	        NetworkFunctions networkFunction = new NetworkFunctions();
-	        JSONObject jsonNetworkObject = networkFunction.getUserNetwork(params[0]);
+	        JSONObject jsonNetworkObject = networkFunction.getUserNetwork(network);
 	        
 	        try
 	    	{
@@ -141,22 +144,14 @@ public class LoginActivity extends ActionBarActivity
 	    				DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 		                JSONObject jsonNetwork = jsonNetworkObject.getJSONObject("network");
 
-//		                NetworkFunctions networkFunction = new NetworkFunctions();
 		                networkFunction.clearNetwork(getApplicationContext());
-		                
+		               
 		                db.addNetwork(
 		                		jsonNetwork.getString(DatabaseHandler.KEY_DOMAIN_STRING),
-		                		jsonNetwork.getString(DatabaseHandler.KEY_NETWORK_NAME), 
-		                		jsonNetwork.getString(DatabaseHandler.KEY_DEFAULT_MEETING_POINT),
-				                jsonNetwork.getString(DatabaseHandler.KEY_DESTINATION_LIST)
+		                		jsonNetwork.getString(DatabaseHandler.KEY_NETWORK_NAME),
+		                		jsonNetwork.getString(DatabaseHandler.KEY_CAMPUS_PLACES),
+				                jsonNetwork.getString(DatabaseHandler.KEY_NON_CAMPUS_PLACES)
 				                );
-		                
-		                Log.v("Testing", "Default domain string: " + 
-				                jsonNetwork.getString(DatabaseHandler.KEY_DOMAIN_STRING));
-		                Log.v("Testing", "Domain name: " + 
-				                jsonNetwork.getString(DatabaseHandler.KEY_NETWORK_NAME));
-		                Log.v("Testing", "Default meeting point: " + 
-				                jsonNetwork.getString(DatabaseHandler.KEY_DEFAULT_MEETING_POINT));
 	    			}
 	    			else
 	    			{
@@ -170,7 +165,7 @@ public class LoginActivity extends ActionBarActivity
 //		        loginErrorMsg.setText(R.string.error_message_server);
 		    	e.printStackTrace();
 		    }
-	    	return "error";
+	    	return errorSource;
 		}
 	    
 	    protected void onPostExecute(String error)
@@ -194,77 +189,4 @@ public class LoginActivity extends ActionBarActivity
             
 	    }
 	}
-	
-//	/** 
-//	 * AsyncTask to build the user's network information in the SQLite database.
-//	 */
-//	private class GetNetworkInfoTask extends AsyncTask<String, Void, Void>
-//	{
-//		
-//		protected Void doInBackground(String ... params)
-//	    {
-//	    	NetworkFunctions networkFunction = new NetworkFunctions();
-////	    	if (params.length != 1)
-////	    		return null;
-//	        JSONObject json_2 = networkFunction.getUserNetwork(params[0]);
-////	        return json;
-////	    }
-////	   
-////	    protected void onPostExecute(JSONObject json)
-////	    {
-//	        Log.v("Testing", "GetNewtorkInfoTask thread: " + Thread.currentThread().getName());
-//	        
-//	        try
-//	    	{
-//	    		if (json_2 != null && json_2.getString(KEY_SUCCESS) != null)
-//	    		{
-//	    			String res = json_2.getString(KEY_SUCCESS);
-//	    			if (Integer.parseInt(res) == 1)
-//	    			{
-//	    				// network data successfully gotten
-//	    				DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-//		                JSONObject jsonNetwork = json_2.getJSONObject("network");
-//
-////		                NetworkFunctions networkFunction = new NetworkFunctions();
-//		                networkFunction.clearNetwork(getApplicationContext());
-//		                
-//		                db.addNetwork(
-//		                		jsonNetwork.getString(DatabaseHandler.KEY_DOMAIN_STRING),
-//		                		jsonNetwork.getString(DatabaseHandler.KEY_NETWORK_NAME), 
-//		                		jsonNetwork.getString(DatabaseHandler.KEY_DEFAULT_MEETING_POINT),
-//				                jsonNetwork.getString(DatabaseHandler.KEY_DESTINATION_LIST)
-//				                );
-//		                
-//		                Log.v("Testing", "Default meeting point: " + 
-//				                jsonNetwork.getString(DatabaseHandler.KEY_DEFAULT_MEETING_POINT));
-//		                Log.v("Testing", "Domain name: " + 
-//				                jsonNetwork.getString(DatabaseHandler.KEY_DOMAIN_STRING));
-//		                Log.v("Testing", "Default meeting point: " + 
-//				                jsonNetwork.getString(DatabaseHandler.KEY_DEFAULT_MEETING_POINT));
-////	    			
-////		                // Launch Dashboard Screen
-////		                Intent dashboard = new Intent(getApplicationContext(), 
-////		                		DashboardActivity.class);
-//// 
-////		                // Close all activities before launching Dashboard
-////		                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-////		                startActivity(dashboard);
-////		                
-////		                finish(); // Close login screen
-//	    			}
-//	    			else
-//	    			{
-//	    				// Error - this network doesn't exist
-////	    				loginErrorMsg.setText(R.string.error_message_login);
-//	    			}
-//	    		}
-//	    	} 
-//		    catch (JSONException e)
-//		    {
-////		        loginErrorMsg.setText(R.string.error_message_server);
-//		    	e.printStackTrace();
-//		    }
-//	    	return null;
-//		}
-//	}
 }

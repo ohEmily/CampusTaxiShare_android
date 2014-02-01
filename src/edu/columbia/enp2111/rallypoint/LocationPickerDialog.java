@@ -15,19 +15,19 @@ public class LocationPickerDialog {
 		final TextView textView = aTextView;
 		
 		// Strings to Show In Dialog with Radio Buttons
-		final CharSequence[] options = {"John F. Kennedy International Airport", "LaGuardia Airport","Newark Liberty International Airport"};
+//		final CharSequence[] options = {"John F. Kennedy International Airport", "LaGuardia Airport","Newark Liberty International Airport"};
 		
-//		NetworkFunctions networkFunction = new NetworkFunctions();
-//		final String[] destinationOptions = networkFunction.getDestinations(getApplicationContext());
+		NetworkFunctions networkFunction = new NetworkFunctions();
+		final String[] destinationOptions = networkFunction.getNonCampusPlaces(context);
 		
 		// Creating and Building the Dialog 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setTitle(R.string.destination); 
-		builder.setSingleChoiceItems(options, -1, new DialogInterface.OnClickListener()
+		builder.setTitle(R.string.dialog_title_end_location); 
+		builder.setSingleChoiceItems(destinationOptions, -1, new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int item)
 			{   
-				textView.setText(options[item]);
+				textView.setText(destinationOptions[item]);
 				destinationDialog.dismiss();    
 			}
 		});

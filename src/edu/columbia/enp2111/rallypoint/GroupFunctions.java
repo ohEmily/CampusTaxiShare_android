@@ -23,14 +23,22 @@ public class GroupFunctions
     public static final String TAG_GET_GROUPS = "get_groups";
     
     // keys for passing values
+    public static final String KEY_GROUP_ID = "group_id";
+    public static final String KEY_OWNER_EMAIL = "owner_email";
+    public static final String KEY_NETWORK = "network";
+    public static final String KEY_START_LOCATION = "start_location";
+    public static final String KEY_DESTINATION = "end_location";
     public static final String KEY_DATETIME = "departure_date_time";
-    public static final String KEY_DESTINATION = "destination";
-    public static final String KEY_OWNER_UID = "owner_uid";
+    public static final String KEY_DIRECTION = "direction";
     public static final String KEY_MEMBER1_UID = "member_1";
     public static final String KEY_MEMBER2_UID = "member_2";
     public static final String KEY_MEMBER3_UID = "member_3";
-    public static final String KEY_GROUP_CREATED_AT = "created_at";
-	
+    public static final String KEY_CREATED_AT = "created_at";
+	public static final String KEY_UPDATED_AT = "updated_at";
+    
+	// direction values
+	public static final String KEY_TO_CAMPUS = "t";
+	public static final String KEY_FROM_CAMPUS = "f";
 	private JSONParser jsonParser;
     
     /** Default constructor. */
@@ -44,14 +52,18 @@ public class GroupFunctions
      * @param email
      * @param password
      * */
-    public JSONObject createGroup(String datetime, String destination, String userID)
+    public JSONObject createGroup(String ownerEmail, String network, 
+    		String datetime, String startLocation, String destination)
     {
-        // Building parameters. Mapping to constants
+    	// Building parameters. Mapping to constants
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair(JSONParser.KEY_TAG, TAG_CREATE_GROUP));
+        params.add(new BasicNameValuePair(KEY_OWNER_EMAIL, ownerEmail));
+        params.add(new BasicNameValuePair(KEY_NETWORK, network));
+        params.add(new BasicNameValuePair(KEY_START_LOCATION, startLocation));
         params.add(new BasicNameValuePair(KEY_DATETIME, datetime));
         params.add(new BasicNameValuePair(KEY_DESTINATION, destination));
-        params.add(new BasicNameValuePair(KEY_OWNER_UID, userID));
+        params.add(new BasicNameValuePair(KEY_DIRECTION, KEY_TO_CAMPUS));
         JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
         return json;
     }
