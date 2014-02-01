@@ -1037,6 +1037,7 @@ containing a value of this type.
         public static final int campus_network_name=0x7f05003f;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
+        public static final int createNewGroupButton=0x7f05004b;
         public static final int date=0x7f05005f;
         public static final int default_activity_button=0x7f050028;
         public static final int destination=0x7f050061;
@@ -1074,7 +1075,6 @@ containing a value of this type.
         public static final int myDepartureDate=0x7f050053;
         public static final int myDepartureTime=0x7f050055;
         public static final int myDestination=0x7f050051;
-        public static final int myDestinationPickerButton=0x7f05004b;
         public static final int myMeetingPoint=0x7f05004f;
         public static final int myTimePickerButton=0x7f05004d;
         public static final int nameEditTextRegistration=0x7f050057;

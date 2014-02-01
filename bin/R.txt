@@ -277,6 +277,7 @@ int id button_send_registration 0x7f05005b
 int id campus_network_name 0x7f05003f
 int id checkbox 0x7f05002d
 int id collapseActionView 0x7f05000d
+int id createNewGroupButton 0x7f05004b
 int id date 0x7f05005f
 int id default_activity_button 0x7f050028
 int id destination 0x7f050061
@@ -314,7 +315,6 @@ int id myDatePickerButton 0x7f05004c
 int id myDepartureDate 0x7f050053
 int id myDepartureTime 0x7f050055
 int id myDestination 0x7f050051
-int id myDestinationPickerButton 0x7f05004b
 int id myMeetingPoint 0x7f05004f
 int id myTimePickerButton 0x7f05004d
 int id nameEditTextRegistration 0x7f050057

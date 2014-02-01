@@ -22,7 +22,7 @@
 		>
 	    
 	    <Button 
-	        android:id="@+id/myDestinationPickerButton"
+	        android:id="@+id/createNewGroupButton"
 	        style="@style/button_text"
 	        android:layout_width="match_parent"
 	        android:background="@drawable/pink_button"
@@ -32,7 +32,7 @@
 	    />
 	    
 	    <Button 
-	        android:id="@+id/myDestinationPickerButton"
+	        android:id="@+id/createNewGroupButton"
 	        style="@style/button_text"
 	        android:layout_width="match_parent"
 	        android:background="@drawable/pink_button"

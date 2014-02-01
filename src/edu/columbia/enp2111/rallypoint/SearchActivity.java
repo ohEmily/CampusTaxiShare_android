@@ -15,6 +15,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -60,7 +61,7 @@ public class SearchActivity extends ListActivity
 		groupList = new ArrayList<HashMap<String, String>>();
 
 		ListView lv = getListView();
-
+		
 		// Listview on item click listener. Called when you click any of the
 		// groups displayed -- opens that group's activity
 		lv.setOnItemClickListener(new OnItemClickListener()
@@ -75,7 +76,7 @@ public class SearchActivity extends ListActivity
 				// separating out the values for date and the values for time
 				String datetime = ((TextView) view.findViewById(R.id.date))
 						.getText().toString();
-				
+
 				// Starting single group activity
 				Intent singleGroup = new Intent(getApplicationContext(),
 						SingleGroupActivity.class);
@@ -87,6 +88,14 @@ public class SearchActivity extends ListActivity
 
 		// Calling async task to get json
 		new GetGroups().execute();
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.when_where, menu);
+		return true;
 	}
 	
 	/**
@@ -104,6 +113,14 @@ public class SearchActivity extends ListActivity
 		
 		String timeSubstring = datetime.substring(10, datetime.length()).trim();
 		stringTime = DateTime.parseTime(timeSubstring);
+	}
+	
+	/** Called when the relevant button is pressed: creates a new taxi share
+	 * group going from campus. */
+	public void createNewGroup(View v)
+	{
+    	SearchActivity.this.startActivity(new Intent(SearchActivity.this, 
+    			NewGroupActivity.class));
 	}
 
 	/**
