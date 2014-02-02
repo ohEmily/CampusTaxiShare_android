@@ -20,7 +20,6 @@ public class DateTime
 	{
 		String stringDate = datetime.substring(0, 10).trim(); 
 		String stringTime = datetime.substring(10, datetime.length()).trim();
-		
 	}
 	
 	/** Parses number date of form MM/DD/YYYY */

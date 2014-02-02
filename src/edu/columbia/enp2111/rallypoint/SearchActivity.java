@@ -15,6 +15,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,7 +31,7 @@ import android.widget.TextView;
  *
  */
 
-public class SearchActivity extends ListActivity
+public abstract class SearchActivity extends ListActivity
 {
 	private ProgressDialog pDialog;
 	
@@ -38,13 +39,20 @@ public class SearchActivity extends ListActivity
 	public static final String TAG_GROUPS = "groups";
 	public static final String TAG_DESTINATION = "destination";
 	public static final String TAG_DATETIME = "datetime";
+	public static final String KEY_DIRECTION = "direction";
 	
 	public static final String LIST_KEY_DESTINATION = "destinationText";
 	public static final String LIST_KEY_DATE = "dateText";
 	public static final String LIST_KEY_TIME = "timeText";
 	
+	public static final String KEY_TO_CAMPUS = "t";
+	public static final String KEY_FROM_CAMPUS = "f";
+	
 	String stringDate;
 	String stringTime;
+	
+	// whether we're going to campus or from campus
+	protected String direction;
 	
 	// contacts JSONArray
 	JSONArray all_groups = null;
@@ -62,7 +70,7 @@ public class SearchActivity extends ListActivity
 
 		ListView lv = getListView();
 		
-		// Listview on item click listener. Called when you click any of the
+		// ListView on item click listener. Called when you click any of the
 		// groups displayed -- opens that group's activity
 		lv.setOnItemClickListener(new OnItemClickListener()
 		{
@@ -86,6 +94,9 @@ public class SearchActivity extends ListActivity
 			}
 		});
 
+		setNewGroupButton();
+		setDirection();
+		
 		// Calling async task to get json
 		new GetGroups().execute();
 	}
@@ -115,13 +126,8 @@ public class SearchActivity extends ListActivity
 		stringTime = DateTime.parseTime(timeSubstring);
 	}
 	
-	/** Called when the relevant button is pressed: creates a new taxi share
-	 * group going from campus. */
-	public void createNewGroup(View v)
-	{
-    	SearchActivity.this.startActivity(new Intent(SearchActivity.this, 
-    			NewGroupActivity.class));
-	}
+	public abstract void setNewGroupButton();
+	public abstract void setDirection();
 
 	/**
 	 * AsyncTask class to get json by making HTTP call.
@@ -145,7 +151,10 @@ public class SearchActivity extends ListActivity
 			// adding params: telling JSON what type of request it'll be
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 	        params.add(new BasicNameValuePair(JSONParser.KEY_TAG, GroupFunctions.TAG_GET_GROUPS));
+	        params.add(new BasicNameValuePair(KEY_DIRECTION, direction));
 			
+	        Log.v("Testing", "direction: " + direction);
+	        
 			// Creating a JSONParser
 			JSONParser jp = new JSONParser();
 			JSONObject jsonObj = jp.getJSONFromUrl(JSONParser.API_URL, params);

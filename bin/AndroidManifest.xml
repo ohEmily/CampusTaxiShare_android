@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.columbia.enp2111.rallypoint"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" 
+    >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -18,8 +19,9 @@
         <activity
             android:name="edu.columbia.enp2111.rallypoint.LoginActivity"
             android:label="@string/app_name" 
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
-            >
+        >
             
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +33,7 @@
             android:name="edu.columbia.enp2111.rallypoint.RegistrationActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
             android:parentActivityName="edu.columbia.enp2111.rallypoint.LoginActivity" >
 
             <!-- Parent activity meta-data to support API level 7+ -->
@@ -38,31 +41,59 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.columbia.enp2111.rallypoint.LoginActivity" />
         </activity>
+        
         <activity
             android:name="edu.columbia.enp2111.rallypoint.DashboardActivity"
-            android:label="@string/dashboard_activity_title" >
+            android:label="@string/dashboard_activity_title" 
+            android:screenOrientation="portrait"
+            >
         </activity>
-        <activity
-            android:name="edu.columbia.enp2111.rallypoint.NewGroupActivity"
-            android:label="@string/title_activity_when_where"
-            android:parentActivityName="edu.columbia.enp2111.rallypoint.DashboardActivity" >
 
-            <!-- Parent activity meta-data to support API level 7+ -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.columbia.enp2111.rallypoint.DashboardActivity" />
-        </activity>
         <activity
-            android:name="edu.columbia.enp2111.rallypoint.SearchActivity"
-            android:label="@string/title_activity_search" 
+            android:name="edu.columbia.enp2111.rallypoint.ToCampusSearchActivity"
+            android:label="@string/title_activity_single_contact"
+            android:screenOrientation="portrait"
             android:parentActivityName="edu.columbia.enp2111.rallypoint.DashboardActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.columbia.enp2111.rallypoint.DashboardActivity" />
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="edu.columbia.enp2111.rallypoint.DashboardActivity" />
         </activity>
+
+        <activity
+            android:name="edu.columbia.enp2111.rallypoint.FromCampusSearchActivity"
+            android:label="@string/title_activity_single_contact"
+            android:screenOrientation="portrait"
+            android:parentActivityName="edu.columbia.enp2111.rallypoint.DashboardActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="edu.columbia.enp2111.rallypoint.DashboardActivity" />
+        </activity>
+        
+        
         <activity
             android:name="edu.columbia.enp2111.rallypoint.SingleGroupActivity"
-            android:label="@string/title_activity_single_contact" 
+            android:label="@string/title_activity_single_contact"
+            android:screenOrientation="portrait"
+            android:parentActivityName="edu.columbia.enp2111.rallypoint.SearchActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="edu.columbia.enp2111.rallypoint.SearchActivity" />
+        </activity>
+        
+       <activity
+            android:name="edu.columbia.enp2111.rallypoint.ToCampusNewGroupActivity"
+            android:label="@string/to_campus_new_group_activity_title"
+            android:screenOrientation="portrait"
+            android:parentActivityName="edu.columbia.enp2111.rallypoint.SearchActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="edu.columbia.enp2111.rallypoint.SearchActivity" />
+        </activity>
+        
+        <activity
+            android:name="edu.columbia.enp2111.rallypoint.FromCampusNewGroupActivity"
+            android:label="@string/from_campus_new_group_activity_title"
+            android:screenOrientation="portrait"
             android:parentActivityName="edu.columbia.enp2111.rallypoint.SearchActivity" >
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"

@@ -41,26 +41,12 @@ public class DashboardActivity extends Activity
     			welcomeMessage.setText("Hi " + nameOfUser + "! Your network is: ");
     		
     		// show network name (e.g. "Columbia University", not 'columbia')
-//    		TextView networkName = (TextView) findViewById(R.id.campus_network_name);
-//    		String nameOfNetwork = userFunctions.getNetworkName(getApplicationContext());
-//    		if (nameOfNetwork != null)
-//    			networkName.setText(nameOfNetwork);
-    		// TODO
     		NetworkFunctions networkFunction = new NetworkFunctions();
     		TextView networkName = (TextView) findViewById(R.id.campus_network_name);
     		String nameOfNetwork = networkFunction.getName(getApplicationContext());
     		if (nameOfNetwork != null)
     			networkName.setText(nameOfNetwork);
-    		
-    		// if user just created a new taxi group, show confirmation message
-            Intent previousScreen = getIntent();
-            String message = previousScreen.getStringExtra(NewGroupActivity.KEY_CONFIRMATION_MESSAGE);
-            if (message != null)
-            {
-            	TextView messageView = (TextView) findViewById(R.id.extra_message);
-            	messageView.setTextColor(this.getResources().getColor(R.color.myGreen));
-            	messageView.setText(message);
-            }
+
             // set listener for the logout link in the layout footer
             TextView linkLogout = (TextView) findViewById(R.id.link_to_logout);
             linkLogout.setOnClickListener(new View.OnClickListener()
@@ -84,20 +70,13 @@ public class DashboardActivity extends Activity
             finish(); // Closing dashboard screen
         }       
     }
-
-	/** Called when the relevant button is pressed. */
-	public void searchGroups(View v)
-	{
-    	DashboardActivity.this.startActivity(new Intent(DashboardActivity.this, 
-    			SearchActivity.class));
-	}
 	
 	/** Called when the relevant button is pressed: creates a new taxi share
 	 * group going from campus. */
 	public void createFromCampusGroup(View v)
 	{
     	DashboardActivity.this.startActivity(new Intent(DashboardActivity.this, 
-    			NewGroupActivity.class));
+    			FromCampusSearchActivity.class));
 	}
 	
 	/** Called when the relevant button is pressed: creates a new taxi share
@@ -105,7 +84,7 @@ public class DashboardActivity extends Activity
 	public void createToCampusGroup(View v)
 	{
 		Intent toSchoolGroup = new Intent(DashboardActivity.this, 
-    			NewGroupActivity.class);
+    			ToCampusSearchActivity.class);
 		startActivity(toSchoolGroup);
 	}
 	

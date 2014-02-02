@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * This class manages the activity wherein the user selects the destination
@@ -27,10 +29,14 @@ import android.widget.TextView;
 
 /* has to extend FragmentActivity because:
  * stackoverflow.com/questions/13121432/the-method-is-getsupportfragmentmanager-is-unsuported */
-public class NewGroupActivity extends FragmentActivity
+public abstract class NewGroupActivity extends FragmentActivity
 {
 	public static final String KEY_CONFIRMATION_MESSAGE = "confirmation_message"; 
 	private static String KEY_SUCCESS = "success";
+	
+	// direction values
+	public static final String KEY_TO_CAMPUS = "t";
+	public static final String KEY_FROM_CAMPUS = "f";
 	
 	// dialogs
 	private AlertDialog destinationDialog;
@@ -38,10 +44,17 @@ public class NewGroupActivity extends FragmentActivity
 	private DialogFragment timeFragment;
 	
 	// TextViews
-	private TextView startingLocation;
-	private TextView destination;
+	private TextView startingLocationView;
+	private TextView destinationView;
 	private TextView timeView;
 	private TextView dateView;
+	
+	// values
+	protected String taxiDate;
+	protected String taxiTime;
+	protected String destination;
+	protected String startLocation;
+	protected String direction;
 	
 	// functionality
 	private UserFunctions userFunctions;
@@ -57,20 +70,6 @@ public class NewGroupActivity extends FragmentActivity
         {
         	// user already logged in show databoard
             setContentView(R.layout.activity_new_group);
-            
-            // set logout link
-            TextView linkLogout = (TextView) findViewById(R.id.link_to_logout);
-            linkLogout.setOnClickListener(new View.OnClickListener()
-            {     
-                public void onClick(View view)
-                {
-                    userFunctions.logoutUser(getApplicationContext());
-                    Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-                    login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(login);
-                    finish(); // Closing dashboard screen
-                }
-            });   
         }
         else
         {
@@ -81,16 +80,9 @@ public class NewGroupActivity extends FragmentActivity
             finish(); // Closing dashboard screen
         }   
 	}
-
-	/**
-	 * Called when the "choose time" button is pressed; opens the dialog to 
-	 * choose a time without changing activity. 
-	 */
-	public void showStartLocationPickerDialog(View v)
+	
+	public void showLocationPickerDialog(View v, final String[] destinationOptions)
 	{
-		NetworkFunctions networkFunction = new NetworkFunctions();
-		final String[] destinationOptions = networkFunction.getCampusPlaces(getApplicationContext());
-		
 		// Creating and Building the Dialog 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.dialog_title_end_location); 
@@ -98,8 +90,8 @@ public class NewGroupActivity extends FragmentActivity
 		{
 			public void onClick(DialogInterface dialog, int item)
 			{   
-				startingLocation = (TextView) findViewById(R.id.myDestination);
-				startingLocation.setText(destinationOptions[item]);
+				startingLocationView = (TextView) findViewById(R.id.myDestination);
+				startingLocationView.setText(destinationOptions[item]);
 				destinationDialog.dismiss();    
 			}
 		});
@@ -107,31 +99,8 @@ public class NewGroupActivity extends FragmentActivity
 		destinationDialog.show();
 	}
 	
-	
-	/**
-	 * Called when the "choose time" button is pressed; opens the dialog to 
-	 * choose a time without changing activity. 
-	 */
-	public void showDestinationPickerDialog(View v)
-	{
-		NetworkFunctions networkFunction = new NetworkFunctions();
-		final String[] destinationOptions = networkFunction.getNonCampusPlaces(getApplicationContext());
-		
-		// Creating and Building the Dialog 
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.dialog_title_end_location); 
-		builder.setSingleChoiceItems(destinationOptions, -1, new DialogInterface.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog, int item)
-			{   
-				destination = (TextView) findViewById(R.id.myDestination);
-				destination.setText(destinationOptions[item]);
-				destinationDialog.dismiss();    
-			}
-		});
-		destinationDialog = builder.create();
-		destinationDialog.show();
-	}
+	public abstract void showDestinationPickerDialog(View v);
+	public abstract void showStartLocationPickerDialog(View v);
 	
 	/** Called when the "choose time" button is pressed; opens the dialog to 
 	 * choose a time without changing activity. */
@@ -160,12 +129,12 @@ public class NewGroupActivity extends FragmentActivity
 	public void onSubmit(View v)
 	{
 		// TODO: double check that none of the values are null!
-		if (timeView.getText() != "" || dateView.getText() != "" || destination.getText() != "")
+		if (timeView.getText() != "" || dateView.getText() != "" || destinationView.getText() != "")
 		{
-			String taxiDate = ((DatePickerFragment) dateFragment).getDate();
-			String taxiTime = ((TimePickerFragment) timeFragment).getTime();
-			String startLocation = ((TextView) findViewById(R.id.myMeetingPoint)).getText().toString();
-			String destination = ((TextView) findViewById(R.id.myDestination)).getText().toString();
+			this.taxiDate = ((DatePickerFragment) dateFragment).getDate();
+			this.taxiTime = ((TimePickerFragment) timeFragment).getTime();
+			this.startLocation = ((TextView) findViewById(R.id.myMeetingPoint)).getText().toString();
+			this.destination = ((TextView) findViewById(R.id.myDestination)).getText().toString();
 			String ownerEmail = userFunctions.getEmail(getApplicationContext());
 			String network = userFunctions.getNetwork(getApplicationContext());
 			Log.v("Testing", "The time is " + taxiTime);
@@ -174,7 +143,13 @@ public class NewGroupActivity extends FragmentActivity
 			Log.v("Testing", "The owner's email is: " + ownerEmail);
 			String taxiDateTime = taxiDate + " " + taxiTime;
 			// Put all the values from the TextViews into the database
-			new CreateGroupTask().execute(ownerEmail, network, taxiDateTime, startLocation, destination);
+			new CreateGroupTask().execute(ownerEmail, network, taxiDateTime, startLocation, destination, direction);
+			
+			// add Toast (small popup window) notifying user that the activity was created
+			CharSequence text = getString(R.string.confirmation_message);
+			int duration = Toast.LENGTH_SHORT;
+			Toast toast = Toast.makeText(getApplicationContext(), text, duration);
+			toast.show();
 		}
 	}
 	
@@ -194,7 +169,7 @@ public class NewGroupActivity extends FragmentActivity
 	    {
 			// parameters: String datetime, String destination, String ownerEmail
 	    	GroupFunctions groupFunction = new GroupFunctions();
-	        JSONObject json = groupFunction.createGroup(params[0], params[1], params[2], params[3], params[4]);
+	        JSONObject json = groupFunction.createGroup(params[0], params[1], params[2], params[3], params[4], params[5]);
 	        return json;
 	    }
 	   
@@ -214,7 +189,6 @@ public class NewGroupActivity extends FragmentActivity
 			                 
 			                // Close all views before launching Dashboard
 			                dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			                dashboard.putExtra(KEY_CONFIRMATION_MESSAGE, getString(R.string.confirmation_message));
 			                startActivity(dashboard);
 			                // TODO put extra so that a message is shown to confirm group making
 			                finish(); // Return to dashboard

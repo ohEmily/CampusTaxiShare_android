@@ -43,15 +43,20 @@
     <!-- Dashboard -->
     <string name="dashboard_activity_title">Home</string>
     <string name="greet_user">Welcome! Your network is:</string>
-    <string name="prompt_activity">What would you like to do?</string>
+    <string name="prompt_activity">Where are you headed?</string>
     <string name="button_browse_groups">Browse cab shares</string>
-    <string name="button_new_from_school_trip">Create new cab share from campus</string>
-    <string name="button_new_to_school_trip">Create new cab share to campus</string>
-    <string name="confirmation_message">Confirmed! You made a new cab share group.</string>
+    <string name="button_new_from_school_trip">from campus</string>
+    <string name="button_new_to_school_trip">to campus</string>
+    <string name="confirmation_message"><center>Confirmed! You made a new cab share group.</center></string>
     <string name="button_logout">Logout</string>
 
+    <!-- Search Activities -->
+    <string name="new_to_campus_group">Create new to campus cab share</string>
+    <string name="new_from_campus_group">Create new from campus cab share</string>
+    
     <!-- New Group Activity -->
-    <string name="title_activity_when_where">Trip details</string>
+    <string name="to_campus_new_group_activity_title">Trip details: heading to campus</string>
+    <string name="from_campus_new_group_activity_title">Trip details: away from campus</string>
     <string name="summary">Summary:</string>
     <string name="meeting_point"><b>Meeting point</b>:</string>
     <string name="dialog_title_end_location"><b>Destination:</b></string>
@@ -65,6 +70,8 @@
     <string name="departure"><b>Taxi departure date</b>: </string>
     <string name="time"><b>Exact taxi departure time</b>: </string>
     <string name="button_submit">Submit</string>
+    
+    
     
     <string name="title_activity_search">Browse groups</string>
     <string name="title_activity_single_contact">This group</string>

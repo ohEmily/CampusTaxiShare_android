@@ -36,9 +36,9 @@ public class GroupFunctions
     public static final String KEY_CREATED_AT = "created_at";
 	public static final String KEY_UPDATED_AT = "updated_at";
     
-	// direction values
-	public static final String KEY_TO_CAMPUS = "t";
-	public static final String KEY_FROM_CAMPUS = "f";
+	public static final String KEY_TO_CAMPUS_GROUPS = "to_campus";
+	public static final String KEY_FROM_CAMPUS_GROUPS = "from_campus";
+
 	private JSONParser jsonParser;
     
     /** Default constructor. */
@@ -53,7 +53,8 @@ public class GroupFunctions
      * @param password
      * */
     public JSONObject createGroup(String ownerEmail, String network, 
-    		String datetime, String startLocation, String destination)
+    		String datetime, String startLocation, String destination, 
+    		String direction)
     {
     	// Building parameters. Mapping to constants
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -63,7 +64,7 @@ public class GroupFunctions
         params.add(new BasicNameValuePair(KEY_START_LOCATION, startLocation));
         params.add(new BasicNameValuePair(KEY_DATETIME, datetime));
         params.add(new BasicNameValuePair(KEY_DESTINATION, destination));
-        params.add(new BasicNameValuePair(KEY_DIRECTION, KEY_TO_CAMPUS));
+        params.add(new BasicNameValuePair(KEY_DIRECTION, direction));
         JSONObject json = jsonParser.getJSONFromUrl(JSONParser.API_URL, params);
         return json;
     }
