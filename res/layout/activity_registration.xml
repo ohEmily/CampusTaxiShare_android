@@ -1,94 +1,95 @@
-<ScrollView
-    	xmlns:android="http://schemas.android.com/apk/res/android"
-    	xmlns:tools="http://schemas.android.com/tools"
-    	android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:paddingBottom="@dimen/activity_vertical_margin"
-    	android:paddingLeft="@dimen/activity_horizontal_margin"
-    	android:paddingRight="@dimen/activity_horizontal_margin"
-    	android:paddingTop="@dimen/activity_vertical_margin"
-    	android:fillViewport="true"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:fillViewport="true"
  >
- 
-	<LinearLayout
+
+ 	<TextView
+ 	    android:id="@+id/emailConfirmationMessage"
+	    android:text="@string/confirmation_email_notice"
+	    style="@style/WhiteFont"
+	    android:layout_marginBottom="20dp"
+	/>
+
+	<ImageView
+	    android:id="@+id/bigLogo"
+	    android:adjustViewBounds="true"
+	    android:layout_width="90dp"
+	    android:layout_height="90dp"
+	 	android:layout_centerHorizontal="true"
+	    android:layout_below="@id/emailConfirmationMessage"
+	    android:contentDescription="@string/logo_description"
+	    android:src="@drawable/icon" 
+	/>
+
+	<EditText
+	    android:id="@+id/nameEditTextRegistration"
+	    android:layout_width="match_parent"
+	    android:layout_marginTop="20dp"
+	    android:layout_height="wrap_content"
+	    android:inputType="textPersonName"
+	    android:layout_below="@id/bigLogo"
+	    android:hint="@string/first_name"
+	>
+	
+	<requestFocus />
+	</EditText>
+	    
+	<EditText
+	   	android:id="@+id/emailEditTextRegistration"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:orientation="vertical"
-	    android:weightSum="1.0"
-	    tools:context=".HomeActivity" >
-	
-	    <TextView
-	        android:text="@string/confirmation_email_notice"
-	        style="@style/WhiteFont"
-	        android:layout_marginBottom="20dp"
-	     />
-	    
-	    <ImageView
-	        android:id="@+id/bigLogo"
-	        android:layout_gravity="center"
-	        android:adjustViewBounds="true"
-	        android:layout_width="90dp"
-	        android:layout_height="90dp"
-	        android:contentDescription="@string/logo_description"
-	        android:src="@drawable/icon" 
-	        />
-	
-	    <EditText
-	        android:id="@+id/nameEditTextRegistration"
-	        android:layout_width="match_parent"
-	        android:layout_marginTop="20dp"
-	        android:layout_height="wrap_content"
-	        android:inputType="textPersonName"
-	        android:hint="@string/first_name"
-	        >
-	
-	        <requestFocus />
-	    </EditText>
-	    
-	    <EditText
-	        android:id="@+id/emailEditTextRegistration"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-   	        android:inputType="textEmailAddress" 
-	        android:hint="@string/input_email"
-	        >
-	        <requestFocus />
-	    </EditText>
+   	    android:inputType="textEmailAddress" 
+   	    android:layout_below="@id/nameEditTextRegistration"
+	    android:hint="@string/input_email"
+	>
+	<requestFocus />
+	</EditText>
 
-	    <EditText
-	        android:id="@+id/passEditTextRegistration"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:inputType="textPassword" 
-	        android:hint="@string/password_hint"
-	    />
+	<EditText
+		android:id="@+id/passEditTextRegistration"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:inputType="textPassword" 
+		android:layout_below="@id/emailEditTextRegistration"
+		android:hint="@string/password_hint"
+	/>
 	    
-	    <!--  Error message -->
-        <TextView android:id="@+id/registration_error"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/errorColor"
-            android:textStyle="bold"
-        />
+	<!--  Error message -->
+    <TextView android:id="@+id/registration_error"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:textColor="@color/errorColor"
+    	android:layout_below="@id/passEditTextRegistration"
+    	android:textStyle="bold"
+    />
 	    
-	    <Button 
-	        android:id="@+id/button_send_registration"
-	        style="@style/button_text"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center"
-	        android:background="@drawable/pink_button"
-	        android:layout_marginTop="30dp"
-	    	android:text="@string/button_signup"
-	    	android:onClick="submitRegistrationFields"
-	    />
+	<Button 
+		android:id="@+id/button_send_registration"
+		style="@style/button_text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@drawable/pink_button"
+		android:layout_marginTop="30dp"
+		android:text="@string/button_signup"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@id/registration_error"
+		android:onClick="submitRegistrationFields"
+	/>	
+    	    
+	<TextView 
+		android:id="@+id/link_to_login"
+        style="@style/FooterFont"
+        android:text="@string/go_to_login"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="switchToLogin"
+    />
 	    
-	    <TextView 
-	        android:id="@+id/link_to_login"
-            style="@style/FooterFont"
-            android:text="@string/go_to_login"
-            android:onClick="switchToLogin"
-        />
-	    
-	</LinearLayout>
-</ScrollView>
+</RelativeLayout>

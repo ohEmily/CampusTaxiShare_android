@@ -1,19 +1,19 @@
 package edu.columbia.enp2111.rallypoint;
 
+// handling login event
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.ActionBar;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.app.ActionBar;
-
-// handling login event
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Logging in the user activity. Connects to database.
@@ -26,12 +26,11 @@ public class LoginActivity extends ActionBarActivity
 	private String email;
 	private String password;
 	private ActionBar actionBar;
-	
+
 	// JSON response node names
     public static String KEY_SUCCESS = "success";
 	
     TextView loginErrorMsg;
-    
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

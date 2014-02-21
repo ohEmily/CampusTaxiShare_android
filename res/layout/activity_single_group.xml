@@ -14,9 +14,22 @@
         android:textStyle="bold"
         android:paddingTop="10dip"
         android:paddingBottom="10dip"
+        android:text="name"
         android:textColor="@color/myPink"
    	/>
   
+  	<Button
+	   	android:id="@+id/groupFromSchoolButton"
+	   	style="@style/button_text"
+	   	android:layout_weight="1"
+	   	android:layout_width="wrap_content"
+	   	android:layout_height="wrap_content"
+	   	android:drawableLeft="@drawable/ic_action_add_person"
+	   	android:background="@drawable/pink_button"
+		android:text="@string/button_join_group"
+		android:onClick="joinGroup"
+	/>
+  	
   	<!-- Email Label -->
   	<TextView android:id="@+id/email_label"
         android:layout_width="fill_parent"

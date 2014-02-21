@@ -89,6 +89,7 @@ public abstract class SearchActivity extends ListActivity
 				Intent singleGroup = new Intent(getApplicationContext(),
 						SingleGroupActivity.class);
 				singleGroup.putExtra(GroupFunctions.KEY_DESTINATION, destination);
+//				singleGroup.putExtra(GroupFunctions.KEY_DESTINATION, value)
 				singleGroup.putExtra(GroupFunctions.KEY_DATETIME, datetime);
 				startActivity(singleGroup);
 			}
@@ -132,8 +133,8 @@ public abstract class SearchActivity extends ListActivity
 	/**
 	 * AsyncTask class to get json by making HTTP call.
 	 * */
-	private class GetGroups extends AsyncTask<Void, Void, Void> {
-
+	private class GetGroups extends AsyncTask<Void, Void, Void>
+	{
 		@Override
 		protected void onPreExecute()
 		{
@@ -171,8 +172,11 @@ public abstract class SearchActivity extends ListActivity
 					
 					String destination = aGroup.getString(GroupFunctions.KEY_DESTINATION);
 					String datetime = aGroup.getString(GroupFunctions.KEY_DATETIME);
+					String startPoint = aGroup.getString(GroupFunctions.KEY_START_LOCATION);
 					String ownerEmail = aGroup.getString(GroupFunctions.KEY_OWNER_EMAIL);
 					setDateAndTime(datetime);
+					
+					Log.v("Testing", "Start point: " + startPoint);
 					
 					// One HashMap per group of taxi sharers
 					HashMap<String, String> group_object = new HashMap<String, String>();

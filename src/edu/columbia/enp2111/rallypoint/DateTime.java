@@ -16,10 +16,11 @@ public class DateTime
 	
 	public DateTime() {}
 
-	public void parseDateTime(String datetime)
+	public static String parseDateTime(String datetime)
 	{
 		String stringDate = datetime.substring(0, 10).trim(); 
 		String stringTime = datetime.substring(10, datetime.length()).trim();
+		return parseDate(stringDate) + " " + parseTime(stringTime);
 	}
 	
 	/** Parses number date of form MM/DD/YYYY */

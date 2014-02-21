@@ -32,8 +32,7 @@ import android.util.Log;
 public class JSONParser 
 { 
 	// location of the API for the whole application
-//	public static final String API_URL = "http://10.0.2.2/taxi_project/api/";
-	public static final String API_URL = "http://209.2.222.136/taxi_project/api/";
+	public static final String API_URL = "http://207.10.139.152/taxi_project/api/";
 	
 	public static final String KEY_TAG = "tag";
 	
@@ -56,11 +55,17 @@ public class JSONParser
             HttpEntity httpEntity = httpResponse.getEntity();
             is = httpEntity.getContent();
             
-        } catch (UnsupportedEncodingException e) {
+        }
+        catch (UnsupportedEncodingException e)
+        {
             e.printStackTrace();
-        } catch (ClientProtocolException e) {
+        }
+        catch (ClientProtocolException e)
+        {
             e.printStackTrace();
-        } catch (IOException e) {
+        } 
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
  

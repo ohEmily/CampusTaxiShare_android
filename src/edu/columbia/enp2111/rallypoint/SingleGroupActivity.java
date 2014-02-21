@@ -3,6 +3,7 @@ package edu.columbia.enp2111.rallypoint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 /**
@@ -33,4 +34,9 @@ public class SingleGroupActivity extends Activity
         labelDestination.setText(destination);
         labelDatetime.setText(datetime);
     }
+	
+	public void joinGroup(View view)
+	{
+		
+	}
 }

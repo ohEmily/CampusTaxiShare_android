@@ -6,15 +6,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:weightSum="1.0"
     tools:context=".DashboardActivity" >
 
 
 	    <!-- If account email is not confirmed, show error message here -->
-	    <TextView android:id="@+id/extra_message"
+	    <TextView 
+	        android:id="@+id/extra_message"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_centerHorizontal="true"
 	        android:layout_marginBottom="10dp"
 	        android:textColor="@color/errorColor"
 	        android:textStyle="bold"
@@ -27,7 +26,7 @@
 	        android:layout_height="wrap_content"
 	        style="@style/WhiteFont"
 	        android:text="@string/greet_user"
-	        android:layout_alignParentTop="true"
+	        android:layout_below="@id/extra_message"
 	     />
 	    
 	    <!-- Name of campus network -->
@@ -36,7 +35,6 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        style="@style/LargeYellowFont"
-	        android:layout_centerHorizontal="true"
 	        android:layout_below="@id/welcome_message"
 	        android:text="@string/campus_name"
 	     />
@@ -45,9 +43,8 @@
 	        android:id="@+id/user_prompt"
 	        android:layout_marginTop="20dp"
 	        style="@style/WhiteFont"
-	        android:layout_centerHorizontal="true"
 	        android:text="@string/prompt_activity"
-	        android:layout_above="@+id/button_layout"
+	        android:layout_above="@+id/campus_network_name"
 	     />
 	    
 	    <LinearLayout

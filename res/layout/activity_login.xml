@@ -9,28 +9,24 @@
     	android:paddingTop="@dimen/activity_vertical_margin"
     	android:fillViewport="true"
  >
- 
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical"
-	    tools:context=".LoginActivity"
-	>
 	
 	    <ImageView
 	        android:id="@+id/imageViewBanner"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:adjustViewBounds="true"
+	        android:layout_alignParentTop="true"
 	        android:contentDescription="@string/logo_description"
 	        android:src="@drawable/app_name_banner" 
 	     />
 	    
 	    
 	    <TextView
+	        android:id="@+id/welcomeMessage"
 	        android:text="@string/welcome_message"
 	        style="@style/WhiteFont"
-	        android:layout_marginTop="5dp"
+	        android:layout_below="@id/imageViewBanner"
+	        android:layout_marginTop="10dp"
 	        android:layout_marginLeft="5dp"
 	        android:layout_marginRight="5dp"
 	     />
@@ -42,6 +38,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
    	        android:inputType="textEmailAddress" 
+   	        android:layout_below="@id/welcomeMessage"
 	        android:hint="@string/input_email"
 	        >
 	        <requestFocus />
@@ -53,11 +50,14 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:inputType="textPassword" 
+	        android:layout_below="@id/emailEditTextLogin"
 	        android:hint="@string/password_field"
 	    />
 	    
 	    <!--  Error message -->
-        <TextView android:id="@+id/login_error"
+        <TextView 
+            android:id="@+id/login_error"
+            android:layout_below="@id/passEditTextLogin"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/errorColor"
@@ -69,15 +69,18 @@
 	        style="@style/button_text"
 	        android:background="@drawable/pink_button"
 	        android:drawableLeft="@drawable/ic_action_send_now"
+	        android:layout_below="@id/login_error"
 	    	android:text="@string/button_login"
+	    	android:layout_centerHorizontal="true"
 	    	android:onClick="submitLoginFields"
 	    />
 	    
 	    <TextView 
 	        android:id="@+id/link_to_registration"
             style="@style/FooterFont"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:text="@string/go_to_registration"
         />
-	    
-	</LinearLayout>
+
 </RelativeLayout>
