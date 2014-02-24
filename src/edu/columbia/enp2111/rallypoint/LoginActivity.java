@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -175,17 +176,25 @@ public class LoginActivity extends ActionBarActivity
             	// TODO
             	// set ERROR TEXT
             }
-			
-            // Launch Dashboard Screen
-            Intent dashboard = new Intent(getApplicationContext(), 
-            		DashboardActivity.class);
-
-            // Close all activities before launching Dashboard
-            dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(dashboard);
-            
-            finish(); // Close login screen
-            
+			UserFunctions userFunction = new UserFunctions();
+            if (userFunction.isUserLoggedIn(getApplicationContext()))
+            {
+            	Log.v("Testing", "Log in successful (LoginActivity)");
+            	
+            	// testing
+            	NetworkFunctions networkFunction = new NetworkFunctions();
+            	Log.v("Testing", "network name: " + networkFunction.getName(getApplicationContext()));
+            	
+	            // Launch Dashboard Screen
+	            Intent dashboard = new Intent(getApplicationContext(), 
+	            		DashboardActivity.class);
+	
+	            // Close all activities before launching Dashboard
+	            dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            startActivity(dashboard);
+	            
+	            finish(); // Close login screen
+            } 
 	    }
 	}
 }

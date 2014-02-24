@@ -14,7 +14,10 @@ public class Group
     public String member_3;
     public String created_at;
 	public String updated_at;
-	
+
+	/**
+	 * Constructor with all params.
+	 */
 	public Group(String groupId, String ownerEmail, String network, 
 			String startLocation, String endLocation, String dateTime,
 			String direction, String member1, String member2, String member3,
@@ -34,6 +37,7 @@ public class Group
 		this.updated_at = updatedAt;
 	}
 	
+	/** Constructor without member IDs. */
 	public Group(String groupId, String ownerEmail, String network, 
 			String startLocation, String endLocation, String dateTime,
 			String direction, String createdAt, String updatedAt)
@@ -52,4 +56,16 @@ public class Group
 		return owner_email;
 	}
 
+	/** Returns all the instance variables of this group. */
+	public String toString()
+	{
+		return "Group ID: " + group_id + " Owner email: " + owner_email + 
+				" | network: " + network + " | Start location: " + 
+				start_location + " | End location: " + end_location +
+				" | Departure date/time: " + departure_date_time + 
+				" | Direction " + direction + " | Member 1: " + member_1 +
+				" | Member 2: " + member_2 + " | Member 3: " + member_3 + 
+				" | Created at: " + created_at + " | Updated at: " + 
+				updated_at + ".";
+	}
 }

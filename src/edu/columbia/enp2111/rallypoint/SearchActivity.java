@@ -45,14 +45,11 @@ public abstract class SearchActivity extends ListActivity
 	public static final String LIST_KEY_DATE = "dateText";
 	public static final String LIST_KEY_TIME = "timeText";
 	
-	public static final String KEY_TO_CAMPUS = "t";
-	public static final String KEY_FROM_CAMPUS = "f";
-	
 	String stringDate;
 	String stringTime;
 	
 	// whether we're going to campus or from campus
-	protected String direction;
+//	protected String direction;
 	
 	// contacts JSONArray
 	JSONArray all_groups = null;
@@ -89,17 +86,16 @@ public abstract class SearchActivity extends ListActivity
 				Intent singleGroup = new Intent(getApplicationContext(),
 						SingleGroupActivity.class);
 				singleGroup.putExtra(GroupFunctions.KEY_DESTINATION, destination);
-//				singleGroup.putExtra(GroupFunctions.KEY_DESTINATION, value)
 				singleGroup.putExtra(GroupFunctions.KEY_DATETIME, datetime);
 				startActivity(singleGroup);
 			}
 		});
 
 		setNewGroupButton();
-		setDirection();
 		
 		// Calling async task to get json
-		new GetGroups().execute();
+		getGroups();
+//		new GetGroups().execute();
 	}
 	
 	@Override
@@ -128,95 +124,5 @@ public abstract class SearchActivity extends ListActivity
 	}
 	
 	public abstract void setNewGroupButton();
-	public abstract void setDirection();
-
-	/**
-	 * AsyncTask class to get json by making HTTP call.
-	 * */
-	private class GetGroups extends AsyncTask<Void, Void, Void>
-	{
-		@Override
-		protected void onPreExecute()
-		{
-			super.onPreExecute();
-			// Showing progress dialog
-			pDialog = new ProgressDialog(SearchActivity.this);
-			pDialog.setMessage("Getting groups...");
-			pDialog.setCancelable(false);
-			pDialog.show();
-		}
-
-		@Override
-		protected Void doInBackground(Void ... arg0)
-		{			
-			// adding params: telling JSON what type of request it'll be
-			List<NameValuePair> params = new ArrayList<NameValuePair>();
-	        params.add(new BasicNameValuePair(JSONParser.KEY_TAG, GroupFunctions.TAG_GET_GROUPS));
-	        params.add(new BasicNameValuePair(KEY_DIRECTION, direction));
-			
-	        Log.v("Testing", "direction: " + direction);
-	        
-			// Creating a JSONParser
-			JSONParser jp = new JSONParser();
-			JSONObject jsonObj = jp.getJSONFromUrl(JSONParser.API_URL, params);
-			
-			try
-			{
-				// Getting JSON Array node
-				all_groups = jsonObj.getJSONArray("groups");
-				
-				// looping through All Contacts
-				for (int i = 0; i < all_groups.length(); i++)
-				{
-					JSONObject aGroup = all_groups.getJSONObject(i);
-					
-					String destination = aGroup.getString(GroupFunctions.KEY_DESTINATION);
-					String datetime = aGroup.getString(GroupFunctions.KEY_DATETIME);
-					String startPoint = aGroup.getString(GroupFunctions.KEY_START_LOCATION);
-					String ownerEmail = aGroup.getString(GroupFunctions.KEY_OWNER_EMAIL);
-					setDateAndTime(datetime);
-					
-					Log.v("Testing", "Start point: " + startPoint);
-					
-					// One HashMap per group of taxi sharers
-					HashMap<String, String> group_object = new HashMap<String, String>();
-					// adding each child node to HashMap (key => value)
-					group_object.put(LIST_KEY_DESTINATION, destination);
-					group_object.put(LIST_KEY_DATE, stringDate);
-					group_object.put(LIST_KEY_TIME, stringTime);
-					group_object.put(GroupFunctions.KEY_OWNER_EMAIL, ownerEmail);
-					// adding group to group list
-					groupList.add(group_object);
-				}
-			}
-			catch (JSONException e)
-			{
-				e.printStackTrace();
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result)
-		{
-			super.onPostExecute(result);
-			// Dismiss the progress dialog
-			if (pDialog.isShowing())
-				pDialog.dismiss();
-
-			/**
-			 * Updating parsed JSON data into ListView.
-			 * */
-			ListAdapter adapter = new SimpleAdapter(
-					SearchActivity.this, groupList,
-					R.layout.list_item, 
-					new String[] {LIST_KEY_DESTINATION, 
-							LIST_KEY_DATE,
-							LIST_KEY_TIME }, 
-					new int[] { R.id.destination, 
-							R.id.date,
-							R.id.time });
-			setListAdapter(adapter);	
-		}
-	}
+	public abstract void getGroups();
 }

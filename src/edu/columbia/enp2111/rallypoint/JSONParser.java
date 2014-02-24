@@ -32,7 +32,7 @@ import android.util.Log;
 public class JSONParser 
 { 
 	// location of the API for the whole application
-	public static final String API_URL = "http://207.10.139.152/taxi_project/api/";
+	public static final String API_URL = "http://216.165.95.70/taxi_project/api/";
 	
 	public static final String KEY_TAG = "tag";
 	
